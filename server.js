@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const auth = require("./Routes/AuthRouter");
 const app = express();
 app.use(express.json());
 mongoose
@@ -12,6 +13,8 @@ mongoose
   .catch((err) => {
     console.log(err.message);
   });
+
+app.use("/api/auth", auth);
 
 app.get("/", (req, res) => {
   return res.json("Hi");
