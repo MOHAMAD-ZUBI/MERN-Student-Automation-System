@@ -7,13 +7,11 @@ require("dotenv").config();
 ///////////////////////////////////////////// AUTH FUNCTIONS /////////////////////////////////////////////
 
 // create JWT
-
 const createToken = (_id, email, roles) => {
   return jwt.sign({ _id, email, roles }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
 };
-
 // get all users
 
 const getUsers = async (req, res) => {
@@ -23,17 +21,17 @@ const getUsers = async (req, res) => {
 
 // register
 const register = async (req, res) => {
-  const { email, password, phone, registerNo, firstName, lastName } = req.body;
+  const { email, password, registerNo, firstName, lastName, phone } = req.body;
   console.log(email);
 
   try {
     const user = await User.signup(
       email,
       password,
-      phone,
       registerNo,
       firstName,
-      lastName
+      lastName,
+      phone
     );
 
     const token = createToken(user._id, user.email, user.permissions);
@@ -84,28 +82,30 @@ const deleteUser = async (req, res) => {
 ///////////////////////////////////////////// ROLES FUNCTIONS /////////////////////////////////////////////
 
 // Add role to user
-
 const addRole = async (req, res) => {
-  // modify to be accessed by admins only
   const { id } = req.params;
+
   try {
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: " no such user " });
-    } else {
-      const { permission } = req.body;
-      if (!permission) {
-        throw Error("permission field is required");
-      }
-      const user = await User.findOneAndUpdate(
-        { _id: id },
-        { $push: { permissions: permission } },
-        { new: true }
-      );
-      if (!user) {
-        return res.status(400).json({ error: " no such user " });
-      }
-      return res.status(200).json(user);
+    const { permission } = req.body;
+
+    if (!permission) {
+      throw new Error("permission field is required");
     }
+    if (!(permission in Roles)) {
+      throw new Error("Permission field is invalid");
+    }
+
+    const user = await User.findOneAndUpdate(
+      { _id: mongoose.Types.ObjectId.isValid(id) ? id : null },
+      { $push: { permissions: permission } },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ error: "No such user" });
+    }
+
+    return res.status(200).json(user);
   } catch (error) {
     return res.status(400).json({ msg: error.message });
   }
@@ -124,6 +124,7 @@ const deleteRole = async (req, res) => {
       if (!permission) {
         throw Error("permission field is required");
       }
+
       // check if given role exists in roles dictionary
       if (!Roles[permission]) {
         throw Error("invalid role name");

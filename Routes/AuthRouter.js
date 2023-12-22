@@ -8,10 +8,12 @@ const {
   deleteRole,
 } = require("../Controllers/AuthController");
 
+const { isAdminUser } = require("../Middlewares/Roles");
+
 const router = express.Router();
 
 // getUsers
-router.get("/", getUsers);
+router.get("/", isAdminUser, getUsers);
 // register
 router.post("/register", register);
 
@@ -20,11 +22,11 @@ router.post("/login", login);
 
 // deleteUser
 
-router.get("/delete/:id", deleteUser);
+router.get("/delete/:id", isAdminUser, deleteUser);
 
 // update Role
-router.patch("/addRole/:id", addRole);
+router.patch("/addRole/:id", isAdminUser, addRole);
 
-router.patch("/deleteRole/:id", deleteRole);
+router.patch("/deleteRole/:id", isAdminUser, deleteRole);
 
 module.exports = router;

@@ -9,9 +9,6 @@ const facultySchema = new Schema({
   description: {
     type: String,
   },
-  departments: {
-    type: [],
-  },
 });
 
 module.exports = mongoose.model(facultySchema, "Faculty");

@@ -44,9 +44,13 @@ const userSchema = new Schema(
       min: 9,
     },
     permissions: {
-      // userType
-      type: [String],
-      default: [Roles.Student],
+      type: [
+        {
+          type: String,
+          enum: Roles,
+          default: [Roles.Student],
+        },
+      ],
     },
     avatarPath: {
       type: String,
@@ -55,8 +59,6 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
-
-// Roles Dictionary
 
 // static signUp method
 
