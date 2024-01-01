@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const adminSchema = new Schema({
   user: {
-    Type: mongoose.Types.ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: "User",
   },
   accountStatus: {
@@ -12,4 +12,4 @@ const adminSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model(adminSchema, "Admin");
+module.exports = mongoose.model("Admin", adminSchema);

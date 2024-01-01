@@ -2,6 +2,9 @@ const User = require("../Models/userMode");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const { Roles } = require("../Models/userMode");
+const Admin = require("../Models/admin");
+const Academician = require("../Models/academician");
+const Student = require("../Models/student");
 require("dotenv").config();
 
 ///////////////////////////////////////////// AUTH FUNCTIONS /////////////////////////////////////////////
@@ -88,9 +91,9 @@ const deleteUser = async (req, res) => {
 
 const addRole = async (req, res) => {
   const { id } = req.params;
-
+  let data = "";
   try {
-    const { permission } = req.body;
+    const { permission } = req.body; // admin
 
     if (!permission) {
       throw new Error("permission field is required");
@@ -98,18 +101,38 @@ const addRole = async (req, res) => {
     if (!(permission in Roles)) {
       throw new Error("Permission field is invalid");
     }
-
+    const checkUser = await User.findById(id);
+    if (checkUser.permissions.includes(permission)) {
+      throw new Error("Permission already exists");
+    }
     const user = await User.findOneAndUpdate(
       { _id: mongoose.Types.ObjectId.isValid(id) ? id : null },
       { $push: { permissions: permission } },
       { new: true }
     );
+    if (permission === "Admin") {
+      data = await Admin.create({
+        user: user._id,
+      });
+    }
+
+    if (permission === "Student") {
+      data = await Student.create({
+        user: user._id,
+      });
+    }
+
+    if (permission === "Academician") {
+      data = await Academician.create({
+        user: user._id,
+      });
+    }
 
     if (!user) {
       return res.status(404).json({ error: "No such user" });
     }
 
-    return res.status(200).json(user);
+    return res.status(200).json({ Data: data, user });
   } catch (error) {
     return res.status(400).json({ msg: error.message });
   }

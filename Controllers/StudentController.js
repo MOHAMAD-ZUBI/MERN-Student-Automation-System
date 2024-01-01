@@ -1,12 +1,21 @@
-const mongoose = require("mongoose");
 const User = require("../Models/userMode");
 const Student = require("../Models/student");
 const jwt = require("jsonwebtoken");
 
 const createStudent = async (req, res) => {
   try {
-    const user = jwt.verify(Headers.authorization.split(""));
-  } catch (error) {}
+    const token = req.headers.authorization.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded._id);
+    const { gpa, yearOfStudy } = req.body;
+
+    if (!gpa || !yearOfStudy)
+      return res.status(401).json("all fields are required");
+    const student = await Student.create({ gpa, yearOfStudy, user: user._id });
+    return res.status(200).json(student);
+  } catch (error) {
+    return res.status(401).json({ error: error.msg });
+  }
 };
 
 const getCurrentStudent = async (req, res) => {
@@ -25,7 +34,7 @@ const getCurrentStudent = async (req, res) => {
       return res.status(401).json({ msg: "No such student" });
     }
 
-    return res.status(200).json({ student });
+    return res.status(200).json({ data: student, user });
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "server error" });

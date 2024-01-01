@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 // Routers
 const auth = require("./Routes/AuthRouter");
 const studentRouter = require("./Routes/StudentRouter");
+const academicianRouter = require("./Routes/AcademicianRouter");
+const adminRouter = require("./Routes/AdminRouter");
 
 // Middlewares
 const { isStudentUser } = require("./Middlewares/Roles");
@@ -25,6 +27,8 @@ mongoose
 // Routes
 app.use("/api/auth", auth);
 app.use("/api/student", isStudentUser, studentRouter);
+app.use("/api/academician", academicianRouter);
+app.use("/api/admin", adminRouter);
 
 app.get("/", (req, res) => {
   return res.json("Hi");
