@@ -1,7 +1,15 @@
 const express = require("express");
 const mongoose = require("mongoose");
+
+// Routers
 const auth = require("./Routes/AuthRouter");
+const studentRouter = require("./Routes/StudentRouter");
+
+// Middlewares
+const { isStudentUser } = require("./Middlewares/Roles");
+
 const app = express();
+
 app.use(express.json());
 mongoose
   .connect("mongodb://localhost:27017/Senior")
@@ -14,7 +22,9 @@ mongoose
     console.log(err.message);
   });
 
+// Routes
 app.use("/api/auth", auth);
+app.use("/api/student", isStudentUser, studentRouter);
 
 app.get("/", (req, res) => {
   return res.json("Hi");
