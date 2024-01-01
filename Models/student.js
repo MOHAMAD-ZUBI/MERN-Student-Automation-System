@@ -17,4 +17,4 @@ const studentSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model(studentSchema, "Student");
+module.exports = mongoose.model("Student", studentSchema);

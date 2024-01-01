@@ -7,11 +7,13 @@ require("dotenv").config();
 ///////////////////////////////////////////// AUTH FUNCTIONS /////////////////////////////////////////////
 
 // create JWT
+
 const createToken = (_id, email, roles) => {
   return jwt.sign({ _id, email, roles }, process.env.JWT_SECRET, {
     expiresIn: "30d",
   });
 };
+
 // get all users
 
 const getUsers = async (req, res) => {
@@ -20,6 +22,7 @@ const getUsers = async (req, res) => {
 };
 
 // register
+
 const register = async (req, res) => {
   const { email, password, registerNo, firstName, lastName, phone } = req.body;
   console.log(email);
@@ -82,6 +85,7 @@ const deleteUser = async (req, res) => {
 ///////////////////////////////////////////// ROLES FUNCTIONS /////////////////////////////////////////////
 
 // Add role to user
+
 const addRole = async (req, res) => {
   const { id } = req.params;
 
@@ -144,4 +148,11 @@ const deleteRole = async (req, res) => {
   }
 };
 
-module.exports = { register, getUsers, login, deleteUser, addRole, deleteRole };
+module.exports = {
+  register,
+  getUsers,
+  login,
+  deleteUser,
+  addRole,
+  deleteRole,
+};
