@@ -1,3 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Montagu+Slab:opsz,wght@16..144,100..700&family=Mukta+Vaani:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --font-montagu: 'Montagu Slab', serif;
+  --font-mokta: 'Mukta Vaani', sans-serif;
+  --font-josefin: 'Josefin Sans', sans-serif;
+  --primary-color: #223f76;
+  --secondary-color: #c8272e;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Mukta Vaani', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+header svg path,
+.close-menu svg path,
+.mobile-footer a p,
+.mobile-footer a svg path,
+.profile .day,
+.profile .day span {
+  transition: 0.3s;
+}
+header svg:hover path,
+.close-menu svg:hover path,
+.mobile-footer a:hover svg path {
+  fill: var(--secondary-color);
+}
+.mobile-footer a:hover p {
+  color: var(--secondary-color);
+}
+
+.profile .day:hover {
+  transform: translateY(-2px) !important;
+}
+.profile .day:hover span {
+  color: var(--primary-color);
+}
+
+/* Modify Swipper */
+.requests .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.requests .swiper-button-next {
+  left: auto;
+  right: -15px;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #93939326;
+}
+.requests .swiper-button-prev {
+  right: auto;
+  left: -15px;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #93939326;
+}
+.requests .swiper-button-prev:after,
+.requests .swiper-button-next:after {
+  font-size: 12px;
+  font-weight: 900;
+  color: #595959;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.departement .swiper-button-next {
+  left: auto;
+  right: 2%;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #9393937a;
+  transition: 0.3s;
+}
+.departement .swiper-button-prev {
+  right: auto;
+  left: 2%;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #9393937a;
+  transition: 0.3s;
+}
+.departement .swiper-button-next:hover {
+  background-color: var(--primary-color);
+}
+.departement .swiper-button-prev:hover {
+  background-color: var(--primary-color);
+}
+.departement .swiper-button-prev:after,
+.departement .swiper-button-next:after {
+  font-size: 12px;
+  font-weight: 900;
+  color: #343434;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.3s;
+}
+.departement .swiper-button-prev:hover:after,
+.departement .swiper-button-next:hover:after {
+  color: white;
+}
+
+@media screen and (min-width: 768px) {
+  .departement .swiper-button-next {
+    height: 35px;
+    width: 35px;
+  }
+  .departement .swiper-button-prev {
+    height: 35px;
+    width: 35px;
+  }
+  .departement .swiper-button-prev:after,
+  .departement .swiper-button-next:after {
+    font-size: 18px;
+  }
+}
+#search::placeholder {
+  font-family: var(--font-mokta);
+  font-size: 10px;
+  color: white;
+  line-height: 1;
+}
+@media screen and (min-width: 992px) {
+  #search::placeholder {
+    font-size: 16px;
+  }
+}
+@media screen and (min-width: 1440px) {
+  #search::placeholder {
+    font-size: 20px;
+  }
+}
+#messages-search::placeholder {
+  font-family: var(--font-montagu);
+  font-size: 16px;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.question svg path {
+  transition: 0.3s;
+}
+.question:hover svg path {
+  fill: var(--secondary-color);
+}
