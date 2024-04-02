@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Person from "../../public/Person";
 import Password from "../../public/Password";
 import { useAuth } from "./Auth";
+import axios from "axios";
 
 const Login = () => {
   const auth = useAuth();
@@ -13,10 +15,27 @@ const Login = () => {
   } = useForm();
 
   const navigate = useNavigate();
-  const onSubmit = () => {
-    auth.user = "student";
-    navigate("/", { replace: true });
-    sessionStorage.setItem("admin", auth.user);
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    try {
+      const response = await axios.post(
+        "http://localhost:3060/api/auth/login",
+        data
+      );
+      const { token, email } = response.data;
+
+      // Store token in cookies
+      document.cookie = `token=${token};`;
+
+      // Redirect to homepage or dashboard
+      auth.user = "student";
+      navigate("/", { replace: true });
+      sessionStorage.setItem("admin", auth.user);
+    } catch (error) {
+      console.error("Login failed:", error);
+      // Handle login error, maybe show a message to the user
+    }
   };
 
   return (
@@ -66,7 +85,7 @@ const Login = () => {
               {...register("password", {
                 required: "this is required.",
                 minLength: {
-                  value: 8,
+                  value: 1,
                   message: "password must be long enough",
                 },
               })}
