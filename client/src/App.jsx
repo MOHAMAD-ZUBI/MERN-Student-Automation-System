@@ -61,10 +61,10 @@ const App = () => {
       <Layout>
         {admin === "student" && <Route path="/" element={<Dashboard />} />}
         {admin === "doctor" && <Route path="/" element={<DoctorDashboard />} />}
+        <Route path="login" element={<Login />} />
         <Route path="/login/student" element={<StudentLogin />} />
         <Route path="/login/academician" element={<AcademicianLogin />} />
         <Route path="/resetPassword" element={<ForgetPassword />} />
-        <Route path="login" element={<Login />} />
         {admin === "student" && <Route path="profile" element={<Profile />} />}
         {admin === "doctor" && (
           <Route path="profile" element={<DoctorProfile />} />

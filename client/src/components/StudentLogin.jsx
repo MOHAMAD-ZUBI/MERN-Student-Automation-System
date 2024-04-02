@@ -67,6 +67,7 @@ const Login = () => {
             <input
               className="flex-1 h-full py-[6px] px-3 outline-none rounded text-[17px] sm:text-[20px] font-Montagu text-primary"
               type="email"
+              // value="example2@example.com"
               placeholder="Enter Email"
               {...register("email", { required: "this is required." })}
             />
@@ -81,6 +82,7 @@ const Login = () => {
             <input
               className="flex-1 h-full py-[6px] px-3 outline-none rounded text-[17px] sm:text-[20px] font-Montagu text-primary"
               type="password"
+              // value="123456"
               placeholder="Enter Password"
               {...register("password", {
                 required: "this is required.",
