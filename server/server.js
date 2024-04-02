@@ -6,11 +6,14 @@ const auth = require("./Routes/AuthRouter");
 const studentRouter = require("./Routes/StudentRouter");
 const academicianRouter = require("./Routes/AcademicianRouter");
 const adminRouter = require("./Routes/AdminRouter");
+const cors = require("cors");
 
 // Middlewares
 const { isStudentUser } = require("./Middlewares/Roles");
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 mongoose
