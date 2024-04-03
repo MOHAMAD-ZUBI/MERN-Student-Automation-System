@@ -6,6 +6,7 @@ const auth = require("./Routes/AuthRouter");
 const studentRouter = require("./Routes/StudentRouter");
 const academicianRouter = require("./Routes/AcademicianRouter");
 const adminRouter = require("./Routes/AdminRouter");
+const chatBotRouter = require("./Routes/ChatbotRouter");
 const cors = require("cors");
 
 // Middlewares
@@ -32,7 +33,7 @@ app.use("/api/auth", auth);
 app.use("/api/student", isStudentUser, studentRouter);
 app.use("/api/academician", academicianRouter);
 app.use("/api/admin", adminRouter);
-
+app.use('/bot',chatBotRouter)
 app.get("/", (req, res) => {
   return res.json("Hi");
 });
