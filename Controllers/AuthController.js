@@ -28,9 +28,12 @@ const getUsers = async (req, res) => {
 
 const register = async (req, res) => {
   const { email, password, registerNo, firstName, lastName, phone } = req.body;
-  console.log(email);
 
+  
   try {
+    if(!email.includes("@karabuk.edu.tr")){
+      throw new Error("email should contain @karabuk.edu.tr");
+    }
     const user = await User.signup(
       email,
       password,
