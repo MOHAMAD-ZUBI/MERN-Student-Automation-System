@@ -30,7 +30,7 @@ mongoose
 
 // Routes
 app.use("/api/auth", auth);
-app.use("/api/student", isStudentUser, studentRouter);
+app.use("/api/student", studentRouter);
 app.use("/api/academician", academicianRouter);
 app.use("/api/admin", adminRouter);
 app.use("/bot", chatBotRouter);
