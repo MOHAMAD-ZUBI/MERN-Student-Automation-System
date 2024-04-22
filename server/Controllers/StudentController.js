@@ -14,11 +14,21 @@ const createStudent = async (req, res) => {
     const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded._id);
-    const { gpa, yearOfStudy } = req.body;
+    const { gpa, yearOfStudy, agpa, sex, level, department, faculty } =
+      req.body;
 
     if (!gpa || !yearOfStudy)
       return res.status(401).json("all fields are required");
-    const student = await Student.create({ gpa, yearOfStudy, user: user._id });
+    const student = await Student.create({
+      gpa,
+      yearOfStudy,
+      agpa,
+      level,
+      sex,
+      department,
+      faculty,
+      user: user._id,
+    });
     return res.status(200).json(student);
   } catch (error) {
     return res.status(401).json({ error: error.msg });

@@ -25,7 +25,7 @@ const studentSchema = new Schema(
     sex: {
       type: String,
     },
-    class: {
+    level: {
       type: Number,
       deafult: 1,
     },
