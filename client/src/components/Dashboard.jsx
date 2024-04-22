@@ -5,12 +5,33 @@ import Shedule from "./dashboard/Shedule";
 import { motion } from "framer-motion";
 import { fadeIn } from "../motion/motion";
 import useAuth from "../hooks/useAuth";
+import { useEffect, useState } from "react";
+import api from "../utils/Request";
 // Import the useAuth hook
 
 const Dashboard = () => {
   const admin = sessionStorage.getItem("admin");
-  const { token } = useAuth(); // Use the useAuth hook to access token and logout function
-  // console.log("Token in the dashboard: ", token);
+  const { token } = useAuth();
+  const [response, setResponse] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get("/student/current", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setResponse(response.data); // Assuming the data you want is in the response's 'data' field
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [token]);
+
+  // console.log(response);
 
   return (
     <div className="dashboard relative">
@@ -21,7 +42,13 @@ const Dashboard = () => {
         viewport={{ once: true }}
         className="text-primary font-Montagu text-[20px] sm:text-[40px] font-normal text-center my-[24px] leading-none drop-shadow-4xl"
       >
-        Welcome <span className="text-secondary">{admin}</span>!
+        Welcome{" "}
+        <span className="text-secondary">
+          {response && response.user && response.user.firstName
+            ? response.user.firstName
+            : admin}
+        </span>
+        !
       </motion.h2>
 
       <div className="container">

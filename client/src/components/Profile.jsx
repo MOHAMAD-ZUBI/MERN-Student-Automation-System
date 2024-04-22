@@ -1,10 +1,32 @@
-import SectionTitle from '../components/repeated/SectionTitle';
-import Graduate from '../../public/Graduate';
-import TimeLine from './repeated/TimeLine';
-import { motion } from 'framer-motion';
-import { fadeIn } from '../motion/motion';
+/* eslint-disable no-unused-vars */
+import SectionTitle from "../components/repeated/SectionTitle";
+import Graduate from "../../public/Graduate";
+import TimeLine from "./repeated/TimeLine";
+import { motion } from "framer-motion";
+import { fadeIn } from "../motion/motion";
+import useAuth from "../hooks/useAuth";
+import { useEffect, useState } from "react";
+import api from "../utils/Request";
 
 const Profile = () => {
+  const { token } = useAuth();
+  const [response, setResponse] = useState(null);
+
+  useEffect(() => {
+    const fetchResponse = async () => {
+      const response = await api.get("/student/current", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setResponse(response.data);
+    };
+
+    fetchResponse();
+  }, [token]);
+
+  console.log({ hi: response });
+
   return (
     <div className="profile min-h-screen relative pt-[125px] overflow-hidden">
       <span className="absolute w-full h-[200px] top-0 left-0 bg-gradient-to-b from-gradient1 to-gradient2 z-0"></span>
@@ -17,15 +39,15 @@ const Profile = () => {
           />
           <div className="profile-name">
             <p className="font-normal font-Montagu text-[20px] text-primary">
-              Nisreen Bouta
+              {/* {response.user.firstName} */}
             </p>
             <span className="profile-number font-mukta font-normal text-[20px] text-secondary">
-              201010101010
+              {/* {response.user.registerNo} */}
             </span>
           </div>
         </div>
         <motion.div
-          variants={fadeIn('up', 'tween', 0.3, 1)}
+          variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -35,47 +57,47 @@ const Profile = () => {
             <Graduate wth="100%" hth="100%" fill="white" />
           </div>
           <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white flex-1 text-left sm:text-center">
-            Computer Engineering - Faculty of Engineering
+            {/* {response.data.department} - {response.data.faculty} */}
           </p>
         </motion.div>
         <div className="classes w-full flex justify-center items-center gap-[20px] mb-[50px]">
           <motion.div
-            variants={fadeIn('up', 'tween', 0.4, 1)}
+            variants={fadeIn("up", "tween", 0.4, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
             className="class py-[5px] px-[15px] rounded-[4px] bg-secondary"
           >
             <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white">
-              Class 4
+              {/* Class - {response.data.level} */}
             </p>
           </motion.div>
           <motion.div
-            variants={fadeIn('up', 'tween', 0.3, 1)}
+            variants={fadeIn("up", "tween", 0.3, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
             className="class py-[5px] px-[15px] rounded-[4px] bg-secondary"
           >
             <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white">
-              ANO 4,00
+              {/* ANO {response.data.gpa} */}
             </p>
           </motion.div>
           <motion.div
-            variants={fadeIn('up', 'tween', 0.4, 1)}
+            variants={fadeIn("up", "tween", 0.4, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
             className="class py-[5px] px-[15px] rounded-[4px] bg-secondary"
           >
             <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white">
-              AGNO 4,00
+              {/* AGNO {response.data.agpa} */}
             </p>
           </motion.div>
         </div>
         <SectionTitle content="My Timetable " extras="mb-5" />
         <motion.div
-          variants={fadeIn('up', 'tween', 0.3, 1)}
+          variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -83,7 +105,7 @@ const Profile = () => {
         >
           <div className="days w-full flex justify-between sm:justify-evenly items-center mb-[30px]">
             <motion.div
-              variants={fadeIn('up', 'tween', 0.35, 1)}
+              variants={fadeIn("up", "tween", 0.35, 1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
@@ -94,7 +116,7 @@ const Profile = () => {
               </span>
             </motion.div>
             <motion.div
-              variants={fadeIn('up', 'tween', 0.4, 1)}
+              variants={fadeIn("up", "tween", 0.4, 1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
@@ -105,7 +127,7 @@ const Profile = () => {
               </span>
             </motion.div>
             <motion.div
-              variants={fadeIn('up', 'tween', 0.45, 1)}
+              variants={fadeIn("up", "tween", 0.45, 1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
@@ -116,7 +138,7 @@ const Profile = () => {
               </span>
             </motion.div>
             <motion.div
-              variants={fadeIn('up', 'tween', 0.5, 1)}
+              variants={fadeIn("up", "tween", 0.5, 1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
@@ -127,7 +149,7 @@ const Profile = () => {
               </span>
             </motion.div>
             <motion.div
-              variants={fadeIn('up', 'tween', 0.55, 1)}
+              variants={fadeIn("up", "tween", 0.55, 1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
@@ -138,7 +160,7 @@ const Profile = () => {
               </span>
             </motion.div>
             <motion.div
-              variants={fadeIn('up', 'tween', 0.6, 1)}
+              variants={fadeIn("up", "tween", 0.6, 1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}

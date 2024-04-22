@@ -21,7 +21,7 @@ const Login = () => {
     try {
       const response = await api.post("/auth/login", data);
       console.log(response);
-      const { token, email } = response;
+      const { token, email } = response.data;
 
       // Store token in cookies
       document.cookie = `token=${token};`;
