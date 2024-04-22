@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { AuthProvider } from "./components/Auth";
+import { AuthProvider } from "./contexts/Auth";
 import Header from "./components/Header";
 import Dashboard from "./components/Dashboard";
 import Profile from "./components/Profile";

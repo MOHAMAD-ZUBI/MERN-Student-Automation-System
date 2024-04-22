@@ -1,14 +1,33 @@
-import SectionTitle from '../repeated/SectionTitle';
-import TimeLine from '../repeated/TimeLine';
-import { motion } from 'framer-motion';
-import { fadeIn } from '../../motion/motion';
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import SectionTitle from "../repeated/SectionTitle";
+import TimeLine from "../repeated/TimeLine";
+import { motion } from "framer-motion";
+import { fadeIn } from "../../motion/motion";
+import api from "../../utils/Request.js";
+import useAuth from "../../hooks/useAuth.js";
+import { useEffect, useState } from "react";
 
 const Shedule = () => {
+  const { token } = useAuth();
+  const [response, setResponse] = useState(null);
+
+  useEffect(() => {
+    const fetchResponse = async () => {
+      const response = await api.get("/student/current", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setResponse(response);
+    };
+  }, [response]);
+
   return (
     <div className="schedule">
       <SectionTitle content="Today’s Schedule" extras="mb-5" />
       <motion.div
-        variants={fadeIn('right', 'tween', 0.3, 1)}
+        variants={fadeIn("right", "tween", 0.3, 1)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
@@ -16,7 +35,7 @@ const Shedule = () => {
       >
         <div className=" w-[25%] flex justify-center items-center gap-5 flex-col basis-2/5 sm:basis-auto">
           <motion.div
-            variants={fadeIn('up', 'tween', 0.5, 1)}
+            variants={fadeIn("up", "tween", 0.5, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -33,7 +52,7 @@ const Shedule = () => {
             </h4>
           </motion.div>
           <motion.div
-            variants={fadeIn('up', 'tween', 0.6, 1)}
+            variants={fadeIn("up", "tween", 0.6, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -55,7 +74,7 @@ const Shedule = () => {
         </div>
         <div className="timlines w-[75%] flex flex-col items-center justify-start gap-[15px] sm:gap-[30px] basis-3/5 sm:basis-auto">
           <motion.h3
-            variants={fadeIn('left', 'tween', 0.5, 1)}
+            variants={fadeIn("left", "tween", 0.5, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
