@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 const Shedule = () => {
   const { token } = useAuth();
   const [response, setResponse] = useState(null);
+  const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
     const fetchResponse = async () => {
@@ -21,7 +22,13 @@ const Shedule = () => {
       });
       setResponse(response);
     };
-  }, [response]);
+
+    fetchResponse();
+  }, [token]);
+
+  // Get current day and month
+  const currentDay = currentDate.toLocaleString("en-US", { weekday: "long" });
+  const currentMonth = currentDate.toLocaleString("en-US", { month: "long" });
 
   return (
     <div className="schedule">
@@ -41,14 +48,14 @@ const Shedule = () => {
             viewport={{ once: true }}
             className="day min-w-[100px] w-full border border-white pt-[10px] sm:pt-[15px] pb-[20px] sm:pb-[30px] px-[10px] lg:px-[50px] bg-white rounded shadow-3xl"
           >
-            <h4 className=" font-Montagu font-normal text-[13px] sm:text-[25px] leading-none text-center text-[#595959] mb-2 sm:mb-5">
-              March
+            <h4 className="font-Montagu font-normal text-[13px] sm:text-[25px] leading-none text-center text-[#595959] mb-2 sm:mb-5">
+              {currentMonth}
             </h4>
             <span className="block font-josefin font-normal text-[30px] sm:text-[35px] text-secondary text-center leading-none w-full mb-2 sm:mb-5">
-              25
+              {currentDate.getDate()}
             </span>
             <h4 className="font-Montagu font-normal text-[13px] sm:text-[25px] leading-none text-center text-[#595959] ">
-              Monday
+              {currentDay}
             </h4>
           </motion.div>
           <motion.div
@@ -58,7 +65,7 @@ const Shedule = () => {
             viewport={{ once: true }}
             className="lessons w-full border border-white pt-[15px] pb-[30px] px-[15px] bg-white rounded shadow-3xl"
           >
-            <h4 className=" font-Montagu font-normal text-[13px] sm:text-[25px] leading-none text-center text-primary">
+            <h4 className="font-Montagu font-normal text-[13px] sm:text-[25px] leading-none text-center text-primary">
               Lessons
             </h4>
             <span className="block font-normal text-[8px] sm:text-[22px] text-secondary text-center leading-none w-full py-2 sm:py-5 border-b border-[#F5F5F5]">

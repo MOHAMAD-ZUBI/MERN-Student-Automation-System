@@ -26,7 +26,7 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => {
     // You can handle the response data here
-    return response.data;
+    return response;
   },
   (error) => {
     // You can handle the response error here
