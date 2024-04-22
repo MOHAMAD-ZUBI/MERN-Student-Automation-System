@@ -44,13 +44,8 @@ const userSchema = new Schema(
       min: 9,
     },
     permissions: {
-      type: [
-        {
-          type: String,
-          enum: Roles,
-          default: [Roles.Student],
-        },
-      ],
+      type: [String],
+      default: ["Student"],
     },
     avatarPath: {
       type: String,

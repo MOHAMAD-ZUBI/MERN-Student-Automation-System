@@ -13,6 +13,22 @@ const studentSchema = new Schema(
     gpa: {
       type: Number,
     },
+    agpa: {
+      type: Number,
+    },
+    department: {
+      type: String,
+    },
+    faculty: {
+      type: String,
+    },
+    sex: {
+      type: String,
+    },
+    class: {
+      type: Number,
+      deafult: 1,
+    },
   },
   { timestamps: true }
 );

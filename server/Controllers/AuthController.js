@@ -29,9 +29,8 @@ const getUsers = async (req, res) => {
 const register = async (req, res) => {
   const { email, password, registerNo, firstName, lastName, phone } = req.body;
 
-  
   try {
-    if(!email.includes("@karabuk.edu.tr")){
+    if (!email.includes("@karabuk.edu.tr")) {
       throw new Error("email should contain @karabuk.edu.tr");
     }
     const user = await User.signup(
@@ -44,6 +43,7 @@ const register = async (req, res) => {
     );
 
     const token = createToken(user._id, user.email, user.permissions);
+    await Student.create({ user: user._id });
 
     res.status(200).json({ email, token });
   } catch (error) {

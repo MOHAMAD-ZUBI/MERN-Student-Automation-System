@@ -2,6 +2,13 @@ const User = require("../Models/userMode");
 const Student = require("../Models/student");
 const jwt = require("jsonwebtoken");
 
+const getProfileData = async (req, res) => {
+  try {
+    const user = req.user;
+    if (!user) return res.status(401).json({ msg: "No such user" });
+  } catch (error) {}
+};
+
 const createStudent = async (req, res) => {
   try {
     const token = req.headers.authorization.split(" ")[1];
