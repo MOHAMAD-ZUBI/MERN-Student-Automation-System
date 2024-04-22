@@ -1,36 +1,36 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Close from '../../public/Close';
-import { motion } from 'framer-motion';
-import { fadeIn } from '../motion/motion';
-import { useAuth } from './Auth';
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import Close from "../../public/Close";
+import { motion } from "framer-motion";
+import { fadeIn } from "../motion/motion";
+import useAuth from "../hooks/useAuth";
 
 const Menu = () => {
   //Close the menu
   const closeMenu = () => {
-    const menu = document.querySelector('.menu');
+    const menu = document.querySelector(".menu");
 
-    if (menu.classList.contains('-left-full')) {
-      menu.classList.remove('-left-full');
-      menu.classList.add('left-0');
-    } else if (menu.classList.contains('left-0')) {
-      menu.classList.remove('left-0');
-      menu.classList.add('-left-full');
+    if (menu.classList.contains("-left-full")) {
+      menu.classList.remove("-left-full");
+      menu.classList.add("left-0");
+    } else if (menu.classList.contains("left-0")) {
+      menu.classList.remove("left-0");
+      menu.classList.add("-left-full");
     }
   };
 
   // Close the menu when clicking outside the menu
   const handleClickOutsideMenu = (event) => {
-    const menu = document.querySelector('.menu');
-    if (menu.classList.contains('left-0')) {
+    const menu = document.querySelector(".menu");
+    if (menu.classList.contains("left-0")) {
       if (
-        !event.target.closest('.menu') &&
-        !event.target.closest('.menu-btn')
+        !event.target.closest(".menu") &&
+        !event.target.closest(".menu-btn")
       ) {
-        console.log('yes');
+        console.log("yes");
 
-        menu.classList.remove('left-0');
-        menu.classList.add('-left-full');
+        menu.classList.remove("left-0");
+        menu.classList.add("-left-full");
       }
     }
   };
@@ -38,18 +38,18 @@ const Menu = () => {
   const auth = useAuth();
   const handleLogout = () => {
     auth.logout();
-    sessionStorage.removeItem('admin');
+    sessionStorage.removeItem("admin");
   };
 
   // Add event listeners for clicking outside the menu and unmounting the component
   useEffect(() => {
-    document.addEventListener('click', handleClickOutsideMenu);
+    document.addEventListener("click", handleClickOutsideMenu);
     return () => {
-      document.removeEventListener('click', handleClickOutsideMenu);
+      document.removeEventListener("click", handleClickOutsideMenu);
     };
   }, []);
 
-  const admin = sessionStorage.getItem('admin');
+  const admin = sessionStorage.getItem("admin");
 
   return (
     <div className="menu bg-[#1F3D75] flex flex-col justify-start sm:justify-center items-center gap-10 fixed w-full sm:w-[450px] h-screen z-40 pt-[52px] pb-[67px] px-[56px] top-0 -left-full duration-0.3">
@@ -70,7 +70,7 @@ const Menu = () => {
       </div>
       <ul className="menu-links flex items-start justify-center w-full flex-col gap-5">
         <motion.li
-          variants={fadeIn('right', 'tween', 0.1, 1)}
+          variants={fadeIn("right", "tween", 0.1, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -84,7 +84,7 @@ const Menu = () => {
           </Link>
         </motion.li>
         <motion.li
-          variants={fadeIn('right', 'tween', 0.15, 1)}
+          variants={fadeIn("right", "tween", 0.15, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -98,7 +98,7 @@ const Menu = () => {
           </Link>
         </motion.li>
         <motion.li
-          variants={fadeIn('right', 'tween', 0.2, 1)}
+          variants={fadeIn("right", "tween", 0.2, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -112,14 +112,14 @@ const Menu = () => {
           </Link>
         </motion.li>
         <motion.li
-          variants={fadeIn('right', 'tween', 0.25, 1)}
+          variants={fadeIn("right", "tween", 0.25, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
         >
           <Link
             to={
-              admin === 'student' ? '/project-group' : '/senior-project-groups'
+              admin === "student" ? "/project-group" : "/senior-project-groups"
             }
             className="text-white hover:text-secondary text-[22px] font-Montagu font-normal duration-0.3"
             onClick={closeMenu}
@@ -128,7 +128,7 @@ const Menu = () => {
           </Link>
         </motion.li>
         <motion.li
-          variants={fadeIn('right', 'tween', 0.3, 1)}
+          variants={fadeIn("right", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -144,7 +144,7 @@ const Menu = () => {
       </ul>
 
       <motion.button
-        variants={fadeIn('up', 'tween', 0.1, 1)}
+        variants={fadeIn("up", "tween", 0.1, 1)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}

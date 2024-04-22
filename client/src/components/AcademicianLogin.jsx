@@ -3,9 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Person from "../../public/Person";
 import Password from "../../public/Password";
-import { useAuth } from "./Auth";
-import axios from "axios";
 import api from "../utils/Request";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
   const auth = useAuth();

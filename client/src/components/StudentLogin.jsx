@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Person from "../../public/Person";
 import Password from "../../public/Password";
-import { useAuth } from "./Auth";
 import api from "../utils/Request";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
   const auth = useAuth();
@@ -17,10 +17,10 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     try {
       const response = await api.post("/auth/login", data);
-      console.log(response);
+      // console.log(response);
       const { token, email } = response;
 
       // Store token in cookies
