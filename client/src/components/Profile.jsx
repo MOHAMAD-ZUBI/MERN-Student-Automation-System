@@ -26,20 +26,20 @@ const Profile = () => {
     fetchResponse();
   }, [token]);
 
-  console.log({ hi: response });
+  // console.log({ response });
 
   return (
-    <div className="profile min-h-screen relative pt-[125px] overflow-hidden">
+    <div className="profile min-h-screen relative pt-[125px] overflow-hidden ">
       <span className="absolute w-full h-[200px] top-0 left-0 bg-gradient-to-b from-gradient1 to-gradient2 z-0"></span>
-      <div className="container">
-        <div className="profile-info flex justify-star items-center gap-[10px] mb-[30px]">
+      <div className="container ">
+        <div className="profile-info flex justify-star items-center gap-[10px] mb-[30px] ">
           <img
             src="./profile.png"
             alt="profile"
             className="w-[150px] h-[150px]"
           />
           <div className="profile-name">
-            <p className="font-normal font-Montagu text-[20px] text-primary">
+            <p className="font-normal font-Montagu text-[28px] text-primary">
               {response && response.user && response.user.firstName
                 ? response.user.firstName + " " + response.user.lastName
                 : admin}

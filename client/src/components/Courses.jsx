@@ -1,17 +1,17 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import SectionTitle from '../components/repeated/SectionTitle';
-import CurrentCourse from '../components/repeated/CurrentCourse';
+import SectionTitle from "../components/repeated/SectionTitle";
+import CurrentCourse from "../components/repeated/CurrentCourse";
 
 const Courses = () => {
   return (
     <div className="requests pt-[30px] min-h-screen overflow-hidden">
-      <div className="container overflow-hidden">
+      <div className="container overflow-hidden scale-95">
         <SectionTitle content="Courses" extras="mb-[45px]" />
         <div className=" mb-[50px]">
           <div className="current-courses-title w-full py-2 px-4 rounded flex items-center justify-start bg-[#d2d2d229] mb-[45px]">
