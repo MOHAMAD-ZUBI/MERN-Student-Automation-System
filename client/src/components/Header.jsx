@@ -90,16 +90,16 @@ const Header = () => {
 
   return (
     <>
-      <header className="relative bg-primary w-full h-[67px] lg:h-[84px] flex justify-between items-center px-[25px] lg:px-[40px] py-[22px] text-white shadow-5xl">
+      <header className="relative bg-primary w-full h-[50px] lg:h-[75px] flex justify-between items-center px-[25px] lg:px-[40px] py-[22px] text-white shadow-5xl">
         <div
-          className="menu-btn cursor-pointer flex items-center justify-start lg:basis-1/4"
+          className="menu-btn cursor-pointer flex items-center justify-start lg:basis-1/4 scale-90"
           onClick={toggleMenu}
         >
           <div className="flex justify-center items-center cursor-pointer">
             <BurgerMenu />
           </div>
         </div>
-        <div className="logo flex items-center justify-center basis-full sm:basis-auto lg:basis-2/4">
+        <div className="logo flex items-center justify-center basis-full sm:basis-auto lg:basis-2/4 scale-90">
           <a
             href="/"
             className=" text-white hover:text-secondary duration-300 text-[20px] sm:text-[38px] font-Montagu font-medium"
@@ -107,7 +107,7 @@ const Header = () => {
             e-Campus
           </a>
         </div>
-        <div className="header-links hidden sm:flex justify-end items-center flex-row gap-4 lg:gap-6 lg:basis-1/4">
+        <div className="header-links hidden sm:flex justify-end items-center flex-row gap-4 lg:gap-6 lg:basis-1/4 scale-90">
           <div
             className="w-8 h-8 flex justify-center items-center cursor-pointer"
             onClick={toggleNotif}

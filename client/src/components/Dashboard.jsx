@@ -34,7 +34,7 @@ const Dashboard = () => {
   // console.log(response);
 
   return (
-    <div className="dashboard relative">
+    <div className="dashboard relative scale-95">
       <motion.h2
         variants={fadeIn("up", "tween", 0.1, 1)}
         initial="hidden"

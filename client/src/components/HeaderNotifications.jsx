@@ -1,19 +1,19 @@
-import ArrowDown from '../../public/ArrowDown';
-import Search from '../../public/Search';
+import ArrowDown from "../../public/ArrowDown";
+import Search from "../../public/Search";
 
 const HeaderNotifications = () => {
   const toggleFilter = () => {
-    const filters = document.querySelector('.filters');
-    if (filters.classList.contains('block')) {
-      filters.classList.remove('block');
-      filters.classList.add('hidden');
-    } else if (filters.classList.contains('hidden')) {
-      filters.classList.remove('hidden');
-      filters.classList.add('block');
+    const filters = document.querySelector(".filters");
+    if (filters.classList.contains("block")) {
+      filters.classList.remove("block");
+      filters.classList.add("hidden");
+    } else if (filters.classList.contains("hidden")) {
+      filters.classList.remove("hidden");
+      filters.classList.add("block");
     }
   };
   return (
-    <div className="header-notifications hidden absolute top-[100%] right-[10%] z-50 w-[460px] duration-0.3 bg-primary py-[20px] px-4 flex-col items-center justify-start gap-5">
+    <div className="header-notifications hidden absolute top-[66%] right-[10%] z-50 w-[460px] duration-0.3 bg-primary py-[20px] px-4 flex-col items-center justify-start gap-5 scale-90">
       <h3 className="font-Montagu text-[35px] text-white text-center">
         Notifications
       </h3>

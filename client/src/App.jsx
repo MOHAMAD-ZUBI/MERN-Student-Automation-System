@@ -58,40 +58,46 @@ const App = () => {
 
   return (
     <AuthProvider>
-      <Layout>
-        {admin === "student" && <Route path="/" element={<Dashboard />} />}
-        {admin === "doctor" && <Route path="/" element={<DoctorDashboard />} />}
-        <Route path="login" element={<Login />} />
-        <Route path="/login/student" element={<StudentLogin />} />
-        <Route path="/login/academician" element={<AcademicianLogin />} />
-        <Route path="/resetPassword" element={<ForgetPassword />} />
-        {admin === "student" && <Route path="profile" element={<Profile />} />}
-        {admin === "doctor" && (
-          <Route path="profile" element={<DoctorProfile />} />
-        )}
-        {admin === "student" && (
-          <Route path="requests" element={<Requests />} />
-        )}
-        {admin === "doctor" && (
-          <Route path="requests" element={<DoctorRequests />} />
-        )}
-        <Route path="courses" element={<Courses />} />
-        {admin === "student" && <Route path="course" element={<Course />} />}
-        {admin === "doctor" && (
-          <Route path="course" element={<DoctorCourse />} />
-        )}
-        {admin === "doctor" && (
-          <Route path="senior-project-groups" element={<ProjectGroups />} />
-        )}
-        {admin === "student" && (
-          <Route path="project-group" element={<ProjectGroup />} />
-        )}
-        {admin === "doctor" && (
-          <Route path="project-group" element={<DoctorProjectGroup />} />
-        )}
-        <Route path="department" element={<Department />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Layout>
+      <div className="size-auto">
+        <Layout>
+          {admin === "student" && <Route path="/" element={<Dashboard />} />}
+          {admin === "doctor" && (
+            <Route path="/" element={<DoctorDashboard />} />
+          )}
+          <Route path="login" element={<Login />} />
+          <Route path="/login/student" element={<StudentLogin />} />
+          <Route path="/login/academician" element={<AcademicianLogin />} />
+          <Route path="/resetPassword" element={<ForgetPassword />} />
+          {admin === "student" && (
+            <Route path="profile" element={<Profile />} />
+          )}
+          {admin === "doctor" && (
+            <Route path="profile" element={<DoctorProfile />} />
+          )}
+          {admin === "student" && (
+            <Route path="requests" element={<Requests />} />
+          )}
+          {admin === "doctor" && (
+            <Route path="requests" element={<DoctorRequests />} />
+          )}
+          <Route path="courses" element={<Courses />} />
+          {admin === "student" && <Route path="course" element={<Course />} />}
+          {admin === "doctor" && (
+            <Route path="course" element={<DoctorCourse />} />
+          )}
+          {admin === "doctor" && (
+            <Route path="senior-project-groups" element={<ProjectGroups />} />
+          )}
+          {admin === "student" && (
+            <Route path="project-group" element={<ProjectGroup />} />
+          )}
+          {admin === "doctor" && (
+            <Route path="project-group" element={<DoctorProjectGroup />} />
+          )}
+          <Route path="department" element={<Department />} />
+          <Route path="*" element={<ErrorPage />} />
+        </Layout>
+      </div>
     </AuthProvider>
   );
 };

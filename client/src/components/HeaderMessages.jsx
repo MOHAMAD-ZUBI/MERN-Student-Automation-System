@@ -2,7 +2,7 @@ import Search from "../../public/Search";
 
 const HeaderMessages = () => {
   return (
-    <div className="header-messages absolute top-[100%] right-[5%] z-50 w-[460px] duration-0.3 bg-primary py-[20px] px-4 hidden flex-col items-center justify-start gap-5">
+    <div className="header-messages absolute top-[70%] right-[5%] z-50 w-[460px] duration-0.3 bg-primary py-[20px] px-4 hidden flex-col items-center justify-start gap-5 scale-90">
       <h3 className="font-Montagu text-[35px] text-white">Messages</h3>
       <div className="w-full flex justify-between items-center gap-4">
         <div className="basis-1/3 cursor-pointer flex items-center justify-between py-1 pl-[10px] pr-[8px] rounded bg-white">

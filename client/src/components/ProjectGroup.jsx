@@ -1,18 +1,18 @@
-import { motion } from 'framer-motion';
-import { fadeIn } from '../motion/motion';
-import { Link } from 'react-router-dom';
-import SectionTitle from './repeated/SectionTitle';
-import ArrowDown from '../../public/ArrowDown';
-import Search from '../../public/Search';
+import { motion } from "framer-motion";
+import { fadeIn } from "../motion/motion";
+import { Link } from "react-router-dom";
+import SectionTitle from "./repeated/SectionTitle";
+import ArrowDown from "../../public/ArrowDown";
+import Search from "../../public/Search";
 
 const ProjectGroup = () => {
   return (
-    <div className="course  pt-[30px] min-h-screen overflow-hidden">
+    <div className="course  pt-[30px] min-h-screen overflow-hidden scale-95">
       <div className="container overflow-hidden">
         <SectionTitle content="Senior Project Groups" extras="mb-[45px]" />
         <div className="sm:flex justify-between items-center relative">
           <motion.div
-            variants={fadeIn('left', 'tween', 0.3, 1)}
+            variants={fadeIn("left", "tween", 0.3, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -39,7 +39,7 @@ const ProjectGroup = () => {
             </h4>
           </motion.div>
           <motion.div
-            variants={fadeIn('left', 'tween', 0.3, 1)}
+            variants={fadeIn("left", "tween", 0.3, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -64,14 +64,14 @@ const ProjectGroup = () => {
           </motion.div>
         </div>
         <motion.div
-          variants={fadeIn('up', 'tween', 0.3, 1)}
+          variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           className="active-requests w-full basis-1/2 sm:min-h-[362px] bg-neutral-100 bg-opacity-[0.16] rounded border border-neutral-100 border-opacity-[0.32] shadow-4xl mb-[50px]"
         >
           <motion.div
-            variants={fadeIn('up', 'tween', 0.35, 1)}
+            variants={fadeIn("up", "tween", 0.35, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -112,7 +112,7 @@ const ProjectGroup = () => {
           <div className="flex flex-col justify-between items-center gap-10 py-5 px-3">
             <div className="w-full flex flex-col ml:flex-row flex-wrap gap-2 sm:gap-4 items-start justify-center ml:justify-start">
               <motion.div
-                variants={fadeIn('up', 'tween', 0.35, 1)}
+                variants={fadeIn("up", "tween", 0.35, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -126,7 +126,7 @@ const ProjectGroup = () => {
                 <div className=" flex-1 flex flex-col items-center justify-center gap-2">
                   <div className="flex items-center justify-between w-full">
                     <p className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px]">
-                      Week 3 Exercises.pdf{' '}
+                      Week 3 Exercises.pdf{" "}
                     </p>
                     <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
                       ...
@@ -140,7 +140,7 @@ const ProjectGroup = () => {
                 </div>
               </motion.div>
               <motion.div
-                variants={fadeIn('up', 'tween', 0.4, 1)}
+                variants={fadeIn("up", "tween", 0.4, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -154,7 +154,7 @@ const ProjectGroup = () => {
                 <div className=" flex-1 flex flex-col items-center justify-center gap-2">
                   <div className="flex items-center justify-between w-full">
                     <p className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px]">
-                      Week 3 Exercises.pdf{' '}
+                      Week 3 Exercises.pdf{" "}
                     </p>
                     <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
                       ...
@@ -168,7 +168,7 @@ const ProjectGroup = () => {
                 </div>
               </motion.div>
               <motion.div
-                variants={fadeIn('up', 'tween', 0.45, 1)}
+                variants={fadeIn("up", "tween", 0.45, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -182,7 +182,7 @@ const ProjectGroup = () => {
                 <div className=" flex-1 flex flex-col items-center justify-center gap-2">
                   <div className="flex items-center justify-between w-full">
                     <p className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px]">
-                      Week 3 Exercises.pdf{' '}
+                      Week 3 Exercises.pdf{" "}
                     </p>
                     <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
                       ...
@@ -196,7 +196,7 @@ const ProjectGroup = () => {
                 </div>
               </motion.div>
               <motion.div
-                variants={fadeIn('up', 'tween', 0.5, 1)}
+                variants={fadeIn("up", "tween", 0.5, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -210,7 +210,7 @@ const ProjectGroup = () => {
                 <div className=" flex-1 flex flex-col items-center justify-center gap-2">
                   <div className="flex items-center justify-between w-full">
                     <p className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px]">
-                      Week 3 Exercises.pdf{' '}
+                      Week 3 Exercises.pdf{" "}
                     </p>
                     <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
                       ...

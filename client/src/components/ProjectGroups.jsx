@@ -1,23 +1,23 @@
-import { motion } from 'framer-motion';
-import { fadeIn } from '../motion/motion';
-import SectionTitle from './repeated/SectionTitle';
-import ArrowDown from '../../public/ArrowDown';
-import Group from './repeated/Group';
+import { motion } from "framer-motion";
+import { fadeIn } from "../motion/motion";
+import SectionTitle from "./repeated/SectionTitle";
+import ArrowDown from "../../public/ArrowDown";
+import Group from "./repeated/Group";
 
 const ProjectGroups = () => {
   return (
-    <div className="ProjectGroups  pt-[30px] min-h-screen overflow-hidden">
+    <div className="ProjectGroups  pt-[30px] min-h-screen overflow-hidden scale-95">
       <div className="container overflow-hidden">
         <SectionTitle content="Senior Project Groups" extras="mb-[45px]" />
         <motion.div
-          variants={fadeIn('up', 'tween', 0.3, 1)}
+          variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           className="active-requests w-full basis-1/2 sm:min-h-[362px] bg-neutral-100 bg-opacity-[0.16] rounded border border-neutral-100 border-opacity-[0.32] shadow-4xl mb-[50px]"
         >
           <motion.div
-            variants={fadeIn('up', 'tween', 0.35, 1)}
+            variants={fadeIn("up", "tween", 0.35, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
