@@ -59,7 +59,7 @@ const Menu = () => {
       >
         <Close></Close>
       </span>
-      <div className="scale-75">
+      <div className="scale-90">
         <div className="logo flex sm:hidden items-center justify-center">
           <Link
             to="/"
@@ -127,7 +127,7 @@ const Menu = () => {
               className="text-white hover:text-secondary text-[22px] font-Montagu font-normal duration-0.3"
               onClick={closeMenu}
             >
-              Senior Project Groups
+              Senior Groups
             </Link>
           </motion.li>
           <motion.li
