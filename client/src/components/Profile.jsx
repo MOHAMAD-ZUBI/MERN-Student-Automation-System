@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
+import useAuth from "../hooks/useAuth";
+import { useEffect, useState } from "react";
+import api from "../utils/Request";
 import SectionTitle from "../components/repeated/SectionTitle";
 import Graduate from "../../public/Graduate";
 import TimeLine from "./repeated/TimeLine";
 import { motion } from "framer-motion";
 import { fadeIn } from "../motion/motion";
-import useAuth from "../hooks/useAuth";
-import { useEffect, useState } from "react";
-import api from "../utils/Request";
 
 const Profile = () => {
+  const admin = sessionStorage.getItem("admin");
   const { token } = useAuth();
   const [response, setResponse] = useState(null);
 
@@ -39,6 +40,9 @@ const Profile = () => {
           />
           <div className="profile-name">
             <p className="font-normal font-Montagu text-[20px] text-primary">
+              {response && response.user && response.user.firstName
+                ? response.user.firstName + " " + response.user.lastName
+                : admin}
               {/* {response.user.firstName} */}
             </p>
             <span className="profile-number font-mukta font-normal text-[20px] text-secondary">
@@ -57,7 +61,13 @@ const Profile = () => {
             <Graduate wth="100%" hth="100%" fill="white" />
           </div>
           <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white flex-1 text-left sm:text-center">
-            {/* {response.data.department} - {response.data.faculty} */}
+            {response && response.user && response.data.department
+              ? response.data.department
+              : "Department"}{" "}
+            -{" "}
+            {response && response.user && response.data.faculty
+              ? response.data.faculty
+              : "Faculty"}
           </p>
         </motion.div>
         <div className="classes w-full flex justify-center items-center gap-[20px] mb-[50px]">
@@ -69,7 +79,10 @@ const Profile = () => {
             className="class py-[5px] px-[15px] rounded-[4px] bg-secondary"
           >
             <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white">
-              {/* Class - {response.data.level} */}
+              Class -{" "}
+              {response && response.data && response.data.level
+                ? response.data.level
+                : "Class"}
             </p>
           </motion.div>
           <motion.div
@@ -80,7 +93,10 @@ const Profile = () => {
             className="class py-[5px] px-[15px] rounded-[4px] bg-secondary"
           >
             <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white">
-              {/* ANO {response.data.gpa} */}
+              ANO{" "}
+              {response && response.data && response.data.gpa
+                ? response.data.gpa
+                : "GPA"}
             </p>
           </motion.div>
           <motion.div
@@ -91,7 +107,10 @@ const Profile = () => {
             className="class py-[5px] px-[15px] rounded-[4px] bg-secondary"
           >
             <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white">
-              {/* AGNO {response.data.agpa} */}
+              AGNO{" "}
+              {response && response.data && response.data.agpa
+                ? response.data.agpa
+                : "AGNO"}
             </p>
           </motion.div>
         </div>
