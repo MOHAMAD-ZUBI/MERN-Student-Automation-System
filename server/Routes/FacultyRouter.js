@@ -13,7 +13,7 @@ const router = express.Router();
 router.get("/list", getAllFaculties);
 router.get("/:id", getFacultyById);
 router.post("/create", createFaculty);
-router.put("/update", updateFaculty);
+router.put("/update/:id", updateFaculty);
 router.delete("/delete/:id", deleteFaculty);
 
 module.exports = router;

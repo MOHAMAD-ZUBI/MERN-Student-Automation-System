@@ -22,7 +22,7 @@ const getMyCourses = async (req, res) => {
     const courses = await Course.find({ student: userId });
     res.status(200).json(courses);
   } catch (error) {
-    console.error("Error: ", error);
+    console.error(error);
     res.status(500).json({ error: "Failed to get courses" });
   }
 };
@@ -78,6 +78,7 @@ const updateCourse = async (req, res) => {
     );
     res.status(200).json(course);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Failed to update course" });
   }
 };

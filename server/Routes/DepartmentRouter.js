@@ -13,7 +13,7 @@ const router = express.Router();
 router.get("/list", getAllDepartments);
 router.get("/:id", getDepartmentById);
 router.post("/create", createDepartment);
-router.put("/update", updateDepartment);
+router.put("/update/:id", updateDepartment);
 router.delete("/delete/:id", deleteDepartment);
 
 module.exports = router;
