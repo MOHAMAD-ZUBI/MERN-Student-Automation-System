@@ -3,7 +3,11 @@ const Schema = mongoose.Schema;
 
 const courseSchema = new Schema({
   courseName: {
-    Type: String,
+    type: String,
+    required: true,
+  },
+  courseCode: {
+    type: String,
     required: true,
   },
   credit: {
@@ -14,6 +18,14 @@ const courseSchema = new Schema({
     required: true,
   },
   term: {
+    type: String,
+    required: true,
+  },
+  day: {
+    type: String,
+    required: true,
+  },
+  time: {
     type: String,
     required: true,
   },
@@ -31,4 +43,4 @@ const courseSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model(courseSchema, "Courses");
+module.exports = mongoose.model("Course", courseSchema);
