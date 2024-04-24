@@ -10,8 +10,8 @@ const {
 
 const router = express.Router();
 
-router.get("/:id", getDepartmentById);
 router.get("/list", getAllDepartments);
+router.get("/:id", getDepartmentById);
 router.post("/create", createDepartment);
 router.put("/update", updateDepartment);
 router.delete("/delete/:id", deleteDepartment);
