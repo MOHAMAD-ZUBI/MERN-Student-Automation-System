@@ -17,9 +17,16 @@ const getMyCourses = async (req, res) => {
     const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded._id; // Make sure to declare userId using 'const' or 'let'
-    console.log(userId);
+    // console.log(userId);
+    const { day } = req.query;
 
-    const courses = await Course.find({ student: userId });
+    let courses;
+    if (day) {
+      courses = await Course.find({ student: userId, day });
+    } else {
+      courses = await Course.find({ student: userId });
+    }
+
     res.status(200).json(courses);
   } catch (error) {
     console.error(error);
