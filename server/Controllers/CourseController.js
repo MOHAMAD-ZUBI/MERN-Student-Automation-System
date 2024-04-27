@@ -22,9 +22,14 @@ const getMyCourses = async (req, res) => {
 
     let courses;
     if (day) {
-      courses = await Course.find({ student: userId, day });
+      courses = await Course.find({ student: userId, day }).populate(
+        "lecturer"
+      );
     } else {
-      courses = await Course.find({ student: userId });
+      courses = await Course.find({ student: userId }).populate("lecturer", [
+        "name",
+        "Position",
+      ]);
     }
 
     res.status(200).json(courses);
