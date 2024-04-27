@@ -1,53 +1,34 @@
-import SectionTitle from '../repeated/SectionTitle';
-import CurrentCourse from '../repeated/CurrentCourse';
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import SectionTitle from "../repeated/SectionTitle";
+import CurrentCourse from "../repeated/CurrentCourse";
 
-const CurrentCourses = () => {
+const CurrentCourses = ({ courses }) => {
+  const colors = ["FDFFE0", "E0EBFF", "FFE6E6", "E6FFEF"];
+
   return (
     <div className="Courses mb-[150px]">
       <SectionTitle content="My Current Courses" extras="mb-5" />
       <div className="current-courses flex flex-row justify-start items-center gap-[20px] max-w-full flex-wrap ">
-        <CurrentCourse
-          color="from-[#FFE6E6] to-white"
-          code="MAT209"
-          module="Mathematics"
-          teacher="Dr. Alex Sam"
-          delay="0.5"
-        />
-        <CurrentCourse
-          color="from-[#E6FFEF] to-white"
-          code="MAT209"
-          module="Mathematics"
-          teacher="Dr. Alex Sam"
-          delay="0.55"
-        />
-        <CurrentCourse
-          color="from-[#E0EBFF] to-white"
-          code="MAT209"
-          module="Mathematics"
-          teacher="Dr. Alex Sam"
-          delay="0.6"
-        />
-        <CurrentCourse
-          color="from-[#FDFFE0] to-white"
-          code="MAT209"
-          module="Mathematics"
-          teacher="Dr. Alex Sam"
-          delay="0.65"
-        />
-        <CurrentCourse
-          color="from-[#FFE6E6] to-white"
-          code="MAT209"
-          module="Mathematics"
-          teacher="Dr. Alex Sam"
-          delay="0.7"
-        />
-        <CurrentCourse
-          color="from-[#E6FFEF] to-white"
-          code="MAT209"
-          module="Mathematics"
-          teacher="Dr. Alex Sam"
-          delay="0.75"
-        />
+        {courses ? (
+          courses.map((course, index) => {
+            return (
+              <div key={index}>
+                <CurrentCourse
+                  color={`from-[#${colors[index % 4]}] to-white`}
+                  code={course.courseCode}
+                  module={course.courseName}
+                  teacher={
+                    course.lecturer.position + " " + course.lecturer.name
+                  }
+                  delay="0.5"
+                />
+              </div>
+            );
+          })
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

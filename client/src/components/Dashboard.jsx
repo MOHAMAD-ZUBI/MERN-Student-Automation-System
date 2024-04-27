@@ -13,6 +13,7 @@ const Dashboard = () => {
   const admin = sessionStorage.getItem("admin");
   const { token } = useAuth();
   const [response, setResponse] = useState(null);
+  const [courses, setCourses] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +28,17 @@ const Dashboard = () => {
         console.error("Error fetching data:", error);
       }
     };
+
+    const fetchCourses = async () => {
+      const courses = await api.get(`/course/list/mine`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setCourses(courses.data);
+    };
+
+    fetchCourses();
 
     fetchData();
   }, [token]);
@@ -53,7 +65,7 @@ const Dashboard = () => {
 
       <div className="container">
         <Shedule /> {/* Pass token as prop to Shedule component */}
-        <CurrentCourses />{" "}
+        <CurrentCourses courses={courses} />{" "}
         {/* Pass token as prop to CurrentCourses component */}
       </div>
     </div>
