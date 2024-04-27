@@ -28,7 +28,9 @@ const getDepartmentByStudent = async (req, res) => {
   try {
     const user = req.user;
     const student = await Student.findOne({ user: user._id });
-    const departments = await Department.findById(student.departmentId);
+    const departments = await Department.findById(
+      student.departmentId
+    ).populate("departmentHead");
     res.status(200).json(departments);
   } catch (error) {
     res.status(500).json({ error: "Failed to get department" });
@@ -80,6 +82,7 @@ const createDepartment = async (req, res) => {
       faculty,
       achievements,
       workers,
+      secretary,
     } = req.body;
     const department = new Department({
       name,
@@ -88,6 +91,7 @@ const createDepartment = async (req, res) => {
       faculty,
       achievements,
       workers,
+      secretary,
     });
     await department.save();
     res.status(201).json(department);
