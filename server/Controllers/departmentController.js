@@ -1,4 +1,4 @@
-const Department = require("../Models/department");
+const { Department, Worker } = require("../Models/department");
 
 // get all departments
 const getAllDepartments = async (req, res) => {
@@ -21,22 +21,64 @@ const getDepartmentById = async (req, res) => {
   }
 };
 
+// add a worker to a department
+const addWorker = async (req, res) => {
+  try {
+    const { name, email, phone, sex, position } = req.body;
+    const newWorker = await Worker.create({
+      name,
+      email,
+      phone,
+      sex,
+      position,
+    });
+    const department = await Department.findById(req.params.id);
+    department.workers.push(newWorker);
+    await department.save();
+    return res.status(201).json(department);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+// delete a worker from a department
+
+const deleteWorker = async (req, res) => {
+  try {
+    const { workerId } = req.query;
+    const department = await Department.findById(req.params.id);
+    const worker = await Worker.findById(workerId);
+    department.workers.pull({ _id: workerId });
+    await department.save();
+    res.status(200).json(department);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 // create a new department
 const createDepartment = async (req, res) => {
   try {
-    const { name, departmentHead, description, faculty, achievements } =
-      req.body;
+    const {
+      name,
+      departmentHead,
+      description,
+      faculty,
+      achievements,
+      workers,
+    } = req.body;
     const department = new Department({
       name,
       departmentHead,
       description,
       faculty,
       achievements,
+      workers,
     });
     await department.save();
     res.status(201).json(department);
   } catch (error) {
-    res.status(500).json({ error: "Failed to create department" });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -74,4 +116,6 @@ module.exports = {
   createDepartment,
   updateDepartment,
   deleteDepartment,
+  addWorker,
+  deleteWorker,
 };

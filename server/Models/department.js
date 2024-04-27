@@ -1,6 +1,28 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const workerSchema = new Schema({
+  name: {
+    type: String,
+  },
+  position: {
+    type: String,
+  },
+  email: {
+    type: String,
+  },
+  phone: {
+    type: String,
+  },
+  sex: {
+    type: String,
+  },
+});
+
+const Worker = mongoose.model("Worker", workerSchema);
+
+module.exports.Worker = Worker;
+
 const departmentSchema = new Schema(
   {
     name: {
@@ -8,14 +30,15 @@ const departmentSchema = new Schema(
       required: true,
     },
     departmentHead: {
-      type: mongoose.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
     },
+    workers: [workerSchema],
     description: {
       type: String,
     },
     faculty: {
-      type: mongoose.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Faculty",
     },
     achievements: {
@@ -25,4 +48,6 @@ const departmentSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Department", departmentSchema);
+const Department = mongoose.model("Department", departmentSchema);
+
+module.exports.Department = Department;
