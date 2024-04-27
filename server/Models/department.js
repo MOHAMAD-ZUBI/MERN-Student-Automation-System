@@ -19,9 +19,28 @@ const workerSchema = new Schema({
   },
 });
 
+const secretarySchema = new Schema({
+  name: {
+    type: String,
+  },
+  position: {
+    type: String,
+  },
+  email: {
+    type: String,
+  },
+  phone: {
+    type: String,
+  },
+  sex: {
+    type: String,
+  },
+});
+const Secretary = mongoose.model("Secretary", secretarySchema);
 const Worker = mongoose.model("Worker", workerSchema);
 
 module.exports.Worker = Worker;
+module.exports.Secretary = Secretary;
 
 const departmentSchema = new Schema(
   {
@@ -33,6 +52,7 @@ const departmentSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    secretary: secretarySchema,
     workers: [workerSchema],
     description: {
       type: String,

@@ -1,40 +1,67 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
+/* eslint-disable no-unused-vars */
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
-import { motion } from 'framer-motion';
-import { fadeIn } from '../motion/motion';
+import { motion } from "framer-motion";
+import { fadeIn } from "../motion/motion";
 
-import Book from '../../public/Book';
-import Graduate from '../../public/Graduate';
-import Case from '../../public/Case';
-import ArrowUp from '../../public/ArrowUp';
-import Work from '../../public/Work';
-import Plus from '../../public/Plus';
-import Badge from '../../public/Badge';
+import Book from "../../public/Book";
+import Graduate from "../../public/Graduate";
+import Case from "../../public/Case";
+import ArrowUp from "../../public/ArrowUp";
+import Work from "../../public/Work";
+import Plus from "../../public/Plus";
+import Badge from "../../public/Badge";
+import { useEffect, useState } from "react";
+import api from "../utils/Request";
+import useAuth from "../hooks/useAuth";
 
 const Department = () => {
   const toggleCourses = (e) => {
     const parentCoursesContainer =
-      e.target.closest('.courses-head').nextSibling;
+      e.target.closest(".courses-head").nextSibling;
 
     if (parentCoursesContainer) {
-      parentCoursesContainer.classList.toggle('hidden');
+      parentCoursesContainer.classList.toggle("hidden");
     }
   };
+
+  const admin = sessionStorage.getItem("admin");
+  const { token } = useAuth();
+  const [response, setResponse] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get("/department/studentDepartment", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setResponse(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [token]);
+
+  console.log(response);
 
   return (
     <div className="departement min-h-screen overflow-hidden">
       <div className="hero-section flex items-center justify-between">
         <motion.h1
-          variants={fadeIn('right', 'tween', 0.3, 1)}
+          variants={fadeIn("right", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           className="hero-title basis-1/3 font-Montagu text-primary text-[17px] sm:text-[35px] mxl:text-[65px] leading-6 sm:leading-10 mxl:leading-[84px] px-6"
         >
-          Computer <br /> Engineering
+          {response && response.name ? response.name : "Computer Engineering"}
         </motion.h1>
         <Swiper
           slidesPerView={1}
@@ -82,7 +109,7 @@ const Department = () => {
       </div>
       <div className="w-full flex items-center justify-between px-6 sm:px-8 mxl:px-10 py-2 sm:py-4 mxl:py-6 bg-primary mb-6">
         <motion.div
-          variants={fadeIn('up', 'tween', 0.35, 1)}
+          variants={fadeIn("up", "tween", 0.35, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -96,7 +123,7 @@ const Department = () => {
           </p>
         </motion.div>
         <motion.div
-          variants={fadeIn('up', 'tween', 0.4, 1)}
+          variants={fadeIn("up", "tween", 0.4, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -110,7 +137,7 @@ const Department = () => {
           </p>
         </motion.div>
         <motion.div
-          variants={fadeIn('up', 'tween', 0.45, 1)}
+          variants={fadeIn("up", "tween", 0.45, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -124,7 +151,7 @@ const Department = () => {
           </p>
         </motion.div>
         <motion.div
-          variants={fadeIn('up', 'tween', 0.5, 1)}
+          variants={fadeIn("up", "tween", 0.5, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -138,7 +165,7 @@ const Department = () => {
           </p>
         </motion.div>
         <motion.div
-          variants={fadeIn('up', 'tween', 0.55, 1)}
+          variants={fadeIn("up", "tween", 0.55, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -152,7 +179,7 @@ const Department = () => {
           </p>
         </motion.div>
         <motion.div
-          variants={fadeIn('up', 'tween', 0.6, 1)}
+          variants={fadeIn("up", "tween", 0.6, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -168,7 +195,7 @@ const Department = () => {
       </div>
       <div className="Instructors mb-[50px]">
         <motion.h3
-          variants={fadeIn('left', 'tween', 0.3, 1)}
+          variants={fadeIn("left", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -178,7 +205,7 @@ const Department = () => {
         </motion.h3>
         <div className="w-full flex items-center justify-center">
           <motion.div
-            variants={fadeIn('up', 'tween', 0.3, 1)}
+            variants={fadeIn("up", "tween", 0.3, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -190,7 +217,11 @@ const Department = () => {
               className="w-[100px] sm:w-[200px] mxl:w-[347px]"
             />
             <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-primary text-center">
-              Prof. ilhami
+              {response
+                ? response.departmentHead.firstName +
+                  " " +
+                  response.departmentHead.lastName
+                : ""}
             </p>
             <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-primary text-center">
               Head of the department
@@ -199,183 +230,44 @@ const Department = () => {
         </div>
         <div className="container">
           <div className="grid grid-cols-3 gap-2">
-            <motion.div
-              variants={fadeIn('up', 'tween', 0.3, 1)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="flex flex-col items-center justify-between gap-[6px] mb-[25px]"
-            >
-              <img
-                src="./profile3.png"
-                alt="profile"
-                className="w-[100px] sm:w-[200px] mxl:w-[347px]"
-              />
-              <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-primary text-center">
-                Dr. Lilly
-              </p>
-              <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-primary text-center">
-                Assis. Head of the department
-              </p>
-            </motion.div>
-            <motion.div
-              variants={fadeIn('up', 'tween', 0.3, 1)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="flex flex-col items-center justify-between gap-[6px] mb-[25px]"
-            >
-              <img
-                src="./profile2.png"
-                alt="profile"
-                className="w-[100px] sm:w-[200px] mxl:w-[347px]"
-              />
-              <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-primary text-center">
-                Prof. ilhami
-              </p>
-              <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-primary text-center">
-                Assis. Head of the department
-              </p>
-            </motion.div>
-            <motion.div
-              variants={fadeIn('up', 'tween', 0.3, 1)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="flex flex-col items-center justify-between gap-[6px] mb-[25px]"
-            >
-              <img
-                src="./profile2.png"
-                alt="profile"
-                className="w-[100px] sm:w-[200px] mxl:w-[347px]"
-              />
-              <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-primary text-center">
-                Prof. ilhami
-              </p>
-              <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-primary text-center">
-                Assis. Head of the department
-              </p>
-            </motion.div>
-            <motion.div
-              variants={fadeIn('up', 'tween', 0.4, 1)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="flex flex-col items-center justify-between gap-[6px] mb-[25px]"
-            >
-              <img
-                src="./profile3.png"
-                alt="profile"
-                className="w-[100px] sm:w-[200px] mxl:w-[347px]"
-              />
-              <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-primary text-center">
-                Dr. Lilly
-              </p>
-              <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-primary text-center">
-                Assis. Head of the department
-              </p>
-            </motion.div>
-            <motion.div
-              variants={fadeIn('up', 'tween', 0.4, 1)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="flex flex-col items-center justify-between gap-[6px] mb-[25px]"
-            >
-              <img
-                src="./profile2.png"
-                alt="profile"
-                className="w-[100px] sm:w-[200px] mxl:w-[347px]"
-              />
-              <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-primary text-center">
-                Prof. ilhami
-              </p>
-              <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-primary text-center">
-                Assis. Head of the department
-              </p>
-            </motion.div>
-            <motion.div
-              variants={fadeIn('up', 'tween', 0.4, 1)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="flex flex-col items-center justify-between gap-[6px] mb-[25px]"
-            >
-              <img
-                src="./profile3.png"
-                alt="profile"
-                className="w-[100px] sm:w-[200px] mxl:w-[347px]"
-              />
-              <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-primary text-center">
-                Dr. Sara
-              </p>
-              <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-primary text-center">
-                Assis. Head of the department
-              </p>
-            </motion.div>
-            <motion.div
-              variants={fadeIn('up', 'tween', 0.5, 1)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="flex flex-col items-center justify-between gap-[6px] mb-[25px]"
-            >
-              <img
-                src="./profile3.png"
-                alt="profile"
-                className="w-[100px] sm:w-[200px] mxl:w-[347px]"
-              />
-              <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-primary text-center">
-                Dr. Lilly
-              </p>
-              <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-primary text-center">
-                Assis. Head of the department
-              </p>
-            </motion.div>
-            <motion.div
-              variants={fadeIn('up', 'tween', 0.5, 1)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="flex flex-col items-center justify-between gap-[6px] mb-[25px]"
-            >
-              <img
-                src="./profile2.png"
-                alt="profile"
-                className="w-[100px] sm:w-[200px] mxl:w-[347px]"
-              />
-              <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-primary text-center">
-                Prof. ilhami
-              </p>
-              <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-primary text-center">
-                Assis. Head of the department
-              </p>
-            </motion.div>
-            <motion.div
-              variants={fadeIn('up', 'tween', 0.5, 1)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              className="flex flex-col items-center justify-between gap-[6px] mb-[25px]"
-            >
-              <img
-                src="./profile3.png"
-                alt="profile"
-                className="w-[100px] sm:w-[200px] mxl:w-[347px]"
-              />
-              <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-primary text-center">
-                Dr. Sara
-              </p>
-              <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-primary text-center">
-                Assis. Head of the department
-              </p>
-            </motion.div>
+            {response ? (
+              response.workers.map((worker) => {
+                return (
+                  <motion.div
+                    key={worker._id}
+                    variants={fadeIn("up", "tween", 0.3, 1)}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true }}
+                    className="flex flex-col items-center justify-between gap-[6px] mb-[25px]"
+                  >
+                    <img
+                      src={
+                        worker.sex == "female"
+                          ? "./profile3.png"
+                          : "./profile2.png"
+                      }
+                      alt="profile"
+                      className="w-[100px] sm:w-[200px] mxl:w-[347px]"
+                    />
+                    <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-primary text-center">
+                      {worker.name}
+                    </p>
+                    <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-primary text-center">
+                      {worker.position}
+                    </p>
+                  </motion.div>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
       <div className="secretary  mb-[50px] bg-primary py-10 shadow-3xl">
         <motion.h3
-          variants={fadeIn('up', 'tween', 0.3, 1)}
+          variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -384,29 +276,35 @@ const Department = () => {
           Secretary
         </motion.h3>
         <motion.div
-          variants={fadeIn('up', 'tween', 0.4, 1)}
+          variants={fadeIn("up", "tween", 0.4, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           className="flex flex-col items-center justify-between gap-[6px] mb-[25px]"
         >
           <img
-            src="./profile2.png"
+            src={
+              response?.Secretary.sex == "female"
+                ? "./profile3.png"
+                : "./profile2.png"
+            }
             alt="profile"
             className="w-[100px] sm:w-[200px] mxl:w-[347px]"
           />
           <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-white text-center">
-            Alex
+            {response ? response.Secretary.name : ""}
           </p>
           <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-white text-center">
-            Secretary of the department
+            {response
+              ? response.Secretary.position
+              : "Secretary of the department"}
           </p>
         </motion.div>
       </div>
       <span className="block mb-[50px] w-[300px] sm:w-[700px] mxl:w-[1200px] h-[1px] bg-[#E6E6E6] mx-auto"></span>
       <div className="departement mb-[50px]">
         <motion.h3
-          variants={fadeIn('up', 'tween', 0.3, 1)}
+          variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -416,7 +314,7 @@ const Department = () => {
         </motion.h3>
         <div className="departement-courses">
           <motion.div
-            variants={fadeIn('up', 'tween', 0.5, 1)}
+            variants={fadeIn("up", "tween", 0.5, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -530,7 +428,7 @@ const Department = () => {
             </div>
           </motion.div>
           <motion.div
-            variants={fadeIn('up', 'tween', 0.6, 1)}
+            variants={fadeIn("up", "tween", 0.6, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -644,7 +542,7 @@ const Department = () => {
             </div>
           </motion.div>
           <motion.div
-            variants={fadeIn('up', 'tween', 0.7, 1)}
+            variants={fadeIn("up", "tween", 0.7, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -758,7 +656,7 @@ const Department = () => {
             </div>
           </motion.div>
           <motion.div
-            variants={fadeIn('up', 'tween', 0.7, 1)}
+            variants={fadeIn("up", "tween", 0.7, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -876,7 +774,7 @@ const Department = () => {
       <span className="block mb-[50px] w-[300px] sm:w-[700px] mxl:w-[1200px] h-[1px] bg-[#E6E6E6] mx-auto"></span>
       <div className="erasmus mb-[50px]">
         <motion.h3
-          variants={fadeIn('up', 'tween', 0.3, 1)}
+          variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -886,7 +784,7 @@ const Department = () => {
         </motion.h3>
         <div className=" bg-primary py-4 sm:py-6 mxl:py-8 flex flex-col items-center justify-between gap-4 sm:gap-6 mxl:gap-8 shadow-3xl">
           <motion.p
-            variants={fadeIn('right', 'tween', 0.4, 1)}
+            variants={fadeIn("right", "tween", 0.4, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -899,7 +797,7 @@ const Department = () => {
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </motion.p>
           <motion.div
-            variants={fadeIn('up', 'tween', 0.5, 1)}
+            variants={fadeIn("up", "tween", 0.5, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -922,7 +820,7 @@ const Department = () => {
       <span className="block mb-[50px] w-[300px] sm:w-[700px] mxl:w-[1200px] h-[1px] bg-[#E6E6E6] mx-auto"></span>
       <div className="internship mb-[50px]">
         <motion.h3
-          variants={fadeIn('up', 'tween', 0.3, 1)}
+          variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -932,7 +830,7 @@ const Department = () => {
         </motion.h3>
         <div className=" bg-white py-4 sm:py-6 mxl:py-8 flex flex-col items-center justify-between gap-4 sm:gap-6 mxl:gap-8 ">
           <motion.p
-            variants={fadeIn('right', 'tween', 0.4, 1)}
+            variants={fadeIn("right", "tween", 0.4, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -945,7 +843,7 @@ const Department = () => {
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </motion.p>
           <motion.div
-            variants={fadeIn('up', 'tween', 0.5, 1)}
+            variants={fadeIn("up", "tween", 0.5, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -968,7 +866,7 @@ const Department = () => {
       <span className="block mb-[50px] w-[300px] sm:w-[700px] mxl:w-[1200px] h-[1px] bg-[#E6E6E6] mx-auto"></span>
       <div className="workplace mb-[50px]">
         <motion.h3
-          variants={fadeIn('up', 'tween', 0.3, 1)}
+          variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -978,7 +876,7 @@ const Department = () => {
         </motion.h3>
         <div className=" bg-primary py-4 sm:py-6 mxl:py-8 flex flex-col items-center justify-between gap-4 sm:gap-6 mxl:gap-8 shadow-3xl">
           <motion.p
-            variants={fadeIn('right', 'tween', 0.4, 1)}
+            variants={fadeIn("right", "tween", 0.4, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -991,7 +889,7 @@ const Department = () => {
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </motion.p>
           <motion.div
-            variants={fadeIn('up', 'tween', 0.5, 1)}
+            variants={fadeIn("up", "tween", 0.5, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}

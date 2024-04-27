@@ -8,11 +8,14 @@ const {
   deleteDepartment,
   addWorker,
   deleteWorker,
+  getDepartmentByStudent,
 } = require("../Controllers/departmentController");
+const { authenticateUser } = require("../Middlewares/Auth");
 
 const router = express.Router();
 
 router.get("/list", getAllDepartments);
+router.get("/studentDepartment", authenticateUser, getDepartmentByStudent);
 router.get("/:id", getDepartmentById);
 router.post("/addWorker/:id", addWorker);
 router.delete("/deleteWorker/:id", deleteWorker);
