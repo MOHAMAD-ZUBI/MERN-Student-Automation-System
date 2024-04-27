@@ -1,4 +1,6 @@
 const { Department, Worker } = require("../Models/department");
+const User = require("../Models/userMode");
+const Student = require("../Models/student");
 
 // get all departments
 const getAllDepartments = async (req, res) => {
@@ -15,6 +17,18 @@ const getDepartmentById = async (req, res) => {
   try {
     const { id } = req.params;
     const departments = await Department.findById(id);
+    res.status(200).json(departments);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to get department" });
+  }
+};
+
+// get department based on user
+const getDepartmentByStudent = async (req, res) => {
+  try {
+    const user = req.user;
+    const student = await Student.findOne({ user: user._id });
+    const departments = await Department.findById(student.departmentId);
     res.status(200).json(departments);
   } catch (error) {
     res.status(500).json({ error: "Failed to get department" });
@@ -118,4 +132,5 @@ module.exports = {
   deleteDepartment,
   addWorker,
   deleteWorker,
+  getDepartmentByStudent,
 };

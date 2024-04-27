@@ -19,6 +19,10 @@ const studentSchema = new Schema(
     department: {
       type: String,
     },
+    departmentId: {
+      type: mongoose.Types.ObjectId,
+      ref: "Department",
+    },
     faculty: {
       type: String,
     },
