@@ -13,6 +13,10 @@ const academicianSchema = new Schema({
   employmentHistory: {
     type: String,
   },
+
+  name: {
+    Type: String,
+  },
   officeNo: {
     type: String,
   },
@@ -24,6 +28,7 @@ const academicianSchema = new Schema({
   },
   position: {
     type: String,
+    default: "Dr.",
   },
   user: {
     type: mongoose.Types.ObjectId,

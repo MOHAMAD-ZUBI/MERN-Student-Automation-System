@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
-import { fadeIn } from '../../motion/motion';
+import PropTypes from "prop-types";
+import { motion } from "framer-motion";
+import { fadeIn } from "../../motion/motion";
 
 const CurrentCourse = ({ color, code, teacher, module, delay }) => {
   return (
     <motion.div
-      variants={fadeIn('up', 'tween', delay, 1)}
+      variants={fadeIn("up", "tween", delay, 1)}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
@@ -14,9 +14,9 @@ const CurrentCourse = ({ color, code, teacher, module, delay }) => {
       <p className=" font-mukta font-normal text-[15px] sm:text-[22px] text-[#595959] leading-5 sm:leading-9 uppercase text-left">
         {code}
         <br />
-        <span className="text-[#1F3D75]">{module}</span>
+        <span className="text-[#1F3D75] text-wrap">{module}</span>
       </p>
-      <p className=" text-[#C8272E] text-[10px] sm:text-[18px] font-mukta font-normal leading-none text-left">
+      <p className=" text-[#C8272E] text-[10px] text-wrap sm:text-[18px] font-mukta font-normal leading-none text-left">
         {teacher}
       </p>
     </motion.div>

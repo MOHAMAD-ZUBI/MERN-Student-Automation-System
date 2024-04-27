@@ -11,42 +11,77 @@ import { fadeIn } from "../motion/motion";
 const Profile = () => {
   const admin = sessionStorage.getItem("admin");
   const { token } = useAuth();
-  const [response, setResponse] = useState(null);
+  const [student, setStudent] = useState(null);
+  const [courses, setCourses] = useState(null);
+  const [day, setDay] = useState("Mon");
+
+  /**
+   const DaysOfWeek = {
+  Sun: 0,
+  Mon: 1,
+  Tue: 2,
+  Wed: 3,
+  Thu: 4,
+  Fri: 5,
+  Sat: 6,
+};
+   */
+  const colors = ["FDFFE0", "E0EBFF", "FFE6E6", "E6FFEF"];
+  const colors2 = ["F4FBA3", "87A4DA", "E88287", "9DF6BB"];
 
   useEffect(() => {
-    const fetchResponse = async () => {
-      const response = await api.get("/student/current", {
+    const fetchStudent = async () => {
+      const student = await api.get("/student/current", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setResponse(response.data);
+      setStudent(student.data);
     };
 
-    fetchResponse();
-  }, [token]);
+    const fetchCourses = async () => {
+      const courses = await api.get(`/course/list/mine?day=${day}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setCourses(courses.data);
+    };
 
-  // console.log({ response });
+    fetchCourses();
+    fetchStudent();
+  }, [token, day]);
 
   return (
     <div className="profile min-h-screen relative pt-[125px] overflow-hidden ">
       <span className="absolute w-full h-[200px] top-0 left-0 bg-gradient-to-b from-gradient1 to-gradient2 z-0"></span>
       <div className="container ">
         <div className="profile-info flex justify-star items-center gap-[10px] mb-[30px] ">
-          <img
-            src="./profile.png"
-            alt="profile"
-            className="w-[150px] h-[150px]"
-          />
+          {student?.data ? (
+            <img
+              src={
+                student?.data?.sex == "male"
+                  ? "./profile2.png"
+                  : "./profile.png"
+              }
+              alt="profile"
+              className="w-[150px] h-[150px]"
+            />
+          ) : (
+            <></>
+          )}
           <div className="profile-name">
-            <p className="font-normal font-Montagu text-[28px] text-primary">
-              {response && response.user && response.user.firstName
-                ? response.user.firstName + " " + response.user.lastName
+            <p className="font-normal capitalize font-Montagu text-[28px] text-primary">
+              {student && student.user && student.user.firstName
+                ? student.user.firstName + " " + student.user.lastName
                 : admin}
-              {/* {response.user.firstName} */}
+              {/* {student.user.firstName} */}
+            </p>
+            <p className="font-normal capitalize font-Montagu text-[20px] text-primary">
+              {student?.user?.registerNo}
             </p>
             <span className="profile-number font-mukta font-normal text-[20px] text-secondary">
-              {/* {response.user.registerNo} */}
+              {/* {student.user.registerNo} */}
             </span>
           </div>
         </div>
@@ -61,12 +96,12 @@ const Profile = () => {
             <Graduate wth="100%" hth="100%" fill="white" />
           </div>
           <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white flex-1 text-left sm:text-center">
-            {response && response.user && response.data.department
-              ? response.data.department
+            {student && student.user && student.data.department
+              ? student.data.department
               : "Department"}{" "}
             -{" "}
-            {response && response.user && response.data.faculty
-              ? response.data.faculty
+            {student && student.user && student.data.faculty
+              ? student.data.faculty
               : "Faculty"}
           </p>
         </motion.div>
@@ -80,8 +115,8 @@ const Profile = () => {
           >
             <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white">
               Class -{" "}
-              {response && response.data && response.data.level
-                ? response.data.level
+              {student && student.data && student.data.level
+                ? student.data.level
                 : "Class"}
             </p>
           </motion.div>
@@ -94,8 +129,8 @@ const Profile = () => {
           >
             <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white">
               ANO{" "}
-              {response && response.data && response.data.gpa
-                ? response.data.gpa
+              {student && student.data && student.data.gpa
+                ? student.data.gpa
                 : "GPA"}
             </p>
           </motion.div>
@@ -108,8 +143,8 @@ const Profile = () => {
           >
             <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white">
               AGNO{" "}
-              {response && response.data && response.data.agpa
-                ? response.data.agpa
+              {student && student.data && student.data.agpa
+                ? student.data.agpa
                 : "AGNO"}
             </p>
           </motion.div>
@@ -131,7 +166,7 @@ const Profile = () => {
               className="day flex justify-center items-center py-[8px] px-[6px] rounded-[4px] bg-white shadow-3xl min-w-[38px] sm:min-w-[50px] cursor-pointer"
             >
               <span className="font-Montagu text-[10px] sm:text-[16px] text-secondary">
-                Mon
+                <button onClick={() => setDay("Mon")}>Mon</button>
               </span>
             </motion.div>
             <motion.div
@@ -142,7 +177,7 @@ const Profile = () => {
               className="day flex justify-center items-center py-[8px] px-[6px] rounded-[4px] bg-white shadow-3xl min-w-[38px] sm:min-w-[50px] cursor-pointer"
             >
               <span className="font-Montagu text-[10px] sm:text-[16px] text-secondary">
-                Tue
+                <button onClick={() => setDay("Tue")}>Tue</button>
               </span>
             </motion.div>
             <motion.div
@@ -153,7 +188,7 @@ const Profile = () => {
               className="day flex justify-center items-center py-[8px] px-[6px] rounded-[4px] bg-white shadow-3xl min-w-[38px] sm:min-w-[50px] cursor-pointer"
             >
               <span className="font-Montagu text-[10px] sm:text-[16px] text-secondary">
-                Wed
+                <button onClick={() => setDay("Wed")}>Wed</button>
               </span>
             </motion.div>
             <motion.div
@@ -164,7 +199,7 @@ const Profile = () => {
               className="day flex justify-center items-center py-[8px] px-[6px] rounded-[4px] bg-white shadow-3xl min-w-[38px] sm:min-w-[50px] cursor-pointer"
             >
               <span className="font-Montagu text-[10px] sm:text-[16px] text-secondary">
-                Thu
+                <button onClick={() => setDay("Thu")}>Thu</button>
               </span>
             </motion.div>
             <motion.div
@@ -175,7 +210,7 @@ const Profile = () => {
               className="day flex justify-center items-center py-[8px] px-[6px] rounded-[4px] bg-white shadow-3xl min-w-[38px] sm:min-w-[50px] cursor-pointer"
             >
               <span className="font-Montagu text-[10px] sm:text-[16px] text-secondary">
-                Fri
+                <button onClick={() => setDay("Fri")}>Fri</button>
               </span>
             </motion.div>
             <motion.div
@@ -186,49 +221,29 @@ const Profile = () => {
               className="day flex justify-center items-center py-[8px] px-[6px] rounded-[4px] bg-white shadow-3xl min-w-[38px] sm:min-w-[50px] cursor-pointer"
             >
               <span className="font-Montagu text-[10px] sm:text-[16px] text-secondary">
-                Sat
+                <button onClick={() => setDay("Sat")}>Sat</button>
               </span>
             </motion.div>
           </div>
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-start w-full gap-1 sm:gap-[35px]">
-            <div className="w-full flex flex-col items-center justify-start gap-[5px]">
-              <TimeLine
-                time="10:00"
-                module="PRG209 Programming"
-                color1="bg-[#FFE6E6]"
-                color2="bg-[#E88287]"
-                delay="0.5"
-              />
-              <TimeLine
-                time="11:00"
-                module="PHY209 Physics"
-                color1="bg-[#E6FFEF]"
-                color2="bg-[#9DF6BB]"
-                delay="0.55"
-              />
-              <TimeLine
-                time="12:00"
-                module="MAT209 Mathematics"
-                color1="bg-[#E0EBFF]"
-                color2="bg-[#87A4DA]"
-                delay="0.6"
-              />
-            </div>
-            <div className="w-full flex flex-col items-center justify-start gap-[5px]">
-              <TimeLine
-                time="14:00"
-                module="MAT209 Mathematics"
-                color1="bg-[#FDFFE0]"
-                color2="bg-[#F4FBA3]"
-                delay="0.65"
-              />
-              <TimeLine
-                time="08:00"
-                module="PHY209 Physics"
-                color1="bg-[#E0EBFF]"
-                color2="bg-[#87A4DA]"
-                delay="0.7"
-              />
+            <div className="w-full flex flex-wrap items-center justify-start gap-[15px]">
+              {courses ? (
+                courses.map((course, index) => {
+                  return (
+                    <div key={index}>
+                      <TimeLine
+                        time={course.time}
+                        module={course.courseName}
+                        color1={`bg-[#${colors[index % 4]}]`}
+                        color2={`bg-[#${colors2[index % 4]}]`}
+                        delay="0.5"
+                      />
+                    </div>
+                  );
+                })
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </motion.div>
