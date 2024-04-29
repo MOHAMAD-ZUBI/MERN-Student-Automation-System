@@ -660,7 +660,7 @@ const Department = () => {
         </div>
       </div>
       <span className="block mb-[50px] w-[300px] sm:w-[700px] mxl:w-[1200px] h-[1px] bg-[#E6E6E6] mx-auto"></span>
-      <div className="erasmus mb-[50px]">
+      <div className="erasmus border-b-2 border-gray-700/80">
         <motion.h3
           variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
@@ -681,8 +681,10 @@ const Department = () => {
             What is Erasmus+ program?
             <br />
             <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Erasmus+ is an EU program supporting education, training, youth, and
+            sport through exchanges, internships, and partnerships to enhance
+            skills, employability, and cross-cultural understanding across
+            Europe.
           </motion.p>
           <motion.div
             variants={fadeIn("up", "tween", 0.5, 1)}
@@ -697,7 +699,7 @@ const Department = () => {
               className="w-[100px] sm:w-[200px] mxl:w-[347px]"
             />
             <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-white text-center">
-              Alex
+              Prof. Ilhami Muharrem Orak
             </p>
             <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-white text-center">
               Erasmus Program Coordinator
@@ -705,7 +707,7 @@ const Department = () => {
           </motion.div>
         </div>
       </div>
-      <span className="block mb-[50px] w-[300px] sm:w-[700px] mxl:w-[1200px] h-[1px] bg-[#E6E6E6] mx-auto"></span>
+      {/* <span className="block mb-[50px] w-[300px] sm:w-[700px] mxl:w-[1200px] h-[1px] bg-[#E6E6E6] mx-auto"></span>
       <div className="internship mb-[50px]">
         <motion.h3
           variants={fadeIn("up", "tween", 0.3, 1)}
@@ -796,7 +798,7 @@ const Department = () => {
             </p>
           </motion.div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
