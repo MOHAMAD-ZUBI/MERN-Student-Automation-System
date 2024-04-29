@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
-import { fadeIn } from '../../motion/motion';
+import PropTypes from "prop-types";
+import { motion } from "framer-motion";
+import { fadeIn } from "../../motion/motion";
 
 const TimeLine = ({ time, module, color1, color2, delay }) => {
   return (
     <motion.div
-      variants={fadeIn('left', 'tween', delay, 1)}
+      variants={fadeIn("left", "tween", delay, 1)}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}

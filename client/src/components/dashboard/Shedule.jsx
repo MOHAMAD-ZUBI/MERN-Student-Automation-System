@@ -9,12 +9,35 @@ import useAuth from "../../hooks/useAuth.js";
 import { useEffect, useState } from "react";
 
 const Shedule = ({ courses }) => {
+  if (courses) {
+    courses = courses.slice().sort((a, b) => {
+      // Extracting the time strings from each object
+      const timeA = a.time;
+      const timeB = b.time;
+
+      // Splitting the time strings into hours and minutes
+      const [hoursA, minutesA] = timeA.split(":").map(Number);
+      const [hoursB, minutesB] = timeB.split(":").map(Number);
+
+      // Comparing hours first
+      if (hoursA !== hoursB) {
+        return hoursA - hoursB;
+      }
+
+      // If hours are the same, compare minutes
+      return minutesA - minutesB;
+    });
+  }
+
   const [currentDate, setCurrentDate] = useState(new Date());
 
   // Get current day and month
   const currentDay = currentDate.toLocaleString("en-US", { weekday: "long" });
   const currentMonth = currentDate.toLocaleString("en-US", { month: "long" });
   const firstThreeLetters = currentDay.slice(0, 3);
+
+  const colors = ["FDFFE0", "E0EBFF", "FFE6E6", "E6FFEF"];
+  const colors2 = ["F4FBA3", "87A4DA", "E88287", "9DF6BB"];
 
   return (
     <div className="schedule">
@@ -83,67 +106,28 @@ const Shedule = ({ courses }) => {
           >
             Time Line
           </motion.h3>
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full gap-1 sm:gap-[35px]">
-            <div className="flex flex-col items-center justify-center gap-1 sm:gap-4 sm:basis-1/2 w-full">
-              <TimeLine
-                time="10:00"
-                module="MAT209 Mathematics"
-                color1="bg-[#FFE6E6]"
-                color2="bg-[#E88287]"
-                delay="0.5"
-              />
-              <TimeLine
-                time="11:00"
-                module="MAT209 Mathematics"
-                color1="bg-[#E6FFEF]"
-                color2="bg-[#9DF6BB]"
-                delay="0.55"
-              />
-              <TimeLine
-                time="12:00"
-                module="MAT209 Mathematics"
-                color1="bg-[#E0EBFF]"
-                color2="bg-[#87A4DA]"
-                delay="0.6"
-              />
-              <TimeLine
-                time="13:00"
-                module="MAT209 Mathematics"
-                color1="bg-[#FDFFE0]"
-                color2="bg-[#F4FBA3]"
-                delay="0.65"
-              />
-            </div>
-            <div className="flex flex-col items-center justify-center gap-1 sm:gap-4 sm:basis-1/2 w-full">
-              <TimeLine
-                time="09:00"
-                module="MAT209 Mathematics"
-                color1="bg-[#E6FFEF]"
-                color2="bg-[#9DF6BB]"
-                delay="0.5"
-              />
-              <TimeLine
-                time="08:00"
-                module="MAT209 Mathematics"
-                color1="bg-[#FDFFE0]"
-                color2="bg-[#F4FBA3]"
-                delay="0.55"
-              />
-              <TimeLine
-                time="10:00"
-                module="MAT209 Mathematics"
-                color1="bg-[#E0EBFF]"
-                color2="bg-[#87A4DA]"
-                delay="0.6"
-              />
-              <TimeLine
-                time="14:00"
-                module="MAT209 Mathematics"
-                color1="bg-[#FFE6E6]"
-                color2="bg-[#E88287]"
-                delay="0.65"
-              />
-            </div>
+          <div className="grid grid-cols-2 items-center justify-center gap-1 sm:gap-4 sm:basis-1/2 w-full">
+            {courses ? (
+              courses.map((course, index) => {
+                console.log(firstThreeLetters);
+                if (course.day == firstThreeLetters) {
+                  return (
+                    <TimeLine
+                      key={course._id}
+                      time={course.time}
+                      module={course.courseCode + " " + course.courseName}
+                      color1={`bg-[#${colors[index % 4]}]`}
+                      color2={`bg-[#${colors2[index % 4]}]`}
+                      delay="0.5"
+                    />
+                  );
+                } else {
+                  index--;
+                }
+              })
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </motion.div>
