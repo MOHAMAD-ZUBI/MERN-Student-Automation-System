@@ -30,7 +30,7 @@ const Dashboard = () => {
     };
 
     const fetchCourses = async () => {
-      const courses = await api.get(`/course/list/mine`, {
+      const courses = await api.get(`/course/list/mine?filter=current`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
