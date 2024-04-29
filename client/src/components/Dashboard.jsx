@@ -64,7 +64,8 @@ const Dashboard = () => {
       </motion.h2>
 
       <div className="container">
-        <Shedule /> {/* Pass token as prop to Shedule component */}
+        <Shedule courses={courses} />{" "}
+        {/* Pass token as prop to Shedule component */}
         <CurrentCourses courses={courses} />{" "}
         {/* Pass token as prop to CurrentCourses component */}
       </div>

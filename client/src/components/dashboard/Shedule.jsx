@@ -8,27 +8,13 @@ import api from "../../utils/Request.js";
 import useAuth from "../../hooks/useAuth.js";
 import { useEffect, useState } from "react";
 
-const Shedule = () => {
-  const { token } = useAuth();
-  const [response, setResponse] = useState(null);
+const Shedule = ({ courses }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-
-  useEffect(() => {
-    const fetchResponse = async () => {
-      const response = await api.get("/student/current", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setResponse(response);
-    };
-
-    fetchResponse();
-  }, [token]);
 
   // Get current day and month
   const currentDay = currentDate.toLocaleString("en-US", { weekday: "long" });
   const currentMonth = currentDate.toLocaleString("en-US", { month: "long" });
+  const firstThreeLetters = currentDay.slice(0, 3);
 
   return (
     <div className="schedule">
@@ -68,15 +54,23 @@ const Shedule = () => {
             <h4 className="font-Montagu font-normal text-[13px] sm:text-[25px] leading-none text-center text-primary">
               Lessons
             </h4>
-            <span className="block font-normal text-[8px] sm:text-[22px] text-secondary text-center leading-none w-full py-2 sm:py-5 border-b border-[#F5F5F5]">
-              MAT209 Mathematics
-            </span>
-            <span className="block font-normal text-[8px] sm:text-[22px] text-secondary text-center leading-none w-full py-2 sm:py-5 border-b border-[#F5F5F5]">
-              PHY209 Physics
-            </span>
-            <span className="block font-normal text-[8px] sm:text-[22px] text-secondary text-center leading-none w-full pt-2 sm:pt-5">
-              PRG209 Programming
-            </span>
+            {courses ? (
+              courses.map((course, index) => {
+                console.log(firstThreeLetters);
+                if (course.day == firstThreeLetters) {
+                  return (
+                    <span
+                      key={course._id}
+                      className="block font-normal text-[8px] sm:text-[22px] text-secondary text-center leading-none w-full py-2 sm:py-5 border-b border-[#F5F5F5]"
+                    >
+                      {course.courseCode + " " + course.courseName}
+                    </span>
+                  );
+                }
+              })
+            ) : (
+              <></>
+            )}
           </motion.div>
         </div>
         <div className="timlines w-[75%] flex flex-col items-center justify-start gap-[15px] sm:gap-[30px] basis-3/5 sm:basis-auto">
