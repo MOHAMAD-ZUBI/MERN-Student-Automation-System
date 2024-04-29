@@ -339,42 +339,28 @@ const Department = () => {
                   </h3>
                   <div className="fall-courses w-full px-2 sm:px-4 mxl:px-6">
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-[18px] gap-y-[12px]">
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
+                      {response ? (
+                        response.corses.map((corse) => {
+                          if (corse.year == "1" && corse.semester == "fall") {
+                            return (
+                              <div
+                                key={corse._id}
+                                className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer"
+                              >
+                                <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
+                                  <span className="text-secondary">
+                                    {corse.code}
+                                  </span>{" "}
+                                  <br />
+                                  {corse.name}
+                                </p>
+                              </div>
+                            );
+                          }
+                        })
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -385,42 +371,28 @@ const Department = () => {
                   </h3>
                   <div className="spring-courses w-full px-2 sm:px-4 mxl:px-6">
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-[18px] gap-y-[12px]">
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
+                      {response ? (
+                        response.corses.map((corse) => {
+                          if (corse.year == "1" && corse.semester == "spring") {
+                            return (
+                              <div
+                                key={corse._id}
+                                className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer"
+                              >
+                                <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
+                                  <span className="text-secondary">
+                                    {corse.code}
+                                  </span>{" "}
+                                  <br />
+                                  {corse.name}
+                                </p>
+                              </div>
+                            );
+                          }
+                        })
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -453,42 +425,28 @@ const Department = () => {
                   </h3>
                   <div className="fall-courses w-full px-2 sm:px-4 mxl:px-6">
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-[18px] gap-y-[12px]">
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
+                      {response ? (
+                        response.corses.map((corse) => {
+                          if (corse.year == "2" && corse.semester == "fall") {
+                            return (
+                              <div
+                                key={corse._id}
+                                className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer"
+                              >
+                                <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
+                                  <span className="text-secondary">
+                                    {corse.code}
+                                  </span>{" "}
+                                  <br />
+                                  {corse.name}
+                                </p>
+                              </div>
+                            );
+                          }
+                        })
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -499,42 +457,28 @@ const Department = () => {
                   </h3>
                   <div className="spring-courses w-full px-2 sm:px-4 mxl:px-6">
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-[18px] gap-y-[12px]">
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
+                      {response ? (
+                        response.corses.map((corse) => {
+                          if (corse.year == "2" && corse.semester == "spring") {
+                            return (
+                              <div
+                                key={corse._id}
+                                className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer"
+                              >
+                                <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
+                                  <span className="text-secondary">
+                                    {corse.code}
+                                  </span>{" "}
+                                  <br />
+                                  {corse.name}
+                                </p>
+                              </div>
+                            );
+                          }
+                        })
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -567,42 +511,28 @@ const Department = () => {
                   </h3>
                   <div className="fall-courses w-full px-2 sm:px-4 mxl:px-6">
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-[18px] gap-y-[12px]">
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
+                      {response ? (
+                        response.corses.map((corse) => {
+                          if (corse.year == "3" && corse.semester == "fall") {
+                            return (
+                              <div
+                                key={corse._id}
+                                className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer"
+                              >
+                                <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
+                                  <span className="text-secondary">
+                                    {corse.code}
+                                  </span>{" "}
+                                  <br />
+                                  {corse.name}
+                                </p>
+                              </div>
+                            );
+                          }
+                        })
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -613,42 +543,28 @@ const Department = () => {
                   </h3>
                   <div className="spring-courses w-full px-2 sm:px-4 mxl:px-6">
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-[18px] gap-y-[12px]">
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
+                      {response ? (
+                        response.corses.map((corse) => {
+                          if (corse.year == "3" && corse.semester == "spring") {
+                            return (
+                              <div
+                                key={corse._id}
+                                className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer"
+                              >
+                                <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
+                                  <span className="text-secondary">
+                                    {corse.code}
+                                  </span>{" "}
+                                  <br />
+                                  {corse.name}
+                                </p>
+                              </div>
+                            );
+                          }
+                        })
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -681,42 +597,28 @@ const Department = () => {
                   </h3>
                   <div className="fall-courses w-full px-2 sm:px-4 mxl:px-6">
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-[18px] gap-y-[12px]">
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
+                      {response ? (
+                        response.corses.map((corse) => {
+                          if (corse.year == "4" && corse.semester == "fall") {
+                            return (
+                              <div
+                                key={corse._id}
+                                className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer"
+                              >
+                                <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
+                                  <span className="text-secondary">
+                                    {corse.code}
+                                  </span>{" "}
+                                  <br />
+                                  {corse.name}
+                                </p>
+                              </div>
+                            );
+                          }
+                        })
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -727,42 +629,28 @@ const Department = () => {
                   </h3>
                   <div className="spring-courses w-full px-2 sm:px-4 mxl:px-6">
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-[18px] gap-y-[12px]">
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
-                      <div className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer">
-                        <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
-                          <span className="text-secondary">MAT209</span> <br />
-                          Mathematics
-                        </p>
-                      </div>
+                      {response ? (
+                        response.corses.map((corse) => {
+                          if (corse.year == "4" && corse.semester == "spring") {
+                            return (
+                              <div
+                                key={corse._id}
+                                className="department-course w-full flex items-center justify-center h-[80px] sm:h-[150px] mxl:h-[240px] px-1 sm:px-2 mxl:px-4 rounded bg-gradient-to-b from-[#FFE6E6] shadow-3xl  duration-0.3 hover:-translate-y-1 cursor-pointer"
+                              >
+                                <p className="text-center font-mukta text-[10px] sm:text-[18px] mxl:text-[25px] text-primary">
+                                  <span className="text-secondary">
+                                    {corse.code}
+                                  </span>{" "}
+                                  <br />
+                                  {corse.name}
+                                </p>
+                              </div>
+                            );
+                          }
+                        })
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -772,7 +660,7 @@ const Department = () => {
         </div>
       </div>
       <span className="block mb-[50px] w-[300px] sm:w-[700px] mxl:w-[1200px] h-[1px] bg-[#E6E6E6] mx-auto"></span>
-      <div className="erasmus mb-[50px]">
+      <div className="erasmus border-b-2 border-gray-700/80">
         <motion.h3
           variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
@@ -793,8 +681,10 @@ const Department = () => {
             What is Erasmus+ program?
             <br />
             <br />
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Erasmus+ is an EU program supporting education, training, youth, and
+            sport through exchanges, internships, and partnerships to enhance
+            skills, employability, and cross-cultural understanding across
+            Europe.
           </motion.p>
           <motion.div
             variants={fadeIn("up", "tween", 0.5, 1)}
@@ -809,7 +699,7 @@ const Department = () => {
               className="w-[100px] sm:w-[200px] mxl:w-[347px]"
             />
             <p className="name font-Montagu text-[10px] sm:text-[25px] mxl:text-[45px] text-white text-center">
-              Alex
+              Prof. Ilhami Muharrem Orak
             </p>
             <p className="name font-mukta text-[10px] sm:text-[20px] mxl:text-[35px] text-white text-center">
               Erasmus Program Coordinator
@@ -817,7 +707,7 @@ const Department = () => {
           </motion.div>
         </div>
       </div>
-      <span className="block mb-[50px] w-[300px] sm:w-[700px] mxl:w-[1200px] h-[1px] bg-[#E6E6E6] mx-auto"></span>
+      {/* <span className="block mb-[50px] w-[300px] sm:w-[700px] mxl:w-[1200px] h-[1px] bg-[#E6E6E6] mx-auto"></span>
       <div className="internship mb-[50px]">
         <motion.h3
           variants={fadeIn("up", "tween", 0.3, 1)}
@@ -908,7 +798,7 @@ const Department = () => {
             </p>
           </motion.div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

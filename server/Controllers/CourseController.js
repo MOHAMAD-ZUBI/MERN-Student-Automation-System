@@ -1,5 +1,6 @@
 const Course = require("../Models/course");
 const jwt = require("jsonwebtoken");
+const Student = require("../Models/student");
 
 // get all courses
 const getAllCourses = async (req, res) => {
@@ -17,20 +18,31 @@ const getMyCourses = async (req, res) => {
     const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded._id; // Make sure to declare userId using 'const' or 'let'
-    // console.log(userId);
-    const { day } = req.query;
+    const { day, filter } = req.query;
+    let student = await Student.findOne({ user: userId });
 
-    let courses;
+    let query = { student: userId };
+
+    // If day is provided in the query, add it to the filter
     if (day) {
-      courses = await Course.find({ student: userId, day }).populate(
-        "lecturer"
-      );
-    } else {
-      courses = await Course.find({ student: userId }).populate("lecturer", [
-        "name",
-        "Position",
-      ]);
+      query.day = day;
     }
+
+    // If filter is provided in the query, add it to the filter
+
+    // compare student.lvl and course.year.
+    if (filter === "current") {
+      query.year = student.level; // Get courses for current or future years
+    }
+    if (filter === "past") {
+      query.year = { $lt: student.level }; // Get courses for past years
+    }
+
+    // Retrieve courses based on the constructed query
+    const courses = await Course.find(query).populate("lecturer", [
+      "name",
+      "Position",
+    ]);
 
     res.status(200).json(courses);
   } catch (error) {

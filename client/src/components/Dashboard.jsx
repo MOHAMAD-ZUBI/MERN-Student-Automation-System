@@ -30,7 +30,7 @@ const Dashboard = () => {
     };
 
     const fetchCourses = async () => {
-      const courses = await api.get(`/course/list/mine`, {
+      const courses = await api.get(`/course/list/mine?filter=current`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -64,7 +64,8 @@ const Dashboard = () => {
       </motion.h2>
 
       <div className="container">
-        <Shedule /> {/* Pass token as prop to Shedule component */}
+        <Shedule courses={courses} />{" "}
+        {/* Pass token as prop to Shedule component */}
         <CurrentCourses courses={courses} />{" "}
         {/* Pass token as prop to CurrentCourses component */}
       </div>

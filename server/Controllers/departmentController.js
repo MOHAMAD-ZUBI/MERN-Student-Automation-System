@@ -1,4 +1,4 @@
-const { Department, Worker } = require("../Models/department");
+const { Department, Worker, DepartmentCorse } = require("../Models/department");
 const User = require("../Models/userMode");
 const Student = require("../Models/student");
 
@@ -57,6 +57,40 @@ const addWorker = async (req, res) => {
   }
 };
 
+// delete a corse from a department
+
+const deleteDepartmentCorse = async (req, res) => {
+  try {
+    const { corseId } = req.query;
+    const department = await Department.findById(req.params.id);
+    const corse = await DepartmentCorse.findById(corseId);
+    department.corses.pull({ _id: corseId });
+    await department.save();
+    res.status(200).json(department);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+// add a corse to a department
+const addDepartmentCorse = async (req, res) => {
+  try {
+    const { name, code, year, semester } = req.body;
+    const newWorker = await DepartmentCorse.create({
+      name,
+      code,
+      year,
+      semester,
+    });
+    const department = await Department.findById(req.params.id);
+    department.corses.push(newWorker);
+    await department.save();
+    return res.status(201).json(department);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 // delete a worker from a department
 
 const deleteWorker = async (req, res) => {
@@ -83,6 +117,7 @@ const createDepartment = async (req, res) => {
       achievements,
       workers,
       secretary,
+      corses,
     } = req.body;
     const department = new Department({
       name,
@@ -92,6 +127,7 @@ const createDepartment = async (req, res) => {
       achievements,
       workers,
       secretary,
+      corses,
     });
     await department.save();
     res.status(201).json(department);
@@ -137,4 +173,6 @@ module.exports = {
   addWorker,
   deleteWorker,
   getDepartmentByStudent,
+  addDepartmentCorse,
+  deleteDepartmentCorse,
 };
