@@ -1,5 +1,5 @@
 const seniorGroup = require("../Models/seniorGroup");
-
+const Report = require("../Models/report");
 const StudentModel = require("../Models/student");
 // Create a new senior group
 const createSeniorGroup = async (req, res) => {
@@ -115,7 +115,11 @@ const getStudentSeniorGroup = async (req, res) => {
     if (!group) {
       return res.status(404).json({ message: "Senior group not found" });
     }
-    res.status(200).json(group);
+    const reports = await Report.find({ group: group._id }).select(
+      "title description file"
+    );
+
+    res.status(200).json({ group, reports });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

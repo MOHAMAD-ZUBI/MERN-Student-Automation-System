@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path");
 
 // Routers
 const auth = require("./Routes/AuthRouter");
@@ -11,6 +12,7 @@ const courseRouter = require("./Routes/CourseRouter");
 const departmentRouter = require("./Routes/DepartmentRouter");
 const facultyRouter = require("./Routes/FacultyRouter");
 const seniorRouter = require("./Routes/SeniorGroupRouter");
+const reportRouter = require("./Routes/ReportRouter");
 const cors = require("cors");
 
 // Middlewares
@@ -42,6 +44,8 @@ app.use("/api/course", courseRouter);
 app.use("/api/academician", academicianRouter);
 app.use("/api/admin", adminRouter);
 app.use("/bot", chatBotRouter);
+app.use("/api/report", reportRouter);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.get("/", (req, res) => {
   return res.json("Hi");
 });
