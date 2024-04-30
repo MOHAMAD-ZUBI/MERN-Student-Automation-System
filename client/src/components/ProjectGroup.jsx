@@ -10,6 +10,26 @@ import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 
 const ProjectGroup = () => {
+  function getFileExtension(filename) {
+    // Use a regular expression to match the file extension
+    const match = /\.([0-9a-z]+)$/i.exec(filename);
+
+    // If a match is found, return the extension (group 1)
+    if (match) {
+      return match[1];
+    } else {
+      // If no match is found, return an empty string or handle the error as appropriate
+      return ""; // or throw an error, or handle it differently
+    }
+  }
+  function formatDate(createdAt) {
+    const date = new Date(createdAt);
+    const month = date.getMonth() + 1; // Months are zero-based, so we add 1
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    return `${month}/${day}/${year}`;
+  }
   const admin = sessionStorage.getItem("admin");
   const { token } = useAuth();
   const [group, setGroup] = useState(null);
@@ -51,7 +71,7 @@ const ProjectGroup = () => {
             </span>
 
             {group ? (
-              group.students.map((student, index) => {
+              group.group.students.map((student, index) => {
                 return (
                   <h4
                     key={index}
@@ -84,7 +104,9 @@ const ProjectGroup = () => {
             <div className="flex items-start justify-between flex-col  w-[240px] py-[5px] px-[10px] bg-primary  rounded-lg text-left">
               <p className="w-full text-left text-white text-[14px] ml:text-[22px]">
                 {group
-                  ? group.lecturer.firstName + " " + group.lecturer.lastName
+                  ? group.group.lecturer.firstName +
+                    " " +
+                    group.group.lecturer.lastName
                   : ""}
               </p>
               {/* TODO: go to the lecturer profile */}
@@ -146,118 +168,48 @@ const ProjectGroup = () => {
           </motion.div>
           <div className="flex flex-col justify-between items-center gap-10 py-5 px-3">
             <div className="w-full flex flex-col ml:flex-row flex-wrap gap-2 sm:gap-4 items-start justify-center ml:justify-start">
-              <motion.div
-                variants={fadeIn("up", "tween", 0.35, 1)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="w-full py-[5px] px-[12px] ml:w-[45%] ml:min-h-[88px] flex items-center justify-between gap-5 bg-white shadow-4xl border border-white border-opacity-[0.36]"
-              >
-                <img
-                  src="./pdf.png"
-                  alt="pdf"
-                  className="w-[55px] sm:w-[70px]"
-                />
-                <div className=" flex-1 flex flex-col items-center justify-center gap-2">
-                  <div className="flex items-center justify-between w-full">
-                    <p className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px]">
-                      Week 3 Exercises.pdf{" "}
-                    </p>
-                    <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
-                      ...
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-start w-full">
-                    <p className="font-mukta text-primary text-[10px] sm:text-[14px] mxl:text-[16px]">
-                      1 / 12 / 2023
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-              <motion.div
-                variants={fadeIn("up", "tween", 0.4, 1)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="w-full py-[5px] px-[12px] ml:w-[45%] ml:min-h-[88px] flex items-center justify-between gap-5 bg-white shadow-4xl border border-white border-opacity-[0.36]"
-              >
-                <img
-                  src="./pptx.png"
-                  alt="pdf"
-                  className="w-[55px] sm:w-[70px]"
-                />
-                <div className=" flex-1 flex flex-col items-center justify-center gap-2">
-                  <div className="flex items-center justify-between w-full">
-                    <p className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px]">
-                      Week 3 Exercises.pdf{" "}
-                    </p>
-                    <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
-                      ...
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-start w-full">
-                    <p className="font-mukta text-primary text-[10px] sm:text-[14px] mxl:text-[16px]">
-                      1 / 12 / 2023
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-              <motion.div
-                variants={fadeIn("up", "tween", 0.45, 1)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="w-full py-[5px] px-[12px] ml:w-[45%] ml:min-h-[88px] flex items-center justify-between gap-5 bg-white shadow-4xl border border-white border-opacity-[0.36]"
-              >
-                <img
-                  src="./xls.png"
-                  alt="pdf"
-                  className="w-[55px] sm:w-[70px]"
-                />
-                <div className=" flex-1 flex flex-col items-center justify-center gap-2">
-                  <div className="flex items-center justify-between w-full">
-                    <p className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px]">
-                      Week 3 Exercises.pdf{" "}
-                    </p>
-                    <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
-                      ...
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-start w-full">
-                    <p className="font-mukta text-primary text-[10px] sm:text-[14px] mxl:text-[16px]">
-                      1 / 12 / 2023
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-              <motion.div
-                variants={fadeIn("up", "tween", 0.5, 1)}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="w-full py-[5px] px-[12px] ml:w-[45%] ml:min-h-[88px] flex items-center justify-between gap-5 bg-white shadow-4xl border border-white border-opacity-[0.36]"
-              >
-                <img
-                  src="./docx.png"
-                  alt="pdf"
-                  className="w-[55px] sm:w-[70px]"
-                />
-                <div className=" flex-1 flex flex-col items-center justify-center gap-2">
-                  <div className="flex items-center justify-between w-full">
-                    <p className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px]">
-                      Week 3 Exercises.pdf{" "}
-                    </p>
-                    <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
-                      ...
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-start w-full">
-                    <p className="font-mukta text-primary text-[10px] sm:text-[14px] mxl:text-[16px]">
-                      1 / 12 / 2023
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+              {group ? (
+                group.reports.map((report, index) => {
+                  return (
+                    <motion.div
+                      key={index}
+                      variants={fadeIn("up", "tween", 0.35, 1)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: true }}
+                      className="w-full py-[5px] px-[12px] ml:w-[45%] ml:min-h-[88px] flex items-center justify-between gap-5 bg-white shadow-4xl border border-white border-opacity-[0.36]"
+                    >
+                      <a
+                        href={`http://localhost:3060/${report.file}`}
+                        target="_blank"
+                      >
+                        <img
+                          src={`./${getFileExtension(report?.file)}.png`}
+                          alt={getFileExtension(report?.file)}
+                          className="w-[55px] sm:w-[70px]"
+                        />
+                      </a>
+                      <div className=" flex-1 flex flex-col items-center justify-center gap-2">
+                        <div className="flex items-center justify-between w-full">
+                          <p className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px]">
+                            {report.title}
+                          </p>
+                          <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
+                            ...
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-start w-full">
+                          <p className="font-mukta text-primary text-[10px] sm:text-[14px] mxl:text-[16px]">
+                            {formatDate(report.createdAt)}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })
+              ) : (
+                <></>
+              )}
             </div>
             <div className="pagination flex justify-center items-center gap-1 text-[#939393]">
               <span className="rounded border border-[#93939370] py-1 px-2 cursor-pointer">

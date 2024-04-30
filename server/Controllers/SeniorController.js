@@ -116,7 +116,7 @@ const getStudentSeniorGroup = async (req, res) => {
       return res.status(404).json({ message: "Senior group not found" });
     }
     const reports = await Report.find({ group: group._id }).select(
-      "title description file"
+      "title description file createdAt"
     );
 
     res.status(200).json({ group, reports });
