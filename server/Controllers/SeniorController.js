@@ -110,7 +110,7 @@ const getStudentSeniorGroup = async (req, res) => {
       })
       .populate({
         path: "lecturer",
-        select: "firstName lastName",
+        select: "firstName lastName sex",
       });
     if (!group) {
       return res.status(404).json({ message: "Senior group not found" });

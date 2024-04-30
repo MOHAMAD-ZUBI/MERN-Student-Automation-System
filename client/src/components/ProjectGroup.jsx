@@ -1,15 +1,36 @@
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import { fadeIn } from "../motion/motion";
 import { Link } from "react-router-dom";
 import SectionTitle from "./repeated/SectionTitle";
 import ArrowDown from "../../public/ArrowDown";
 import Search from "../../public/Search";
+import api from "../utils/Request";
+import { useEffect, useState } from "react";
+import useAuth from "../hooks/useAuth";
 
 const ProjectGroup = () => {
+  const admin = sessionStorage.getItem("admin");
+  const { token } = useAuth();
+  const [group, setGroup] = useState(null);
+
+  useEffect(() => {
+    const fetchStudent = async () => {
+      const group = await api.get("/senior/studentGroup", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setGroup(group.data);
+    };
+
+    fetchStudent();
+  }, [token]);
+
   return (
     <div className="course  pt-[30px] min-h-screen overflow-hidden scale-95">
       <div className="container overflow-hidden">
-        <SectionTitle content="Senior Project Groups" extras="mb-[45px]" />
+        <SectionTitle content="Senior Project Group" extras="mb-[45px]" />
         <div className="sm:flex justify-between items-center relative">
           <motion.div
             variants={fadeIn("left", "tween", 0.3, 1)}
@@ -28,31 +49,43 @@ const ProjectGroup = () => {
                 Members
               </p>
             </span>
-            <h4 className="sm:basis-1/4 text-left w-full font-Montagu text-[12px] sm:text-[18px] text-primary mb-3">
-              1. Nisreen Bouta
-            </h4>
-            <h4 className="sm:basis-1/4 text-left w-full font-Montagu text-[12px] sm:text-[18px] text-primary mb-3">
-              1. Nisreen Bouta
-            </h4>
-            <h4 className="sm:basis-1/4 text-left w-full font-Montagu text-[12px] sm:text-[18px] text-primary mb-3">
-              1. Nisreen Bouta
-            </h4>
+
+            {group ? (
+              group.students.map((student, index) => {
+                return (
+                  <h4
+                    key={index}
+                    className="sm:basis-1/4 text-left w-full font-Montagu capitalize text-[12px] sm:text-[18px] text-primary mb-3"
+                  >
+                    {index + 1}. {student.firstName} {student.lastName}
+                  </h4>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </motion.div>
           <motion.div
             variants={fadeIn("left", "tween", 0.3, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="flex items-center justify-start gap-0 mb-12 sm:absolute sm:right-10 my-auto"
+            className="flex items-center justify-start mb-8 sm:absolute sm:right-10 my-auto"
           >
             <img
-              src="./profile-pic.png"
+              src={
+                group?.lecturer?.sex == "male"
+                  ? "./profile2.png"
+                  : "./profile.png"
+              }
               alt="profile img"
-              className="w-[50px] ml:w-[100px]"
+              className="w-[50px] ml:w-[100px] mr-4"
             />
-            <div className="flex items-start justify-between flex-col gap-0 w-[240px] py-[5px] px-[10px] bg-primary rounded-l-none rounded-r text-left">
+            <div className="flex items-start justify-between flex-col  w-[240px] py-[5px] px-[10px] bg-primary  rounded-lg text-left">
               <p className="w-full text-left text-white text-[14px] ml:text-[22px]">
-                Dr. Sam Felix
+                {group
+                  ? group.lecturer.firstName + " " + group.lecturer.lastName
+                  : ""}
               </p>
               <Link
                 to="/profile"
