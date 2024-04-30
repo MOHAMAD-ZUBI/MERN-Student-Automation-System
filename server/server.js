@@ -10,6 +10,7 @@ const chatBotRouter = require("./Routes/ChatbotRouter");
 const courseRouter = require("./Routes/CourseRouter");
 const departmentRouter = require("./Routes/DepartmentRouter");
 const facultyRouter = require("./Routes/FacultyRouter");
+const seniorRouter = require("./Routes/SeniorGroupRouter");
 const cors = require("cors");
 
 // Middlewares
@@ -34,6 +35,7 @@ mongoose
 // Routes
 app.use("/api/auth", auth);
 app.use("/api/student", studentRouter);
+app.use("/api/senior", seniorRouter);
 app.use("/api/faculty", facultyRouter);
 app.use("/api/department", departmentRouter);
 app.use("/api/course", courseRouter);

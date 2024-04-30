@@ -5,15 +5,15 @@ const StudentModel = require("../Models/student");
 const createSeniorGroup = async (req, res) => {
   try {
     const user = req.user;
-    if (user.premissions.includes("Academician") === false)
-      return res
-        .status(401)
-        .json({ message: "You are not allowed to create a senior group" });
-    const { title, students } = req.body;
+    // if (user.premissions.includes("Academician") === false)
+    //   return res
+    //     .status(401)
+    //     .json({ message: "You are not allowed to create a senior group" });
+    const { title, students, lecturer } = req.body;
     //const Students = await StudentModel.findMany({ _id: { $in: students } });
     const newSeniorGroup = await seniorGroup.create({
       title,
-      lecturer: Lecturer,
+      lecturer,
       students,
     });
     res.status(201).json(newSeniorGroup);
@@ -22,14 +22,42 @@ const createSeniorGroup = async (req, res) => {
   }
 };
 
+const addStudentToGroup = async (req, res) => {
+  try {
+    const { groupId } = req.params;
+    const { studentId } = req.body;
+    const group = await seniorGroup.findById(groupId);
+    if (group.students.includes(studentId))
+      return res.status(409).json("This student is already in the group");
+    group.students.push(studentId);
+    await group.save();
+    return res.status(200).json({ group });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const removeStudentFromGroup = async (req, res) => {
+  try {
+    const { groupId } = req.params;
+    const { studentId } = req.body;
+    const group = await seniorGroup.findById(groupId);
+    group.students.pull(studentId);
+    await group.save();
+    return res.status(200).json({ group });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 // Get all senior groups
-const getAllSeniorGroups = async (req, res) => {
+const getLecturerSeniorGroups = async (req, res) => {
   try {
     const user = req.user;
-    if (user.premissions.includes("Academician") === false)
-      return res
-        .status(401)
-        .json({ message: "You are not allowed to view senior groups" });
+    // if (user.premissions.includes("Academician") === false)
+    //   return res
+    //     .status(401)
+    //     .json({ message: "You are not allowed to view senior groups" });
 
     const seniorGroups = await seniorGroup
       .find({ lecturer: user._id })
@@ -48,12 +76,9 @@ const getAllSeniorGroups = async (req, res) => {
 const getSeniorGroupById = async (req, res) => {
   try {
     const user = req.user;
-    if (user.premissions.includes("Academician") === false)
-      return res
-        .status(401)
-        .json({ message: "You are not allowed to view senior groups" });
+
     const seniorGroupId = req.params.id;
-    const seniorGroup = await seniorGroup
+    const group = await seniorGroup
       .findById(seniorGroupId)
       .populate({
         path: "students",
@@ -63,10 +88,34 @@ const getSeniorGroupById = async (req, res) => {
         path: "lecturer",
         select: "name",
       });
-    if (!seniorGroup) {
+    if (!group) {
       return res.status(404).json({ message: "Senior group not found" });
     }
-    res.status(200).json(seniorGroup);
+    res.status(200).json(group);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Get student group
+const getStudentSeniorGroup = async (req, res) => {
+  try {
+    const user = req.user;
+
+    const group = await seniorGroup
+      .findOne({ students: user._id })
+      .populate({
+        path: "students",
+        select: "firstName lastName ",
+      })
+      .populate({
+        path: "lecturer",
+        select: "firstName lastName",
+      });
+    if (!group) {
+      return res.status(404).json({ message: "Senior group not found" });
+    }
+    res.status(200).json(group);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -109,8 +158,13 @@ const deleteSeniorGroupById = async (req, res) => {
 
 module.exports = {
   createSeniorGroup,
-  getAllSeniorGroups,
+  getLecturerSeniorGroups,
   getSeniorGroupById,
   updateSeniorGroupById,
   deleteSeniorGroupById,
+  addStudentToGroup,
+  removeStudentFromGroup,
+  getStudentSeniorGroup,
 };
+
+// add file

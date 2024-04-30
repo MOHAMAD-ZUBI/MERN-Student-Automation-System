@@ -14,8 +14,9 @@ const seniorGroupsSchema = new Schema(
       type: [mongoose.Types.ObjectId],
       ref: "User",
     },
+    // Files: file name, file type..
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model(seniorGroupsSchema, "Seniorgroups");
+module.exports = mongoose.model("Seniorgroups", seniorGroupsSchema);
