@@ -39,10 +39,10 @@ const getMyCourses = async (req, res) => {
     }
 
     // Retrieve courses based on the constructed query
-    const courses = await Course.find(query).populate("lecturer", [
-      "name",
-      "Position",
-    ]);
+    const courses = await Course.find(query).populate({
+      path: "lecturer",
+      select: "firstName lastName",
+    });
 
     res.status(200).json(courses);
   } catch (error) {

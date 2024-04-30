@@ -15,7 +15,7 @@ const ProjectGroup = () => {
   const [group, setGroup] = useState(null);
 
   useEffect(() => {
-    const fetchStudent = async () => {
+    const fetchGroup = async () => {
       const group = await api.get("/senior/studentGroup", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -24,7 +24,7 @@ const ProjectGroup = () => {
       setGroup(group.data);
     };
 
-    fetchStudent();
+    fetchGroup();
   }, [token]);
 
   return (
@@ -87,6 +87,7 @@ const ProjectGroup = () => {
                   ? group.lecturer.firstName + " " + group.lecturer.lastName
                   : ""}
               </p>
+              {/* TODO: go to the lecturer profile */}
               <Link
                 to="/profile"
                 className="text-white underline cursor-pointer text-left font-Montagu text-[9px] ml:text-[14px] hover:text-secondary duration-0.3"
@@ -96,6 +97,7 @@ const ProjectGroup = () => {
             </div>
           </motion.div>
         </div>
+        {/* TODO: Add the file functionality */}
         <motion.div
           variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
