@@ -1,0 +1,1933 @@
+{
+	"info": {
+		"_postman_id": "a878ac4b-bf0a-41ee-ade0-e9276154302d",
+		"name": "DEV.PARAM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20663125",
+		"_collection_link": "https://universal-robot-577258.postman.co/workspace/New-Team-Workspace~03845fce-93d2-4ff0-9d2a-02dbb337e4c7/collection/20663125-a878ac4b-bf0a-41ee-ade0-e9276154302d?action=share&source=collection_link&creator=20663125"
+	},
+	"item": [
+		{
+			"name": "Pazaryeri",
+			"item": [
+				{
+					"name": "Pazaryeri_TP_AltUyeIsyeri_Ekleme",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<Pazaryeri_TP_AltUyeIsyeri_Ekleme xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<ETS_GUID>0c13d406-873b-403b-9c09-a5766840d98c</ETS_GUID>\r\n<Tip>1</Tip>\r\n<Ad_Soyad>Test Deneme</Ad_Soyad>\r\n<Unvan>Test Deneme3</Unvan>\r\n<TC_VN>57889243501</TC_VN>\r\n<Kisi_DogumTarihi>01.12.2022</Kisi_DogumTarihi>\r\n<GSM_No>5312920320</GSM_No>\r\n<IBAN_No>TR123456789123456789123457</IBAN_No>\r\n<IBAN_Unvan>Test Deneme</IBAN_Unvan>\r\n<Adres>AdanaMerkez</Adres>\r\n<Il>1</Il>\r\n<Ilce>1218</Ilce>\r\n<EPosta>test.deneme@hotmail.com</EPosta>\r\n<Website>www.google.com</Website>\r\n<MCC_Kod>1000</MCC_Kod>\r\n<Yetkili_Kisi_TC>61057998660</Yetkili_Kisi_TC>\r\n<Yetkili_Kisi_DogumTarihi>01.12.2022</Yetkili_Kisi_DogumTarihi>\r\n<Vergi_Daire>1000587</Vergi_Daire>\r\n <Bagli_Olunan_Hesap></Bagli_Olunan_Hesap>\r\n</Pazaryeri_TP_AltUyeIsyeri_Ekleme>\r\n</soap:Body>\r\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx?wsdl",
+							"protocol": "https",
+							"host": [
+								"test-dmz",
+								"param",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkpos.ws",
+								"service_turkpos_test.asmx"
+							],
+							"query": [
+								{
+									"key": "wsdl",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pazaryeri_TP_AltUyeIsyeri_Guncelleme",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n<soap:Body>\r\n<Pazaryeri_TP_AltUyeIsyeri_Guncelleme xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID_AltUyeIsyeri>a5c158be-8aaa-4716-abdc-f6f99eadfc81</GUID_AltUyeIsyeri>\r\n<Ad_Soyad>Test Deneme</Ad_Soyad>\r\n<Unvan>Test Deneme</Unvan>\r\n<GSM_No>5312920320</GSM_No>\r\n<IBAN_No>TR123456789123456789123456</IBAN_No>\r\n<Adres>Çankaya ANKARA</Adres>\r\n<Il>01</Il>\r\n<Ilce>1219</Ilce>\r\n<EPosta>test@hotmail.com</EPosta>\r\n<Website>www.param.com.tr</Website>\r\n<MCC_Kod>1000</MCC_Kod>\r\n<Vergi_Daire>100000000</Vergi_Daire>\r\n<IBAN_Unvan>string</IBAN_Unvan>\r\n</Pazaryeri_TP_AltUyeIsyeri_Guncelleme>\r\n</soap:Body>\r\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+							"protocol": "https",
+							"host": [
+								"test-dmz",
+								"param",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkpos.ws",
+								"service_turkpos_test.asmx"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pazaryeri_TP_AltUyeIsyeri_Liste",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<Pazaryeri_TP_AltUyeIsyeri_Liste xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G> <ETS_GUID>0c13d406-873b-403b-9c09-a5766840d98c</ETS_GUID>\r\n<Limit>2</Limit>\r\n<Skip>1</Skip>\r\n</Pazaryeri_TP_AltUyeIsyeri_Liste>\r\n</soap:Body>\r\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+							"protocol": "https",
+							"host": [
+								"test-dmz",
+								"param",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkpos.ws",
+								"service_turkpos_test.asmx"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pazaryeri_TP_Siparis_Onay",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\r\n  <soap12:Body>\r\n    <Pazaryeri_TP_Siparis_Onay xmlns=\"https://turkpos.com.tr/\">\r\n      <G>\r\n        <CLIENT_CODE>10738</CLIENT_CODE>\r\n        <CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n        <CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n        </G>\r\n      <PYSiparis_GUID>9AA76A40-1957-4B51-B2F9-E875D6B4D0B1</PYSiparis_GUID>\r\n      <Durum>1</Durum>\r\n    </Pazaryeri_TP_Siparis_Onay>\r\n  </soap12:Body>\r\n</soap12:Envelope>"
+						},
+						"url": {
+							"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+							"protocol": "https",
+							"host": [
+								"test-dmz",
+								"param",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkpos.ws",
+								"service_turkpos_test.asmx"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pazaryeri_TP_Siparis_Detay_Ekle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n<soap:Body>\r\n<Pazaryeri_TP_Siparis_Detay_Ekle xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE> <CLIENT_USERNAME>Test</CLIENT_USERNAME> <CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<ETS_GUID>0C13D406-873B-403B-9C09-A5766840D98C</ETS_GUID>\r\n<Tutar_Urun>1,75</Tutar_Urun>\r\n<Tutar_Odenecek>1,75</Tutar_Odenecek>\r\n<SanalPOS_Islem_ID>3003930557</SanalPOS_Islem_ID>\r\n<GUID_AltUyeIsyeri>e09219fc-ab42-4715-b066-4bef69017b22</GUID_AltUyeIsyeri>\r\n</Pazaryeri_TP_Siparis_Detay_Ekle>\r\n</soap:Body>\r\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+							"protocol": "https",
+							"host": [
+								"test-dmz",
+								"param",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkpos.ws",
+								"service_turkpos_test.asmx"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pazaryeri_TP_Islem_Sorgulama",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n<soap:Body>\r\n<Pazaryeri_TP_Islem_Sorgulama xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE> <CLIENT_USERNAME>Test</CLIENT_USERNAME> <CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<ETS_GUID>0c13d406-873b-403b-9c09-a5766840d98c</ETS_GUID>\r\n<GUID_AltUyeIsyeri>e09219fc-ab42-4715-b066-4bef69017b22</GUID_AltUyeIsyeri>\r\n<PYSiparis_GUID>9AA76A40-1957-4B51-B2F9-E875D6B4D0B1</PYSiparis_GUID>\r\n<SanalPOS_Islem_ID>6006467362</SanalPOS_Islem_ID>\r\n<Tarih_Bas>14.07.2023 00:00:00</Tarih_Bas>\r\n<Tarih_Bit>21.07.2023 17:00:00</Tarih_Bit>\r\n</Pazaryeri_TP_Islem_Sorgulama>\r\n</soap:Body>\r\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+							"protocol": "https",
+							"host": [
+								"test-dmz",
+								"param",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkpos.ws",
+								"service_turkpos_test.asmx"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pazaryeri_TP_Iptal_Iade",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n<soap:Body>\r\n<Pazaryeri_TP_Iptal_Iade xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE> <CLIENT_USERNAME>Test</CLIENT_USERNAME> <CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<PYSiparis_GUID>D8523FA4-F5E9-4142-BD34-962088026796</PYSiparis_GUID>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<Durum>IPTAL</Durum>\r\n<Siparis_ID>siparis54</Siparis_ID>\r\n<SiparisTutar>5.00</SiparisTutar>\r\n<OdenecekTutar>5.00</OdenecekTutar>\r\n</Pazaryeri_TP_Iptal_Iade>\r\n</soap:Body>\r\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+							"protocol": "https",
+							"host": [
+								"test-dmz",
+								"param",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkpos.ws",
+								"service_turkpos_test.asmx"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pazaryeri_TP_Limit_Kontrol",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\r\n  <soap12:Body>\r\n    <Pazaryeri_TP_Limit_Kontrol xmlns=\"https://turkpos.com.tr/\">\r\n        <ETS_GUID>0c13d406-873b-403b-9c09-a5766840d98c</ETS_GUID>\r\n        <GUID_AltUyeIsyeri>e09219fc-ab42-4715-b066-4bef69017b22</GUID_AltUyeIsyeri>\r\n        <Tutar_Odenecek>1.7500</Tutar_Odenecek>\r\n    </Pazaryeri_TP_Limit_Kontrol>\r\n  </soap12:Body>\r\n</soap12:Envelope>"
+						},
+						"url": {
+							"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+							"protocol": "https",
+							"host": [
+								"test-dmz",
+								"param",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkpos.ws",
+								"service_turkpos_test.asmx"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pazaryeri_TP_AltUyeIsyeri_Silme",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<Pazaryeri_TP_AltUyeIsyeri_Silme xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G> <GUID_AltUyeIsyeri>a5c158be-8aaa-4716-abdc-f6f99eadfc81</GUID_AltUyeIsyeri>\r\n</Pazaryeri_TP_AltUyeIsyeri_Silme>\r\n</soap:Body>\r\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+							"protocol": "https",
+							"host": [
+								"test-dmz",
+								"param",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkpos.ws",
+								"service_turkpos_test.asmx"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Il_Liste",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\r\n  <soap12:Body>\r\n    <Il_Liste xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G> \r\n    </Il_Liste>\r\n  </soap12:Body>\r\n</soap12:Envelope>"
+						},
+						"url": {
+							"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+							"protocol": "https",
+							"host": [
+								"test-dmz",
+								"param",
+								"com",
+								"tr"
+							],
+							"path": [
+								"turkpos.ws",
+								"service_turkpos_test.asmx"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Il_Ilce_Liste",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <Il_Ilce_Liste xmlns=\"http://tempuri.org/\">\r\n      <Islem_Tip>Ilce</Islem_Tip>\r\n      <Il_Kodu>06</Il_Kodu>\r\n      <Uygulama_Tip>web</Uygulama_Tip>\r\n    </Il_Ilce_Liste>\r\n  </soap:Body>\r\n</soap:Envelope>"
+						},
+						"url": {
+							"raw": "https://test-dmz.param.com.tr/param.ws/service_param.asmx",
+							"protocol": "https",
+							"host": [
+								"test-dmz",
+								"param",
+								"com",
+								"tr"
+							],
+							"path": [
+								"param.ws",
+								"service_param.asmx"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API",
+			"item": [
+				{
+					"name": "Satış - 3D Pay / NS",
+					"item": [
+						{
+							"name": "Pos_Odeme - SHA2B64",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<SHA2B64 xmlns=\"https://turkpos.com.tr/\">\r\n<Data>107380c13d406-873b-403b-9c09-a5766840d98c1100,00100,00Pos_Odeme3D0002https://dev.param.com.tr/enhttps://dev.param.com.tr/tr</Data>\r\n</SHA2B64>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pos_Odeme - 3D",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n<soap:Body>\r\n<Pos_Odeme xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<KK_Sahibi>Test Test</KK_Sahibi>\r\n<KK_No>4155650100416111</KK_No>\r\n<KK_SK_Ay>01</KK_SK_Ay>\r\n<KK_SK_Yil>50</KK_SK_Yil>\r\n<KK_CVC>715</KK_CVC>\r\n<KK_Sahibi_GSM>5350179608</KK_Sahibi_GSM>\r\n<Hata_URL>https://dev.param.com.tr/en</Hata_URL>\r\n<Basarili_URL>https://dev.param.com.tr/tr</Basarili_URL>\r\n<Siparis_ID>Pos_Odeme3D0001</Siparis_ID>\r\n<Siparis_Aciklama></Siparis_Aciklama>\r\n<Taksit>1</Taksit>\r\n<Islem_Tutar>100,00</Islem_Tutar>\r\n<Toplam_Tutar>100,00</Toplam_Tutar>\r\n<Islem_Hash>Vu2NWs/JeMxP4dl/SpIo2lpjb6w=</Islem_Hash>\r\n<Islem_Guvenlik_Tip>3D</Islem_Guvenlik_Tip>\r\n<Islem_ID></Islem_ID>\r\n<IPAdr>127.0.0.1</IPAdr>\r\n<Ref_URL></Ref_URL>\r\n<Data1></Data1>\r\n<Data2></Data2>\r\n<Data3></Data3>\r\n<Data4></Data4>\r\n<Data5></Data5>\r\n<Data6></Data6>\r\n<Data7></Data7>\r\n<Data8></Data8>\r\n<Data9></Data9>\r\n<Data10></Data10>\r\n</Pos_Odeme>\r\n</soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pos_Odeme - NS",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n<soap:Body>\r\n<Pos_Odeme xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<KK_Sahibi>Test Test</KK_Sahibi>\r\n<KK_No>6060433087290190</KK_No>\r\n<KK_SK_Ay>12</KK_SK_Ay>\r\n<KK_SK_Yil>26</KK_SK_Yil>\r\n<KK_CVC>000</KK_CVC>\r\n<KK_Sahibi_GSM>5350179608</KK_Sahibi_GSM>\r\n<Hata_URL>https://dev.param.com.tr/en</Hata_URL>\r\n<Basarili_URL>https://dev.param.com.tr/tr</Basarili_URL>\r\n<Siparis_ID>Pos_OdemeNS0001</Siparis_ID>\r\n<Siparis_Aciklama></Siparis_Aciklama>\r\n<Taksit>1</Taksit>\r\n<Islem_Tutar>100,00</Islem_Tutar>\r\n<Toplam_Tutar>100,00</Toplam_Tutar>\r\n<Islem_Hash>DViY98Cw3CCkGNdH5nwx3L0wg6o=</Islem_Hash>\r\n<Islem_Guvenlik_Tip>NS</Islem_Guvenlik_Tip>\r\n<Islem_ID></Islem_ID>\r\n<IPAdr>127.0.0.1</IPAdr>\r\n<Ref_URL></Ref_URL>\r\n<Data1></Data1>\r\n<Data2></Data2>\r\n<Data3></Data3>\r\n<Data4></Data4>\r\n<Data5></Data5>\r\n<Data6></Data6>\r\n<Data7></Data7>\r\n<Data8></Data8>\r\n<Data9></Data9>\r\n<Data10></Data10>\r\n</Pos_Odeme>\r\n</soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Satış - 3D Model / NS",
+					"item": [
+						{
+							"name": "TP_WMD_UCD - SHA2B64",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<SHA2B64 xmlns=\"https://turkpos.com.tr/\">\r\n<Data>107380c13d406-873b-403b-9c09-a5766840d98c1100,00100,00TTP_WMD_UCD3D0001</Data>\r\n</SHA2B64>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TP_WMD_UCD - 3D",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_WMD_UCD xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<KK_Sahibi>Test Test</KK_Sahibi>\r\n<KK_No>4155650100416111</KK_No>\r\n<KK_SK_Ay>01</KK_SK_Ay>\r\n<KK_SK_Yil>50</KK_SK_Yil>\r\n<KK_CVC>715</KK_CVC>\r\n<KK_Sahibi_GSM>5551231212</KK_Sahibi_GSM>\r\n<Hata_URL>https://dev.param.com.tr/en</Hata_URL>\r\n<Basarili_URL>https://dev.param.com.tr/tr</Basarili_URL>\r\n<Siparis_ID>TTP_WMD_UCD3D0001</Siparis_ID>\r\n<Siparis_Aciklama>a</Siparis_Aciklama>\r\n<Taksit>1</Taksit>\r\n<Islem_Tutar>100,00</Islem_Tutar>\r\n<Toplam_Tutar>100,00</Toplam_Tutar>\r\n<Islem_Hash>x+fo3Z+ElGSPuctK1M4BE4LVYrM=</Islem_Hash>\r\n<Islem_Guvenlik_Tip>3D</Islem_Guvenlik_Tip>\r\n<Islem_ID></Islem_ID>\r\n<IPAdr>127.0.0.1</IPAdr>\r\n<Ref_URL></Ref_URL>\r\n<Data1></Data1>\r\n<Data2></Data2>\r\n<Data3></Data3>\r\n<Data4></Data4>\r\n<Data5></Data5>\r\n</TP_WMD_UCD>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TP_WMD_UCD - NS",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_WMD_UCD xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<KK_Sahibi>Test Test</KK_Sahibi>\r\n<KK_No>4546711234567894</KK_No>\r\n<KK_SK_Ay>12</KK_SK_Ay>\r\n<KK_SK_Yil>26</KK_SK_Yil>\r\n<KK_CVC>000</KK_CVC>\r\n<KK_Sahibi_GSM>5551231212</KK_Sahibi_GSM>\r\n<Hata_URL>https://dev.param.com.tr/en</Hata_URL>\r\n<Basarili_URL>https://dev.param.com.tr/tr</Basarili_URL>\r\n<Siparis_ID>TTP_WMD_UCDNS0001</Siparis_ID>\r\n<Siparis_Aciklama>a</Siparis_Aciklama>\r\n<Taksit>1</Taksit>\r\n<Islem_Tutar>100,00</Islem_Tutar>\r\n<Toplam_Tutar>100,00</Toplam_Tutar>\r\n<Islem_Hash>rpte/hgxXJPpmL7NnRJ9v5No6k0=</Islem_Hash>\r\n<Islem_Guvenlik_Tip>NS</Islem_Guvenlik_Tip>\r\n<Islem_ID>123</Islem_ID>\r\n<IPAdr>127.0.0.1</IPAdr>\r\n<Ref_URL>https://dev.param.com.tr/tr</Ref_URL>\r\n<Data1>a</Data1>\r\n<Data2>a</Data2>\r\n<Data3>a</Data3>\r\n<Data4>a</Data4>\r\n<Data5>a</Data5>\r\n</TP_WMD_UCD>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TP_WMD_Pay",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <TP_WMD_Pay xmlns=\"https://turkpos.com.tr/\">\r\n      <G>\r\n        <CLIENT_CODE>10738</CLIENT_CODE>\r\n        <CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n        <CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n      </G>\r\n      <GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n      <UCD_MD>UGF5bWVudFZQT1NEYXRhPUVCQjA5Q0U0QkE1MUU0QkVENEIyMkYxQjI4RTE1RUQw</UCD_MD>\r\n      <Islem_GUID>047d1a94-c85b-4d50-b961-37e9c6dee6a1</Islem_GUID>\r\n      <Siparis_ID>TTP_WMD_UCD3D0001</Siparis_ID>\r\n    </TP_WMD_Pay>\r\n  </soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Ön Provizyon - 3D Model / NS",
+					"item": [
+						{
+							"name": "TP_Islem_Odeme_OnProv_WMD - SHA2B64",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<SHA2B64 xmlns=\"https://turkpos.com.tr/\">\r\n<Data>107380c13d406-873b-403b-9c09-a5766840d98c1100,00100,00TTP_Islem_Odeme_OnProv_WMD3D012https://dev.param.com.tr/enhttps://dev.param.com.tr/tr</Data>\r\n</SHA2B64>\r\n</soap:Body>\r\n</soap:Envelope>z"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TP_Islem_Odeme_OnProv_WMD - 3D",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> \r\n    <soap:Body> \r\n        <TP_Islem_Odeme_OnProv_WMD xmlns=\"https://turkpos.com.tr/\"> \r\n                <G> \r\n                        <CLIENT_CODE>10738</CLIENT_CODE>\r\n                        <CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n                        <CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n                </G>\r\n                <GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n                <KK_Sahibi>Test Test</KK_Sahibi>\r\n                <KK_No>4155650100416111</KK_No>\r\n                <KK_SK_Ay>01</KK_SK_Ay>\r\n                <KK_SK_Yil>50</KK_SK_Yil>\r\n                <KK_CVC>715</KK_CVC>\r\n                <KK_Sahibi_GSM>5551231212</KK_Sahibi_GSM>\r\n                <Hata_URL>https://dev.param.com.tr/en</Hata_URL>\r\n                <Basarili_URL>https://dev.param.com.tr/tr</Basarili_URL>\r\n                <Siparis_ID>TBSTP_Islem_Odeme_OnProv_WMD3D013</Siparis_ID>\r\n                <Siparis_Aciklama>a</Siparis_Aciklama>\r\n                <Taksit>1</Taksit>\r\n                <Islem_Tutar>100,00</Islem_Tutar>\r\n                <Toplam_Tutar>100,00</Toplam_Tutar>\r\n                <Islem_Hash>GFU522OtfyZnEIhJsJkCI4hUFCA=</Islem_Hash>\r\n                <Islem_Guvenlik_Tip>3D</Islem_Guvenlik_Tip>\r\n                <Islem_ID>123</Islem_ID>\r\n                <IPAdr>127.0.0.1</IPAdr>\r\n                <Ref_URL>https://dev.param.com.tr/tr</Ref_URL>\r\n                <Data1>a</Data1>\r\n                <Data2>a</Data2>\r\n                <Data3>a</Data3>\r\n                <Data4>a</Data4>\r\n                <Data5>a</Data5>\r\n        </TP_Islem_Odeme_OnProv_WMD> \r\n    </soap:Body>\r\n</soap:Envelope> "
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TP_Islem_Odeme_OnProv_WMD - NS",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> \r\n    <soap:Body> \r\n        <TP_Islem_Odeme_OnProv_WMD xmlns=\"https://turkpos.com.tr/\"> \r\n                <G> \r\n                        <CLIENT_CODE>10738</CLIENT_CODE>\r\n                        <CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n                        <CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n                </G>\r\n                <GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n                <KK_Sahibi>Test Test</KK_Sahibi>\r\n                <KK_No>5456165456165454</KK_No>\r\n                <KK_SK_Ay>12</KK_SK_Ay>\r\n                <KK_SK_Yil>2026</KK_SK_Yil>\r\n                <KK_CVC>000</KK_CVC>\r\n                <KK_Sahibi_GSM>5551231212</KK_Sahibi_GSM>\r\n                <Hata_URL>https://dev.param.com.tr/tr</Hata_URL>\r\n                <Basarili_URL>https://dev.param.com.tr/tr</Basarili_URL>\r\n                <Siparis_ID>TTP_Islem_Odeme_OnProv_WMDNS005</Siparis_ID>\r\n                <Siparis_Aciklama>a</Siparis_Aciklama>\r\n                <Taksit>1</Taksit>\r\n                <Islem_Tutar>100,00</Islem_Tutar>\r\n                <Toplam_Tutar>100,00</Toplam_Tutar>\r\n                <Islem_Hash>DwuCyCfDSKH0B/lGiJpIbh+KWoo=</Islem_Hash>\r\n                <Islem_Guvenlik_Tip>NS</Islem_Guvenlik_Tip>\r\n                <Islem_ID>123</Islem_ID>\r\n                <IPAdr>127.0.0.1</IPAdr>\r\n                <Ref_URL>https://dev.param.com.tr/tr</Ref_URL>\r\n                <Data1>a</Data1>\r\n                <Data2>a</Data2>\r\n                <Data3>a</Data3>\r\n                <Data4>a</Data4>\r\n                <Data5>a</Data5>\r\n        </TP_Islem_Odeme_OnProv_WMD> \r\n    </soap:Body>\r\n</soap:Envelope> "
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TP_WMD_Pay",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <TP_WMD_Pay xmlns=\"https://turkpos.com.tr/\">\r\n      <G>\r\n        <CLIENT_CODE>10738</CLIENT_CODE>\r\n        <CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n        <CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n      </G>\r\n      <GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n      <UCD_MD>454671:758E0D19A82432439719B38211FC71E8E303082AB482C79B99CA1AA8158697CC:3720:##190100000\r\n</UCD_MD>\r\n      <Islem_GUID>d4120805-692e-449d-ab4d-8df855f974cb</Islem_GUID>\r\n      <Siparis_ID>TTP_Islem_Odeme_OnProv_WMD3D002</Siparis_ID>\r\n    </TP_WMD_Pay>\r\n  </soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Ön Provizyon - Kapama",
+					"item": [
+						{
+							"name": "TP_Islem_Odeme_OnProv_Kapa",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_Islem_Odeme_OnProv_Kapa xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<Prov_ID>6006448014</Prov_ID>\r\n<Prov_Tutar>100,00</Prov_Tutar>\r\n<Siparis_ID>TTP_Islem_Odeme_OnProv_WMD3D009</Siparis_ID>\r\n</TP_Islem_Odeme_OnProv_Kapa>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Ön Provizyon - İptal",
+					"item": [
+						{
+							"name": "TP_Islem_Iptal_OnProv",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_Islem_Iptal_OnProv xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<Prov_ID></Prov_ID>\r\n<Siparis_ID>tfghy</Siparis_ID>\r\n</TP_Islem_Iptal_OnProv>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Döviz İle Ödeme",
+					"item": [
+						{
+							"name": "TP_Islem_Odeme_WD - SHA2B64",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<SHA2B64 xmlns=\"https://turkpos.com.tr/\">\r\n<Data>107380c13d406-873b-403b-9c09-a5766840d98c100,00100,00TTP_Islem_Odeme_WD_3D0001https://dev.param.com.tr/enhttps://dev.param.com.tr/tr</Data>\r\n</SHA2B64>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TP_Islem_Odeme_WD - 3D",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n<soap:Body>\r\n<TP_Islem_Odeme_WD xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<Doviz_Kodu>1001</Doviz_Kodu>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<KK_Sahibi>test</KK_Sahibi>\r\n<KK_No>4546711234567894</KK_No>\r\n<KK_SK_Ay>12</KK_SK_Ay>\r\n<KK_SK_Yil>26</KK_SK_Yil>\r\n<KK_CVC>000</KK_CVC>\r\n<KK_Sahibi_GSM>5551231212</KK_Sahibi_GSM>\r\n<Hata_URL>https://dev.param.com.tr/en</Hata_URL>\r\n<Basarili_URL>https://dev.param.com.tr/tr</Basarili_URL>\r\n<Siparis_ID>TTP_Islem_Odeme_WD_3D0001</Siparis_ID>\r\n<Siparis_Aciklama>string</Siparis_Aciklama>\r\n<Islem_Tutar>100,00</Islem_Tutar>\r\n<Toplam_Tutar>100,00</Toplam_Tutar>\r\n<Islem_Hash>d1RmTqoXVLzjyOCGXXjpNwcCuRU=</Islem_Hash>\r\n<Islem_Guvenlik_Tip>3D</Islem_Guvenlik_Tip>\r\n<Islem_ID>125</Islem_ID>\r\n<IPAdr>127.0.0.1</IPAdr>\r\n<Ref_URL>string</Ref_URL>\r\n<Data1>string</Data1>\r\n<Data2>string</Data2>\r\n<Data3>string</Data3>\r\n<Data4>string</Data4>\r\n<Data5>string</Data5>\r\n</TP_Islem_Odeme_WD>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TP_Islem_Odeme_WD - NS",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n<soap:Body>\r\n<TP_Islem_Odeme_WD xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<Doviz_Kodu>1001</Doviz_Kodu>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<KK_Sahibi>test</KK_Sahibi>\r\n<KK_No>4546711234567894</KK_No>\r\n<KK_SK_Ay>12</KK_SK_Ay>\r\n<KK_SK_Yil>26</KK_SK_Yil>\r\n<KK_CVC>000</KK_CVC>\r\n<KK_Sahibi_GSM>5551231212</KK_Sahibi_GSM>\r\n<Hata_URL>https://dev.param.com.tr/tr</Hata_URL>\r\n<Basarili_URL>https://dev.param.com.tr/tr</Basarili_URL>\r\n<Siparis_ID>TTP_Islem_Odeme_WD_NS0001</Siparis_ID>\r\n<Siparis_Aciklama>string</Siparis_Aciklama>\r\n<Islem_Tutar>100,00</Islem_Tutar>\r\n<Toplam_Tutar>100,00</Toplam_Tutar>\r\n<Islem_Hash>jEJc3QF7VBPWyw6GKmzcNtaceSs=</Islem_Hash>\r\n<Islem_Guvenlik_Tip>NS</Islem_Guvenlik_Tip>\r\n<Islem_ID>125</Islem_ID>\r\n<IPAdr>127.0.0.1</IPAdr>\r\n<Ref_URL>string</Ref_URL>\r\n<Data1>string</Data1>\r\n<Data2>string</Data2>\r\n<Data3>string</Data3>\r\n<Data4>string</Data4>\r\n<Data5>string</Data5>\r\n</TP_Islem_Odeme_WD>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Kart Saklama",
+					"item": [
+						{
+							"name": "KK_Saklama",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <KK_Saklama xmlns=\"https://turkpos.com.tr/\">\r\n      <G>\r\n        <CLIENT_CODE>10738</CLIENT_CODE>\r\n        <CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n        <CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n      </G>\r\n      <Kart_No>4155650100416111</Kart_No>\r\n      <KK_Sahibi>Test Test</KK_Sahibi>\r\n      <KK_No>4155650100416111</KK_No>\r\n      <KK_SK_Ay>01</KK_SK_Ay>\r\n      <KK_SK_Yil>50</KK_SK_Yil>\r\n      <Data1>string</Data1>\r\n      <Data2>string</Data2>\r\n      <Data3>string</Data3>\r\n    </KK_Saklama>\r\n  </soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Kart Ekleme",
+					"item": [
+						{
+							"name": "KS_Kart_Ekle",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<KS_Kart_Ekle xmlns=\"https://turkpara.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<KK_Sahibi>Test Test</KK_Sahibi>\r\n<KK_No>4155650100416</KK_No>\r\n<KK_SK_Ay>01</KK_SK_Ay>\r\n<KK_SK_Yil>50</KK_SK_Yil>\r\n<KK_Kart_Adi>MyFavCard</KK_Kart_Adi>\r\n<KK_Islem_ID></KK_Islem_ID>\r\n</KS_Kart_Ekle>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/out.ws/service_ks.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"out.ws",
+										"service_ks.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Kart Saklamalı Ödeme",
+					"item": [
+						{
+							"name": "KS_Tahsilat",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<KS_Tahsilat xmlns=\"https://turkpara.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<KS_GUID>a27a99f2-c523-4caf-8bac-6f700a8b23eb</KS_GUID>\r\n<CVV>000</CVV>\r\n<KK_Sahibi_GSM>5551231212</KK_Sahibi_GSM>\r\n<Hata_URL>https://dev.param.com.tr/en</Hata_URL>\r\n<Basarili_URL>https://dev.param.com.tr/tr</Basarili_URL>\r\n<Siparis_ID>TKS_TahsilatS001</Siparis_ID>\r\n<Siparis_Aciklama>string</Siparis_Aciklama>\r\n<Taksit>1</Taksit>\r\n<Islem_Tutar>100,00</Islem_Tutar>\r\n<Toplam_Tutar>100,00</Toplam_Tutar>\r\n<Islem_Guvenlik_Tip>3D</Islem_Guvenlik_Tip>\r\n<Islem_ID>string</Islem_ID>\r\n<IPAdr>127.0.0.1</IPAdr>\r\n<Ref_URL>string</Ref_URL>\r\n<Data1>string</Data1>\r\n<Data2>string</Data2>\r\n<Data3>string</Data3>\r\n<Data4>string</Data4>\r\n<KK_Islem_ID>string</KK_Islem_ID>\r\n</KS_Tahsilat>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/out.ws/service_ks.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"out.ws",
+										"service_ks.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Kart Saklama Listesi",
+					"item": [
+						{
+							"name": "KK_Sakli_Liste",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <KK_Sakli_Liste xmlns=\"https://turkpos.com.tr/\">\r\n      <G>\r\n        <CLIENT_CODE>10738</CLIENT_CODE>\r\n        <CLIENT_USERNAME>test</CLIENT_USERNAME>\r\n        <CLIENT_PASSWORD>test</CLIENT_PASSWORD>\r\n      </G>\r\n      <Kart_No>4546711234567894</Kart_No>\r\n      <KS_KK_Kisi_ID>string</KS_KK_Kisi_ID>\r\n    </KK_Sakli_Liste>\r\n  </soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "KS_Kart_Liste",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <KS_Kart_Liste xmlns=\"https://turkpara.com.tr/\">\r\n      <G>\r\n        <CLIENT_CODE>10738</CLIENT_CODE>\r\n        <CLIENT_USERNAME>test</CLIENT_USERNAME>\r\n        <CLIENT_PASSWORD>test</CLIENT_PASSWORD>\r\n      </G>\r\n      <GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n      <KK_Kart_Adi></KK_Kart_Adi>\r\n      <KK_Islem_ID></KK_Islem_ID>\r\n    </KS_Kart_Liste>\r\n  </soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/out.ws/service_ks.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"out.ws",
+										"service_ks.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Saklı Kart ile Ön Provizyon",
+					"item": [
+						{
+							"name": "TP_Islem_Odeme_OnProv_WKS - SHA2B64",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<SHA2B64 xmlns=\"https://turkpos.com.tr/\">\r\n<Data>107380c13d406-873b-403b-9c09-a5766840d98c100,00100,00147963https://dev.param.com.tr/trhttps://dev.param.com.tr/tr</Data>\r\n</SHA2B64>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TP_Islem_Odeme_OnProv_WKS - 3D",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <TP_Islem_Odeme_OnProv_WKS xmlns=\"https://turkpos.com.tr/\">\r\n      <G>\r\n        <CLIENT_CODE>10738</CLIENT_CODE>\r\n        <CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n        <CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n      </G>\r\n      <GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n      <KS_Kart_No>0c13d406-873b-403b-9c09-a5766840d98c</KS_Kart_No>\r\n      <KK_GUID>29a768aa-c8ab-4868-ba34-de172fe5274a</KK_GUID>\r\n      <KK_Sahibi_GSM>5454845</KK_Sahibi_GSM>\r\n      <Hata_URL>https://dev.param.com.tr/en</Hata_URL>\r\n      <Basarili_URL>https://dev.param.com.tr/tr</Basarili_URL>\r\n      <Siparis_ID>147963</Siparis_ID>\r\n      <Siparis_Aciklama>string</Siparis_Aciklama>\r\n      <Islem_Tutar>100,00</Islem_Tutar>\r\n      <Toplam_Tutar>100,00</Toplam_Tutar>\r\n      <Islem_Hash>kOU9hc55tY/E1tJwVI84d4rCFmU=</Islem_Hash>\r\n      <Islem_Guvenlik_Tip>NS</Islem_Guvenlik_Tip>\r\n      <Islem_ID>sipariş11</Islem_ID>\r\n      <IPAdr>127.0.0.1</IPAdr>\r\n      <Ref_URL>https://dev.param.com.tr/tr</Ref_URL>\r\n      <Data1>string</Data1>\r\n      <Data2>string</Data2>\r\n      <Data3>string</Data3>\r\n      <Data4>string</Data4>\r\n      <Data5>string</Data5>\r\n    </TP_Islem_Odeme_OnProv_WKS>\r\n  </soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TP_Islem_Odeme_OnProv_WKS - NS",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <TP_Islem_Odeme_OnProv_WKS xmlns=\"https://turkpos.com.tr/\">\r\n      <G>\r\n        <CLIENT_CODE>10738</CLIENT_CODE>\r\n        <CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n        <CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n      </G>\r\n      <GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n      <KS_Kart_No>0c13d406-873b-403b-9c09-a5766840d98c</KS_Kart_No>\r\n      <KK_GUID>29a768aa-c8ab-4868-ba34-de172fe5274a</KK_GUID>\r\n      <KK_Sahibi_GSM>5454845</KK_Sahibi_GSM>\r\n      <Hata_URL>https://dev.param.com.tr/tr</Hata_URL>\r\n      <Basarili_URL>https://dev.param.com.tr/tr</Basarili_URL>\r\n      <Siparis_ID>147963</Siparis_ID>\r\n      <Siparis_Aciklama>string</Siparis_Aciklama>\r\n      <Islem_Tutar>100,00</Islem_Tutar>\r\n      <Toplam_Tutar>100,00</Toplam_Tutar>\r\n      <Islem_Hash>kOU9hc55tY/E1tJwVI84d4rCFmU=</Islem_Hash>\r\n      <Islem_Guvenlik_Tip>3D</Islem_Guvenlik_Tip>\r\n      <Islem_ID>sipariş11</Islem_ID>\r\n      <IPAdr>127.0.0.1</IPAdr>\r\n      <Ref_URL>https://dev.param.com.tr/tr</Ref_URL>\r\n      <Data1>string</Data1>\r\n      <Data2>string</Data2>\r\n      <Data3>string</Data3>\r\n      <Data4>string</Data4>\r\n      <Data5>string</Data5>\r\n    </TP_Islem_Odeme_OnProv_WKS>\r\n  </soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Saklı Kart Silme",
+					"item": [
+						{
+							"name": "KS_Kart_Sil",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<KS_Kart_Sil xmlns=\"https://turkpara.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<KS_GUID>7647f35d-7f37-4f83-bdc6-37c1e18fcd96</KS_GUID>\r\n<KK_Islem_ID>1014</KK_Islem_ID>\r\n</KS_Kart_Sil>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/out.ws/service_ks.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"out.ws",
+										"service_ks.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Kart Doğrulama",
+					"item": [
+						{
+							"name": "TP_KK_Verify",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_KK_Verify xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<KK_No>5571135571135575</KK_No>\r\n<KK_SK_Ay>12</KK_SK_Ay>\r\n<KK_SK_Yil>26</KK_SK_Yil>\r\n<KK_CVC>000</KK_CVC>\r\n<Return_URL>https://dev.param.com.tr/tr</Return_URL>\r\n<Data1></Data1>\r\n<Data2></Data2>\r\n<Data3></Data3>\r\n<Data4></Data4>\r\n<Data5></Data5>\r\n</TP_KK_Verify>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BKM Express ile Ödeme",
+					"item": [
+						{
+							"name": "TP_Islem_Odeme_BKM - SHA2B64",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<SHA2B64 xmlns=\"https://turkpos.com.tr/\">\r\n<Data>107380c13d406-873b-403b-9c09-a5766840d98c100,00TTP_Islem_Odeme_BKM001https://dev.param.com.tr/trhttps://dev.param.com.tr/tr</Data>\r\n</SHA2B64>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TP_Islem_Odeme_BKM",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_Islem_Odeme_BKM xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<Customer_Info></Customer_Info>\r\n<Customer_GSM>5551231212</Customer_GSM>\r\n<Error_URL>https://dev.param.com.tr/tr</Error_URL>\r\n<Success_URL>https://dev.param.com.tr/tr</Success_URL>\r\n<Order_ID>TTP_Islem_Odeme_BKM001</Order_ID>\r\n<Order_Description></Order_Description>\r\n<Amount>100,00</Amount>\r\n<Payment_Hash>jdGUcl8Q6kL3HTQ5JWvy0Oqj9Ys=</Payment_Hash>\r\n<Transaction_ID></Transaction_ID>\r\n<IPAddress>127.0.0.1</IPAddress>\r\n<Referrer_URL></Referrer_URL>\r\n</TP_Islem_Odeme_BKM>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Firma Pos Oranları",
+					"item": [
+						{
+							"name": "TP_Ozel_Oran_Liste",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_Ozel_Oran_Liste xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n</TP_Ozel_Oran_Liste>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Kullanıcı Pos Oranları",
+					"item": [
+						{
+							"name": "TP_Ozel_Oran_SK_Liste",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_Ozel_Oran_SK_Liste xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n</TP_Ozel_Oran_SK_Liste>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Özelleştirilmiş Pos Oranları",
+					"item": [
+						{
+							"name": "TP_Ozel_Oran_SK_Guncelle",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_Ozel_Oran_SK_Guncelle xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<Ozel_Oran_SK_ID>6</Ozel_Oran_SK_ID>\r\n<MO_1>0,000</MO_1>\r\n<MO_2>0,000</MO_2>\r\n<MO_3>0,000</MO_3>\r\n<MO_4>0,000</MO_4>\r\n<MO_5>0,000</MO_5>\r\n<MO_6>0,000</MO_6>\r\n<MO_7>0,000</MO_7>\r\n<MO_8>0,000</MO_8>\r\n<MO_9>0,000</MO_9>\r\n<MO_10>0,000</MO_10>\r\n<MO_11>0,000</MO_11>\r\n<MO_12>0,000</MO_12>\r\n</TP_Ozel_Oran_SK_Guncelle>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "İşlem Özetleri",
+					"item": [
+						{
+							"name": "TP_Mutabakat_Ozet",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_Mutabakat_Ozet xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<Tarih_Bas>20.11.2022 00:00:00</Tarih_Bas>\r\n<Tarih_Bit>21.11.2022 15:15:00</Tarih_Bit>\r\n</TP_Mutabakat_Ozet>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Mutabakat Detay",
+					"item": [
+						{
+							"name": "TP_Mutabakat_Detay",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_Mutabakat_Detay xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<Tarih>14.04.2021 00:00:16</Tarih>\r\n</TP_Mutabakat_Detay>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "İşlem İptal ve İadeleri",
+					"item": [
+						{
+							"name": "TP_Islem_Iptal_Iade_Kismi2",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_Islem_Iptal_Iade_Kismi2 xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<Durum>IADE</Durum>\r\n<Siparis_ID>dfhth</Siparis_ID>\r\n<Tutar>1.00</Tutar>\r\n</TP_Islem_Iptal_Iade_Kismi2>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "İşlem Sorgulama",
+					"item": [
+						{
+							"name": "TP_Islem_Sorgulama4",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_Islem_Sorgulama4 xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<Dekont_ID>3003912366</Dekont_ID>\r\n<Siparis_ID></Siparis_ID>\r\n<Islem_ID></Islem_ID>\r\n</TP_Islem_Sorgulama4>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "İşlem İzleme Metodu",
+					"item": [
+						{
+							"name": "TP_Islem_Izleme",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_Islem_Izleme xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<Tarih_Bas>10.03.2023 00:00:00</Tarih_Bas>\r\n<Tarih_Bit>17.03.2023 15:00:00</Tarih_Bit>\r\n<Islem_Tip></Islem_Tip>\r\n<Islem_Durum></Islem_Durum>\r\n</TP_Islem_Izleme>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Dekont",
+					"item": [
+						{
+							"name": "TP_Islem_Dekont_Gonder",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<TP_Islem_Dekont_Gonder xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n<Dekont_ID>3003912366</Dekont_ID>\r\n<E_Posta></E_Posta>\r\n</TP_Islem_Dekont_Gonder>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "BIN Kodları",
+					"item": [
+						{
+							"name": "BIN_SanalPos",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?> <soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"> <soap:Body>\r\n<BIN_SanalPos xmlns=\"https://turkpos.com.tr/\">\r\n<G>\r\n<CLIENT_CODE>10738</CLIENT_CODE>\r\n<CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n<CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n</G>\r\n<BIN>6060432073705005</BIN>\r\n</BIN_SanalPos>\r\n</soap:Body>\r\n</soap:Envelope>"
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Iframe",
+					"item": [
+						{
+							"name": "TP_Modal_Payment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "text/xml; charset=utf-8",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\r\nxmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n    <soap:Body>\r\n        <TP_Modal_Payment xmlns=\"https://turkpos.com.tr/\">\r\n            <d>\r\n                <Code>10738</Code>\r\n                <User>test</User>\r\n                <Pass>test</Pass>\r\n                <GUID>0c13d406-873b-403b-9c09-a5766840d98c</GUID>\r\n                <GSM></GSM>\r\n                <Amount>1,00</Amount>\r\n                <Order_ID>Iframe0044</Order_ID>\r\n                <TransactionId>IframeTransaction002</TransactionId>\r\n                <Callback_URL>https://dev.param.com.tr/tr</Callback_URL>\r\n                <Installment>1</Installment>\r\n                <MaxInstallment>6</MaxInstallment>\r\n            </d>\r\n        </TP_Modal_Payment>\r\n    </soap:Body>\r\n</soap:Envelope>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://test-dmz.param.com.tr/turkpos.ws/service_turkpos_test.asmx",
+									"protocol": "https",
+									"host": [
+										"test-dmz",
+										"param",
+										"com",
+										"tr"
+									],
+									"path": [
+										"turkpos.ws",
+										"service_turkpos_test.asmx"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Ortak Ödeme",
+					"item": [
+						{
+							"name": "TEST",
+							"item": [
+								{
+									"name": "TO_Pre_Encrypting_OOS",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "text/xml; charset=utf-8",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Header>\r\n    <ServiceSecuritySoapHeader xmlns=\"https://turkodeme.com.tr/\">\r\n      <CLIENT_CODE>10738</CLIENT_CODE>\r\n      <CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n      <CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n    </ServiceSecuritySoapHeader>\r\n  </soap:Header>\r\n  <soap:Body>\r\n    <TO_Pre_Encrypting_OOS xmlns=\"https://turkodeme.com.tr/\">\r\n      <GUID>0C13D406-873B-403B-9C09-A5766840D98C</GUID>\r\n      <Borclu_Kisi_TC></Borclu_Kisi_TC>\r\n      <Borclu_Aciklama>r|açıklama</Borclu_Aciklama>\r\n      <Borclu_Tutar>r|10,00</Borclu_Tutar>\r\n      <Borclu_GSM>r|5555555555</Borclu_GSM>\r\n      <Borclu_Odeme_Tip>r|</Borclu_Odeme_Tip>\r\n      <Borclu_AdSoyad>r|test</Borclu_AdSoyad>\r\n      <Return_URL>r|https://dev.param.com.tr/tr</Return_URL>\r\n      <Islem_ID>202219</Islem_ID>\r\n      <Terminal_ID>10738</Terminal_ID>\r\n      <Taksit>1</Taksit>\r\n    </TO_Pre_Encrypting_OOS>\r\n  </soap:Body>\r\n</soap:Envelope>\r\n\r\n<!-- https://test-pos.param.com.tr/default.aspx?s= -->\r\n"
+										},
+										"url": {
+											"raw": "https://test-pos.param.com.tr/to.ws/Service_Odeme.asmx",
+											"protocol": "https",
+											"host": [
+												"test-pos",
+												"param",
+												"com",
+												"tr"
+											],
+											"path": [
+												"to.ws",
+												"Service_Odeme.asmx"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "TO_Pre_Encrypting_OrtakOdeme",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "text/xml",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Header>\r\n    <ServiceSecuritySoapHeader xmlns=\"https://turkodeme.com.tr/\">\r\n      <CLIENT_CODE>10738</CLIENT_CODE>\r\n      <CLIENT_USERNAME>Test</CLIENT_USERNAME>\r\n      <CLIENT_PASSWORD>Test</CLIENT_PASSWORD>\r\n    </ServiceSecuritySoapHeader>\r\n  </soap:Header>\r\n  <soap:Body>\r\n    <TO_Pre_Encrypting_OrtakOdeme xmlns=\"https://turkodeme.com.tr/\">\r\n      <GUID>0C13D406-873B-403B-9C09-A5766840D98C</GUID>\r\n      <Borclu_Kisi_TC>99910090115</Borclu_Kisi_TC>\r\n      <Borclu_Aciklama>test</Borclu_Aciklama>\r\n      <Borclu_Tutar>19,00</Borclu_Tutar>\r\n      <Borclu_GSM>1231231212</Borclu_GSM>\r\n      <Borclu_Odeme_Tip>r|</Borclu_Odeme_Tip>\r\n      <Borclu_AdSoyad>r|test</Borclu_AdSoyad>\r\n      <Return_URL>https://dev.param.com.tr/tr</Return_URL>\r\n      <Islem_ID>202219</Islem_ID>\r\n      <Terminal_ID>10738</Terminal_ID>\r\n    </TO_Pre_Encrypting_OrtakOdeme>\r\n  </soap:Body>\r\n</soap:Envelope>\r\n\r\n<! -- https://test-pos.param.com.tr/default.aspx?s= -->\r\n"
+										},
+										"url": {
+											"raw": "https://test-pos.param.com.tr/to.ws/Service_Odeme.asmx",
+											"protocol": "https",
+											"host": [
+												"test-pos",
+												"param",
+												"com",
+												"tr"
+											],
+											"path": [
+												"to.ws",
+												"Service_Odeme.asmx"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "PROD",
+							"item": [
+								{
+									"name": "TO_Pre_Encrypting_OOS",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "text/xml",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Header>\r\n    <ServiceSecuritySoapHeader xmlns=\"https://turkodeme.com.tr/\">\r\n      <CLIENT_CODE>xxx</CLIENT_CODE>\r\n      <CLIENT_USERNAME>xxx</CLIENT_USERNAME>\r\n      <CLIENT_PASSWORD>xxx</CLIENT_PASSWORD>\r\n    </ServiceSecuritySoapHeader>\r\n  </soap:Header>\r\n  <soap:Body>\r\n    <TO_Pre_Encrypting_OOS xmlns=\"https://turkodeme.com.tr/\">\r\n      <GUID>xxx</GUID>\r\n      <Borclu_Kisi_TC>11111111112</Borclu_Kisi_TC>\r\n      <Borclu_Aciklama>r|Test</Borclu_Aciklama>\r\n      <Borclu_Tutar>r|1,00</Borclu_Tutar>\r\n      <Borclu_GSM>r|5555555554</Borclu_GSM>\r\n      <Borclu_Odeme_Tip>r|Diğer</Borclu_Odeme_Tip>\r\n      <Borclu_AdSoyad>|rTest Test</Borclu_AdSoyad>\r\n      <Return_URL>www.google.com</Return_URL>\r\n      <Islem_ID>2022EP19</Islem_ID>\r\n      <Terminal_ID>52378</Terminal_ID>\r\n      <Taksit>1</Taksit>\r\n    </TO_Pre_Encrypting_OOS>\r\n  </soap:Body>\r\n</soap:Envelope>\r\n\r\n<!-- https://pos.param.com.tr/Tahsilat/Default.aspx?s= -->\r\n<!--https://pos.param.com.tr/Tahsilat/Default-v2.aspx?s= -->\r\n"
+										},
+										"url": {
+											"raw": "https://pos.param.com.tr/Tahsilat/to.ws/Service_Odeme.asmx",
+											"protocol": "https",
+											"host": [
+												"pos",
+												"param",
+												"com",
+												"tr"
+											],
+											"path": [
+												"Tahsilat",
+												"to.ws",
+												"Service_Odeme.asmx"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "TO_Pre_Encrypting_OrtakOdeme",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "text/xml",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Header>\r\n    <ServiceSecuritySoapHeader xmlns=\"https://turkodeme.com.tr/\">\r\n      <CLIENT_CODE>string</CLIENT_CODE>\r\n      <CLIENT_USERNAME>string</CLIENT_USERNAME>\r\n      <CLIENT_PASSWORD>string</CLIENT_PASSWORD>\r\n    </ServiceSecuritySoapHeader>\r\n  </soap:Header>\r\n  <soap:Body>\r\n    <TO_Pre_Encrypting_OrtakOdeme xmlns=\"https://turkodeme.com.tr/\">\r\n      <GUID>string</GUID>\r\n      <Borclu_Kisi_TC>string</Borclu_Kisi_TC>\r\n      <Borclu_Aciklama>string</Borclu_Aciklama>\r\n      <Borclu_Tutar>string</Borclu_Tutar>\r\n      <Borclu_GSM>string</Borclu_GSM>\r\n      <Borclu_Odeme_Tip>string</Borclu_Odeme_Tip>\r\n      <Borclu_AdSoyad>string</Borclu_AdSoyad>\r\n      <Return_URL>string</Return_URL>\r\n      <Islem_ID>string</Islem_ID>\r\n      <Terminal_ID>string</Terminal_ID>\r\n    </TO_Pre_Encrypting_OrtakOdeme>\r\n  </soap:Body>\r\n</soap:Envelope>\r\n\r\n<!-- https://pos.param.com.tr/Tahsilat/Default.aspx?s= -->\r\n<!--https://pos.param.com.tr/Tahsilat/Default-v2.aspx?s= -->"
+										},
+										"url": {
+											"raw": "https://pos.param.com.tr/Tahsilat/to.ws/Service_Odeme.asmx",
+											"protocol": "https",
+											"host": [
+												"pos",
+												"param",
+												"com",
+												"tr"
+											],
+											"path": [
+												"Tahsilat",
+												"to.ws",
+												"Service_Odeme.asmx"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

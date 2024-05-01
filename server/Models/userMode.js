@@ -21,6 +21,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    sex: {
+      type: String,
+      enum: ["male", "female"],
+    },
     email: {
       type: String,
       required: true,
@@ -63,7 +67,8 @@ userSchema.statics.signup = async function (
   registerNo,
   firstName,
   lastName,
-  phone
+  phone,
+  sex
 ) {
   // validation
   if (!email || !password) {
@@ -99,6 +104,7 @@ userSchema.statics.signup = async function (
     lastName,
     phone,
     registerNo,
+    sex,
   });
 
   return user;

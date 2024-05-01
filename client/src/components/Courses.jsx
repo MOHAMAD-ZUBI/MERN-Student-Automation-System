@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -7,8 +8,40 @@ import { Link } from "react-router-dom";
 
 import SectionTitle from "../components/repeated/SectionTitle";
 import CurrentCourse from "../components/repeated/CurrentCourse";
+import { useEffect, useState } from "react";
+import api from "../utils/Request";
+import useAuth from "../hooks/useAuth";
 
 const Courses = () => {
+  const admin = sessionStorage.getItem("admin");
+  const { token } = useAuth();
+  const [currentCourses, setCurrentCourses] = useState(null);
+  const [pastCourses, setPastCourses] = useState(null);
+
+  const colors = ["FDFFE0", "E0EBFF", "FFE6E6", "E6FFEF"];
+
+  useEffect(() => {
+    const fetchCurrentCourses = async () => {
+      const currentCourses = await api.get("/course/list/mine?filter=current", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setCurrentCourses(currentCourses.data);
+    };
+    const fetchPastCourses = async () => {
+      const pastCourses = await api.get("/course/list/mine?filter=past", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setPastCourses(pastCourses.data);
+    };
+
+    fetchCurrentCourses();
+    fetchPastCourses();
+  }, [token]);
+
   return (
     <div className="requests pt-[30px] min-h-screen overflow-hidden">
       <div className="container overflow-hidden scale-95">
@@ -41,72 +74,29 @@ const Courses = () => {
             modules={[Navigation]}
             className="mySwiper h-[200px] sm:h-[250px] overflow-visible"
           >
-            <SwiperSlide>
-              <Link to="/course">
-                <CurrentCourse
-                  color="from-[#FFE6E6] to-white"
-                  code="MAT209"
-                  module="Mathematics"
-                  teacher="Dr. Alex Sam"
-                  delay="0"
-                />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link to="/course">
-                <CurrentCourse
-                  color="from-[#E6FFEF] to-white"
-                  code="MAT209"
-                  module="Mathematics"
-                  teacher="Dr. Alex Sam"
-                  delay="0"
-                />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link to="/course">
-                <CurrentCourse
-                  color="from-[#E0EBFF] to-white"
-                  code="MAT209"
-                  module="Mathematics"
-                  teacher="Dr. Alex Sam"
-                  delay="0"
-                />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link to="/course">
-                <CurrentCourse
-                  color="from-[#FDFFE0] to-white"
-                  code="MAT209"
-                  module="Mathematics"
-                  teacher="Dr. Alex Sam"
-                  delay="0"
-                />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link to="/course">
-                <CurrentCourse
-                  color="from-[#FFE6E6] to-white"
-                  code="MAT209"
-                  module="Mathematics"
-                  teacher="Dr. Alex Sam"
-                  delay="0"
-                />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link to="/course">
-                <CurrentCourse
-                  color="from-[#E6FFEF] to-white"
-                  code="MAT209"
-                  module="Mathematics"
-                  teacher="Dr. Alex Sam"
-                  delay="0"
-                />
-              </Link>
-            </SwiperSlide>
+            {currentCourses ? (
+              currentCourses.map((course, index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <Link to="/course">
+                      <CurrentCourse
+                        color={`from-[#${colors[index % 4]}] to-white`}
+                        code={course.courseCode}
+                        module={course.courseName}
+                        teacher={
+                          course.lecturer[0].firstName +
+                          " " +
+                          course.lecturer[0].lastName
+                        }
+                        delay="0"
+                      />
+                    </Link>
+                  </SwiperSlide>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </Swiper>
         </div>
         <div className=" mb-[50px]">
@@ -137,72 +127,29 @@ const Courses = () => {
             modules={[Navigation]}
             className="mySwiper h-[200px] sm:h-[250px] overflow-visible"
           >
-            <SwiperSlide>
-              <Link to="/course">
-                <CurrentCourse
-                  color="from-[#FFE6E6] to-white"
-                  code="MAT209"
-                  module="Mathematics"
-                  teacher="Dr. Alex Sam"
-                  delay="0"
-                />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link to="/course">
-                <CurrentCourse
-                  color="from-[#E6FFEF] to-white"
-                  code="MAT209"
-                  module="Mathematics"
-                  teacher="Dr. Alex Sam"
-                  delay="0"
-                />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link to="/course">
-                <CurrentCourse
-                  color="from-[#E0EBFF] to-white"
-                  code="MAT209"
-                  module="Mathematics"
-                  teacher="Dr. Alex Sam"
-                  delay="0"
-                />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link to="/course">
-                <CurrentCourse
-                  color="from-[#FDFFE0] to-white"
-                  code="MAT209"
-                  module="Mathematics"
-                  teacher="Dr. Alex Sam"
-                  delay="0"
-                />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link to="/course">
-                <CurrentCourse
-                  color="from-[#FFE6E6] to-white"
-                  code="MAT209"
-                  module="Mathematics"
-                  teacher="Dr. Alex Sam"
-                  delay="0"
-                />
-              </Link>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Link to="/course">
-                <CurrentCourse
-                  color="from-[#E6FFEF] to-white"
-                  code="MAT209"
-                  module="Mathematics"
-                  teacher="Dr. Alex Sam"
-                  delay="0"
-                />
-              </Link>
-            </SwiperSlide>
+            {pastCourses ? (
+              pastCourses.map((course, index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <Link to="/course">
+                      <CurrentCourse
+                        color={`from-[#${colors[index % 4]}] to-white`}
+                        code={course.courseCode}
+                        module={course.courseName}
+                        teacher={
+                          course.lecturer[0].firstName +
+                          " " +
+                          course.lecturer[0].lastName
+                        }
+                        delay="0"
+                      />
+                    </Link>
+                  </SwiperSlide>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </Swiper>
         </div>
       </div>

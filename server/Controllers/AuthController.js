@@ -27,7 +27,8 @@ const getUsers = async (req, res) => {
 // register
 
 const register = async (req, res) => {
-  const { email, password, registerNo, firstName, lastName, phone } = req.body;
+  const { email, password, registerNo, firstName, lastName, phone, sex } =
+    req.body;
 
   try {
     if (!email.includes("@karabuk.edu.tr")) {
@@ -39,7 +40,8 @@ const register = async (req, res) => {
       registerNo,
       firstName,
       lastName,
-      phone
+      phone,
+      sex
     );
 
     const token = createToken(user._id, user.email, user.permissions);
