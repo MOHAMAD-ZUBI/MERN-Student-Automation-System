@@ -22,6 +22,7 @@ const ProjectGroup = () => {
       return ""; // or throw an error, or handle it differently
     }
   }
+
   function formatDate(createdAt) {
     const date = new Date(createdAt);
     const month = date.getMonth() + 1; // Months are zero-based, so we add 1
@@ -30,6 +31,7 @@ const ProjectGroup = () => {
 
     return `${month}/${day}/${year}`;
   }
+
   const admin = sessionStorage.getItem("admin");
   const { token } = useAuth();
   const [group, setGroup] = useState(null);
@@ -46,6 +48,14 @@ const ProjectGroup = () => {
 
     fetchGroup();
   }, [token]);
+
+  const deleteGroup = async (e) => {
+    await api.get(`/report/remove/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
 
   return (
     <div className="course  pt-[30px] min-h-screen overflow-hidden scale-95">
@@ -194,7 +204,10 @@ const ProjectGroup = () => {
                           <p className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px]">
                             {report.title}
                           </p>
-                          <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
+                          <span
+                            onClick={deleteGroup}
+                            className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest"
+                          >
                             ...
                           </span>
                         </div>

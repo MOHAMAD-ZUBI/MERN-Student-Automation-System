@@ -13,6 +13,18 @@ const getAllReports = async (req, res) => {
   }
 };
 
+// get all reports
+const removeReport = async (req, res) => {
+  try {
+    const { reportId } = req.params;
+
+    const reports = await Report.findOneAndDelete({ _id: reportId });
+    res.status(200).json(reports);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to remove report" });
+  }
+};
+
 // create a new report
 const createReport = async (req, res) => {
   try {
@@ -35,7 +47,12 @@ const createReport = async (req, res) => {
 const deleteReport = async (req, res) => {
   try {
     const { id } = req.params;
-    await Report.findByIdAndDelete(id);
+    const deletedReport = await Report.findByIdAndDelete(id);
+
+    if (!deletedReport) {
+      return res.status(404).json({ error: "Report not found" });
+    }
+
     res.status(200).json({ message: "Report deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: "Failed to delete report" });
@@ -46,4 +63,5 @@ module.exports = {
   getAllReports,
   createReport,
   deleteReport,
+  removeReport,
 };

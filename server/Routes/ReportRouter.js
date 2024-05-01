@@ -2,7 +2,10 @@ const multer = require("multer");
 const express = require("express");
 const path = require("path");
 const reportRouter = express.Router();
-const { createReport } = require("../Controllers/ReportController");
+const {
+  createReport,
+  deleteReport,
+} = require("../Controllers/ReportController");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -15,5 +18,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 reportRouter.post("/create", upload.single("report"), createReport);
+reportRouter.delete("/remove/:id", deleteReport);
 
 module.exports = reportRouter;
