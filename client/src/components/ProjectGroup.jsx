@@ -49,8 +49,8 @@ const ProjectGroup = () => {
     fetchGroup();
   }, [token]);
 
-  const deleteGroup = async (e) => {
-    await api.get(`/report/remove/`, {
+  const deleteGroup = async (id) => {
+    await api.delete(`/report/remove/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -204,12 +204,15 @@ const ProjectGroup = () => {
                           <p className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px]">
                             {report.title}
                           </p>
-                          <span
-                            onClick={deleteGroup}
-                            className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest"
+                          <button
+                            onClick={() => {
+                              deleteGroup(report._id);
+                            }}
                           >
-                            ...
-                          </span>
+                            <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
+                              ...
+                            </span>
+                          </button>
                         </div>
                         <div className="flex items-center justify-start w-full">
                           <p className="font-mukta text-primary text-[10px] sm:text-[14px] mxl:text-[16px]">
