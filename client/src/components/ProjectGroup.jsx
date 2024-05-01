@@ -8,6 +8,7 @@ import Search from "../../public/Search";
 import api from "../utils/Request";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
+import { FaRegTrashCan, FaEye } from "react-icons/fa6";
 
 const ProjectGroup = () => {
   function getFileExtension(filename) {
@@ -55,6 +56,7 @@ const ProjectGroup = () => {
         Authorization: `Bearer ${token}`,
       },
     });
+    window.location.reload();
   };
 
   return (
@@ -204,15 +206,25 @@ const ProjectGroup = () => {
                           <p className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px]">
                             {report.title}
                           </p>
-                          <button
-                            onClick={() => {
-                              deleteGroup(report._id);
-                            }}
-                          >
-                            <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
-                              ...
-                            </span>
-                          </button>
+                          <div className="flex flex-row gap-2 justify-center items-center">
+                            <button
+                              onClick={() => {
+                                deleteGroup(report._id);
+                              }}
+                            >
+                              <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
+                                <FaRegTrashCan />
+                              </span>
+                            </button>
+                            <a
+                              href={`http://localhost:3060/${report.file}`}
+                              target="_blank"
+                            >
+                              <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
+                                <FaEye />
+                              </span>
+                            </a>
+                          </div>
                         </div>
                         <div className="flex items-center justify-start w-full">
                           <p className="font-mukta text-primary text-[10px] sm:text-[14px] mxl:text-[16px]">
