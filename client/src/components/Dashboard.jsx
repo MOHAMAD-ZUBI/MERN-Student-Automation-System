@@ -44,6 +44,7 @@ const Dashboard = () => {
   }, [token]);
 
   // console.log(response);
+  console.log(courses);
 
   return (
     <div className="dashboard relative scale-95">
