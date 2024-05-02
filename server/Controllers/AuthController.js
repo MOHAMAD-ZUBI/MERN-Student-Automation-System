@@ -47,7 +47,7 @@ const register = async (req, res) => {
     const token = createToken(user._id, user.email, user.permissions);
     await Student.create({ user: user._id });
 
-    res.status(200).json({ email, token });
+    res.status(200).json({ email, token, role: user.permissions });
   } catch (error) {
     res.status(400).json({ Error: error.message });
   }
@@ -65,7 +65,7 @@ const login = async (req, res) => {
     //create token
     const token = createToken(user._id, user.email, user.permissions);
 
-    res.status(200).json({ email, token });
+    res.status(200).json({ email, token, role: user.permissions });
   } catch (error) {
     res.status(400).json({ msg: error.message });
   }

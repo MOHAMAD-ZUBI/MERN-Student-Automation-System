@@ -7,6 +7,9 @@ const createAcademician = async (req, res) => {
     const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded._id);
+    user.permissions.pull("Student");
+    user.permissions.push("Academician");
+    await user.save();
     const { employmentHistory, officeNo, officeHours, graduatedUni, position } =
       req.body;
 
