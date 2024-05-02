@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
-import api from "../utils/Request";
-import SectionTitle from "../components/repeated/SectionTitle";
-import Graduate from "../../public/Graduate";
-import TimeLine from "./repeated/TimeLine";
+import api from "../../utils/Request";
+import SectionTitle from "../repeated/SectionTitle";
+import Graduate from "../../../public/Graduate";
+import TimeLine from "../repeated/TimeLine";
 import { motion } from "framer-motion";
-import { fadeIn } from "../motion/motion";
+import { fadeIn } from "../../motion/motion";
 
 const Profile = () => {
   const admin = sessionStorage.getItem("admin");

@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion';
-import { fadeIn } from '../motion/motion';
-import { Link } from 'react-router-dom';
-import SectionTitle from './repeated/SectionTitle';
-import ArrowDown from '../../public/ArrowDown';
-import Search from '../../public/Search';
+import { motion } from "framer-motion";
+import { fadeIn } from "../../motion/motion";
+import { Link } from "react-router-dom";
+import SectionTitle from "../repeated/SectionTitle";
+import ArrowDown from "../../../public/ArrowDown";
+import Search from "../../../public/Search";
 
 const Course = () => {
   return (
@@ -11,7 +11,7 @@ const Course = () => {
       <div className="container overflow-hidden">
         <SectionTitle content="PRG209 Programming" extras="mb-[45px]" />
         <motion.p
-          variants={fadeIn('left', 'tween', 0.3, 1)}
+          variants={fadeIn("left", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -23,7 +23,7 @@ const Course = () => {
           aliquip ex ea commodo consequat.
         </motion.p>
         <motion.div
-          variants={fadeIn('left', 'tween', 0.3, 1)}
+          variants={fadeIn("left", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -47,7 +47,7 @@ const Course = () => {
           </div>
         </motion.div>
         <motion.h3
-          variants={fadeIn('left', 'tween', 0.3, 1)}
+          variants={fadeIn("left", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -56,14 +56,14 @@ const Course = () => {
           Notes & Related Links
         </motion.h3>
         <motion.div
-          variants={fadeIn('up', 'tween', 0.3, 1)}
+          variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           className="active-requests w-full basis-1/2 sm:min-h-[362px] bg-neutral-100 bg-opacity-[0.16] rounded border border-neutral-100 border-opacity-[0.32] shadow-4xl mb-[50px]"
         >
           <motion.div
-            variants={fadeIn('up', 'tween', 0.35, 1)}
+            variants={fadeIn("up", "tween", 0.35, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -101,7 +101,7 @@ const Course = () => {
           <div className="flex flex-col justify-between items-center gap-10 py-5 px-3">
             <div className="w-full flex flex-col ml:flex-row flex-wrap gap-2 items-start justify-center ml:justify-start">
               <motion.div
-                variants={fadeIn('up', 'tween', 0.35, 1)}
+                variants={fadeIn("up", "tween", 0.35, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -111,7 +111,7 @@ const Course = () => {
                 <div className=" flex-1 flex flex-col items-center justify-center gap-2">
                   <div className="flex items-center justify-between w-full">
                     <p className="font-mukta text-primary text-[15px]">
-                      Week 3 Exercises.pdf{' '}
+                      Week 3 Exercises.pdf{" "}
                     </p>
                     <span className="font-mukta text-primary text-[15px]">
                       ...
@@ -125,7 +125,7 @@ const Course = () => {
                 </div>
               </motion.div>
               <motion.div
-                variants={fadeIn('up', 'tween', 0.4, 1)}
+                variants={fadeIn("up", "tween", 0.4, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -135,7 +135,7 @@ const Course = () => {
                 <div className=" flex-1 flex flex-col items-center justify-center gap-2">
                   <div className="flex items-center justify-between w-full">
                     <p className="font-mukta text-primary text-[15px]">
-                      Week 3 Exercises.pdf{' '}
+                      Week 3 Exercises.pdf{" "}
                     </p>
                     <span className="font-mukta text-primary text-[15px]">
                       ...
@@ -149,7 +149,7 @@ const Course = () => {
                 </div>
               </motion.div>
               <motion.div
-                variants={fadeIn('up', 'tween', 0.45, 1)}
+                variants={fadeIn("up", "tween", 0.45, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -159,7 +159,7 @@ const Course = () => {
                 <div className=" flex-1 flex flex-col items-center justify-center gap-2">
                   <div className="flex items-center justify-between w-full">
                     <p className="font-mukta text-primary text-[15px]">
-                      Week 3 Exercises.pdf{' '}
+                      Week 3 Exercises.pdf{" "}
                     </p>
                     <span className="font-mukta text-primary text-[15px]">
                       ...
@@ -173,7 +173,7 @@ const Course = () => {
                 </div>
               </motion.div>
               <motion.div
-                variants={fadeIn('up', 'tween', 0.5, 1)}
+                variants={fadeIn("up", "tween", 0.5, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -183,7 +183,7 @@ const Course = () => {
                 <div className=" flex-1 flex flex-col items-center justify-center gap-2">
                   <div className="flex items-center justify-between w-full">
                     <p className="font-mukta text-primary text-[15px]">
-                      Week 3 Exercises.pdf{' '}
+                      Week 3 Exercises.pdf{" "}
                     </p>
                     <span className="font-mukta text-primary text-[15px]">
                       ...

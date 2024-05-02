@@ -5,18 +5,18 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { motion } from "framer-motion";
-import { fadeIn } from "../motion/motion";
+import { fadeIn } from "../../motion/motion";
 
-import Book from "../../public/Book";
-import Graduate from "../../public/Graduate";
-import Case from "../../public/Case";
-import ArrowUp from "../../public/ArrowUp";
-import Work from "../../public/Work";
-import Plus from "../../public/Plus";
-import Badge from "../../public/Badge";
+import Book from "../../../public/Book";
+import Graduate from "../../../public/Graduate";
+import Case from "../../../public/Case";
+import ArrowUp from "../../../public/ArrowUp";
+import Work from "../../../public/Work";
+import Plus from "../../../public/Plus";
+import Badge from "../../../public/Badge";
 import { useEffect, useState } from "react";
-import api from "../utils/Request";
-import useAuth from "../hooks/useAuth";
+import api from "../../utils/Request";
+import useAuth from "../../hooks/useAuth";
 
 const Department = () => {
   const toggleCourses = (e) => {

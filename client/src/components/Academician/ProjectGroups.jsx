@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { fadeIn } from "../motion/motion";
-import SectionTitle from "./repeated/SectionTitle";
-import ArrowDown from "../../public/ArrowDown";
-import Group from "./repeated/Group";
+import { fadeIn } from "../../motion/motion";
+import SectionTitle from "../repeated/SectionTitle";
+import ArrowDown from "../../../public/ArrowDown";
+import Group from "../repeated/Group";
 
 const ProjectGroups = () => {
   return (

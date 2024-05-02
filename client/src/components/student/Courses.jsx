@@ -6,11 +6,11 @@ import "swiper/css/navigation";
 
 import { Link } from "react-router-dom";
 
-import SectionTitle from "../components/repeated/SectionTitle";
-import CurrentCourse from "../components/repeated/CurrentCourse";
+import SectionTitle from "../repeated/SectionTitle";
+import CurrentCourse from "../repeated/CurrentCourse";
 import { useEffect, useState } from "react";
-import api from "../utils/Request";
-import useAuth from "../hooks/useAuth";
+import api from "../../utils/Request";
+import useAuth from "../../hooks/useAuth";
 
 const Courses = () => {
   const admin = sessionStorage.getItem("admin");
