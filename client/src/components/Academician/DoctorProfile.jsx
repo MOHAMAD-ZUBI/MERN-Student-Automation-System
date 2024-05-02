@@ -1,31 +1,66 @@
-import SectionTitle from '../components/repeated/SectionTitle';
-import Graduate from '../../public/Graduate';
-import TimeLine from './repeated/TimeLine';
-import { motion } from 'framer-motion';
-import { fadeIn } from '../motion/motion';
+/* eslint-disable no-unused-vars */
+import SectionTitle from "../repeated/SectionTitle";
+import Graduate from "../../../public/Graduate";
+import TimeLine from "../repeated/TimeLine";
+import { motion } from "framer-motion";
+import { fadeIn } from "../../motion/motion";
+import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import api from "../../utils/Request";
 
 const DoctorProfile = () => {
+  const admin = sessionStorage.getItem("admin");
+  const { token } = useAuth();
+  const [academician, setAcademician] = useState(null);
+  const [day, setDay] = useState("Mon");
+
+  const colors = ["FDFFE0", "E0EBFF", "FFE6E6", "E6FFEF"];
+  const colors2 = ["F4FBA3", "87A4DA", "E88287", "9DF6BB"];
+
+  useEffect(() => {
+    const fetchAcademician = async () => {
+      try {
+        const response = await api.get("/auth/current", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setAcademician(response.data); // Assuming the data you want is in the response's 'data' field
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchAcademician();
+  }, [token]);
+
   return (
     <div className="profile min-h-screen relative pt-[125px] overflow-hidden">
       <span className="absolute w-full h-[200px] top-0 left-0 bg-gradient-to-b from-gradient1 to-gradient2 z-0"></span>
       <div className="container">
         <div className="profile-info flex justify-star items-center gap-[10px] mb-[30px]">
           <img
-            src="./profile.png"
+            src={
+              academician?.user?.sex == "male"
+                ? "./profile2.png"
+                : "./profile.png"
+            }
             alt="profile"
             className="w-[150px] h-[150px]"
           />
           <div className="profile-name">
-            <p className="font-normal font-Montagu text-[20px] text-primary">
-              Dr. Ilhami Muharram
+            <p className="font-normal capitalize font-Montagu text-[20px] text-primary">
+              {academician
+                ? academician.user.firstName + " " + academician.user.lastName
+                : admin}
             </p>
             <span className="profile-number font-mukta font-normal text-[20px] text-secondary">
-              19432400023
+              {academician?.user?.registerNo}
             </span>
           </div>
         </div>
         <motion.div
-          variants={fadeIn('up', 'tween', 0.3, 1)}
+          variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -40,7 +75,7 @@ const DoctorProfile = () => {
         </motion.div>
         <div className="classes hidden w-full justify-center items-center gap-[20px] mb-[50px]">
           <motion.div
-            variants={fadeIn('up', 'tween', 0.4, 1)}
+            variants={fadeIn("up", "tween", 0.4, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -51,7 +86,7 @@ const DoctorProfile = () => {
             </p>
           </motion.div>
           <motion.div
-            variants={fadeIn('up', 'tween', 0.3, 1)}
+            variants={fadeIn("up", "tween", 0.3, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -62,7 +97,7 @@ const DoctorProfile = () => {
             </p>
           </motion.div>
           <motion.div
-            variants={fadeIn('up', 'tween', 0.4, 1)}
+            variants={fadeIn("up", "tween", 0.4, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
@@ -75,7 +110,7 @@ const DoctorProfile = () => {
         </div>
         <SectionTitle content="Full Schedule" extras="mb-5" />
         <motion.div
-          variants={fadeIn('up', 'tween', 0.3, 1)}
+          variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -83,7 +118,7 @@ const DoctorProfile = () => {
         >
           <div className="days w-full flex justify-between sm:justify-evenly items-center mb-[30px]">
             <motion.div
-              variants={fadeIn('up', 'tween', 0.35, 1)}
+              variants={fadeIn("up", "tween", 0.35, 1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
@@ -94,7 +129,7 @@ const DoctorProfile = () => {
               </span>
             </motion.div>
             <motion.div
-              variants={fadeIn('up', 'tween', 0.4, 1)}
+              variants={fadeIn("up", "tween", 0.4, 1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
@@ -105,7 +140,7 @@ const DoctorProfile = () => {
               </span>
             </motion.div>
             <motion.div
-              variants={fadeIn('up', 'tween', 0.45, 1)}
+              variants={fadeIn("up", "tween", 0.45, 1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
@@ -116,7 +151,7 @@ const DoctorProfile = () => {
               </span>
             </motion.div>
             <motion.div
-              variants={fadeIn('up', 'tween', 0.5, 1)}
+              variants={fadeIn("up", "tween", 0.5, 1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
@@ -127,7 +162,7 @@ const DoctorProfile = () => {
               </span>
             </motion.div>
             <motion.div
-              variants={fadeIn('up', 'tween', 0.55, 1)}
+              variants={fadeIn("up", "tween", 0.55, 1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}

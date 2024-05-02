@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
-import CurrentCourses from "./dashboard/CurrentCourses";
-import Shedule from "./dashboard/Shedule";
+import CurrentCourses from "../dashboard/CurrentCourses";
+import Shedule from "../dashboard/Shedule";
 import { motion } from "framer-motion";
-import { fadeIn } from "../motion/motion";
-import useAuth from "../hooks/useAuth";
+import { fadeIn } from "../../motion/motion";
+import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
-import api from "../utils/Request";
+import api from "../../utils/Request";
 
 const DoctorDashboard = () => {
   const admin = sessionStorage.getItem("admin");

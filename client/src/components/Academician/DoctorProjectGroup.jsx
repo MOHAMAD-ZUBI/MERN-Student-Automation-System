@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { fadeIn } from "../motion/motion";
+import { fadeIn } from "../../motion/motion";
 import { Link } from "react-router-dom";
-import SectionTitle from "./repeated/SectionTitle";
-import ArrowDown from "../../public/ArrowDown";
-import Search from "../../public/Search";
+import SectionTitle from "../repeated/SectionTitle";
+import ArrowDown from "../../../public/ArrowDown";
+import Search from "../../../public/Search";
 
 const DoctorProjectGroup = () => {
   return (

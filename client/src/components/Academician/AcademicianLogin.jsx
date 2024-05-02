@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import Person from "../../public/Person";
-import Password from "../../public/Password";
-import api from "../utils/Request";
-import useAuth from "../hooks/useAuth";
+import Person from "../../../public/Person";
+import Password from "../../../public/Password";
+import api from "../../utils/Request";
+import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 
 const Login = () => {

@@ -60,7 +60,7 @@ const Profile = () => {
           {student?.data ? (
             <img
               src={
-                student?.data?.sex == "male"
+                student?.user?.sex == "male"
                   ? "./profile2.png"
                   : "./profile.png"
               }
@@ -72,17 +72,13 @@ const Profile = () => {
           )}
           <div className="profile-name">
             <p className="font-normal capitalize font-Montagu text-[28px] text-primary">
-              {student && student.user && student.user.firstName
+              {student
                 ? student.user.firstName + " " + student.user.lastName
                 : admin}
-              {/* {student.user.firstName} */}
             </p>
             <p className="font-normal capitalize font-Montagu text-[20px] text-primary">
               {student?.user?.registerNo}
             </p>
-            <span className="profile-number font-mukta font-normal text-[20px] text-secondary">
-              {/* {student.user.registerNo} */}
-            </span>
           </div>
         </div>
         <motion.div
