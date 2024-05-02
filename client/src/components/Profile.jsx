@@ -31,7 +31,7 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchStudent = async () => {
-      const student = await api.get("/student/current", {
+      const student = await api.get("/auth/current", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

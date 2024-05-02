@@ -16,7 +16,7 @@ const DoctorDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get("/student/current", {
+        const response = await api.get("/auth/current", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -50,7 +50,11 @@ const DoctorDashboard = () => {
         viewport={{ once: true }}
         className="text-primary font-Montagu text-[20px] sm:text-[40px] font-normal text-center my-[24px] leading-none drop-shadow-4xl scale-95"
       >
-        Welcome <span className="text-secondary">{admin}</span>!
+        Welcome{" "}
+        <span className="text-secondary">
+          {response ? response.user.firstName : admin}
+        </span>
+        !
       </motion.h2>
       <div className="container">
         <Shedule courses={courses}></Shedule>

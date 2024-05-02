@@ -18,7 +18,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get("/student/current", {
+        const response = await api.get("/auth/current", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -57,9 +57,7 @@ const Dashboard = () => {
       >
         Welcome{" "}
         <span className="text-secondary">
-          {response && response.user && response.user.firstName
-            ? response.user.firstName
-            : admin}
+          {response ? response.user.firstName : admin}
         </span>
         !
       </motion.h2>

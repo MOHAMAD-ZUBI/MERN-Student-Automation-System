@@ -6,6 +6,7 @@ const {
   deleteUser,
   addRole,
   deleteRole,
+  getCurrentUser,
 } = require("../Controllers/AuthController");
 
 const { isAdminUser } = require("../Middlewares/Roles");
@@ -14,6 +15,7 @@ const router = express.Router();
 
 // getUsers
 router.get("/", isAdminUser, getUsers);
+router.get("/current", getCurrentUser);
 // register
 router.post("/register", register);
 
