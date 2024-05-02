@@ -35,7 +35,7 @@ const Department = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get("/department/studentDepartment", {
+        const response = await api.get("/department/userDepartment", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -30,6 +30,10 @@ const academicianSchema = new Schema({
     type: String,
     default: "Dr.",
   },
+  departmentId: {
+    type: mongoose.Types.ObjectId,
+    ref: "Department",
+  },
   user: {
     type: mongoose.Types.ObjectId,
     ref: "User",
