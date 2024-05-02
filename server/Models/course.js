@@ -21,7 +21,7 @@ const noteSchema = new Schema(
     description: {
       type: String,
     },
-    group: {
+    course: {
       type: mongoose.Types.ObjectId,
       ref: "Course",
     },
@@ -31,6 +31,7 @@ const noteSchema = new Schema(
   },
   { timestamps: true }
 );
+
 const Note = mongoose.model("Note", noteSchema);
 
 const courseSchema = new Schema({
@@ -74,10 +75,15 @@ const courseSchema = new Schema({
     type: [mongoose.Types.ObjectId],
     ref: "User",
   },
-  Notes: [noteSchema],
+  notes: {
+    type: [mongoose.Types.ObjectId],
+    ref: "Note",
+  },
 });
 
 const Course = mongoose.model("Course", courseSchema);
 
-module.exports.Course = Course;
-module.exports.Note = Note;
+module.exports = {
+  Course,
+  Note,
+};
