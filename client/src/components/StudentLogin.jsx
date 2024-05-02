@@ -5,8 +5,10 @@ import Person from "../../public/Person";
 import Password from "../../public/Password";
 import api from "../utils/Request";
 import useAuth from "../hooks/useAuth";
+import { useState } from "react";
 
 const Login = () => {
+  const [errorMessage, setErrorMessage] = useState(null);
   const auth = useAuth();
   const {
     register,
@@ -21,8 +23,9 @@ const Login = () => {
     try {
       const response = await api.post("/auth/login", data);
       // console.log(response);
-      const { token, email } = response.data;
-
+      const { token, email, role } = response.data;
+      if (!role.includes("Student"))
+        return setErrorMessage("Wrong username or password");
       // Store token in cookies
       document.cookie = `token=${token};`;
 
@@ -92,6 +95,7 @@ const Login = () => {
           </div>
           <p className="w-full py-1 pl-[52px] font-mukta font-medium text-secondary text-[16px]">
             {errors.password?.message}
+            {errorMessage}
           </p>
 
           <Link
