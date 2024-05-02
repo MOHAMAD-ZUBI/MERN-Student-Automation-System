@@ -1,15 +1,13 @@
 /* eslint-disable no-unused-vars */
-// import React from "react";
-import CurrentCourses from "./dashboard/CurrentCourses";
-import Shedule from "./dashboard/Shedule";
+import CurrentCourses from "../dashboard/CurrentCourses";
+import Shedule from "../dashboard/Shedule";
 import { motion } from "framer-motion";
-import { fadeIn } from "../motion/motion";
-import useAuth from "../hooks/useAuth";
+import { fadeIn } from "../../motion/motion";
+import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
-import api from "../utils/Request";
-// Import the useAuth hook
+import api from "../../utils/Request";
 
-const Dashboard = () => {
+const DoctorDashboard = () => {
   const admin = sessionStorage.getItem("admin");
   const { token } = useAuth();
   const [response, setResponse] = useState(null);
@@ -18,7 +16,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get("/student/current", {
+        const response = await api.get("/auth/current", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -43,34 +41,27 @@ const Dashboard = () => {
     fetchData();
   }, [token]);
 
-  // console.log(response);
-
   return (
-    <div className="dashboard relative scale-95">
+    <div className="dashboard relative">
       <motion.h2
         variants={fadeIn("up", "tween", 0.1, 1)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
-        className="text-primary font-Montagu text-[20px] sm:text-[40px] font-normal text-center my-[24px] leading-none drop-shadow-4xl"
+        className="text-primary font-Montagu text-[20px] sm:text-[40px] font-normal text-center my-[24px] leading-none drop-shadow-4xl scale-95"
       >
         Welcome{" "}
         <span className="text-secondary">
-          {response && response.user && response.user.firstName
-            ? response.user.firstName
-            : admin}
+          {response ? response.user.firstName : admin}
         </span>
         !
       </motion.h2>
-
       <div className="container">
-        <Shedule courses={courses} />{" "}
-        {/* Pass token as prop to Shedule component */}
-        <CurrentCourses courses={courses} />{" "}
-        {/* Pass token as prop to CurrentCourses component */}
+        <Shedule courses={courses}></Shedule>
+        <CurrentCourses courses={courses}></CurrentCourses>
       </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default DoctorDashboard;

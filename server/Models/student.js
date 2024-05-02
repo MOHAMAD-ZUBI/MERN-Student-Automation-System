@@ -26,9 +26,6 @@ const studentSchema = new Schema(
     faculty: {
       type: String,
     },
-    sex: {
-      type: String,
-    },
     level: {
       type: Number,
       deafult: 1,

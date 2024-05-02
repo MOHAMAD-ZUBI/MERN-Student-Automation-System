@@ -1,6 +1,7 @@
 const { Department, Worker, DepartmentCorse } = require("../Models/department");
 const User = require("../Models/userMode");
 const Student = require("../Models/student");
+const Academician = require("../Models/academician");
 
 // get all departments
 const getAllDepartments = async (req, res) => {
@@ -24,12 +25,18 @@ const getDepartmentById = async (req, res) => {
 };
 
 // get department based on user
-const getDepartmentByStudent = async (req, res) => {
+const getDepartmentByUser = async (req, res) => {
   try {
     const user = req.user;
-    const student = await Student.findOne({ user: user._id });
+    let userDetails;
+
+    if (user.permissions.includes("Academician")) {
+      userDetails = await Academician.findOne({ user: user._id });
+    } else {
+      userDetails = await Student.findOne({ user: user._id });
+    }
     const departments = await Department.findById(
-      student.departmentId
+      userDetails.departmentId
     ).populate("departmentHead");
     res.status(200).json(departments);
   } catch (error) {
@@ -172,7 +179,7 @@ module.exports = {
   deleteDepartment,
   addWorker,
   deleteWorker,
-  getDepartmentByStudent,
+  getDepartmentByUser,
   addDepartmentCorse,
   deleteDepartmentCorse,
 };

@@ -1,17 +1,17 @@
-import { motion } from 'framer-motion';
-import { fadeIn } from '../motion/motion';
-import { Link } from 'react-router-dom';
-import SectionTitle from './repeated/SectionTitle';
-import ArrowDown from '../../public/ArrowDown';
-import Search from '../../public/Search';
+import { motion } from "framer-motion";
+import { fadeIn } from "../../motion/motion";
+import { Link } from "react-router-dom";
+import SectionTitle from "../repeated/SectionTitle";
+import ArrowDown from "../../../public/ArrowDown";
+import Search from "../../../public/Search";
 
-const Course = () => {
+const DoctorCourse = () => {
   return (
     <div className="course  pt-[30px] min-h-screen overflow-hidden">
       <div className="container overflow-hidden">
         <SectionTitle content="PRG209 Programming" extras="mb-[45px]" />
         <motion.p
-          variants={fadeIn('left', 'tween', 0.3, 1)}
+          variants={fadeIn("left", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -23,7 +23,7 @@ const Course = () => {
           aliquip ex ea commodo consequat.
         </motion.p>
         <motion.div
-          variants={fadeIn('left', 'tween', 0.3, 1)}
+          variants={fadeIn("left", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -47,7 +47,7 @@ const Course = () => {
           </div>
         </motion.div>
         <motion.h3
-          variants={fadeIn('left', 'tween', 0.3, 1)}
+          variants={fadeIn("left", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
@@ -56,21 +56,21 @@ const Course = () => {
           Notes & Related Links
         </motion.h3>
         <motion.div
-          variants={fadeIn('up', 'tween', 0.3, 1)}
+          variants={fadeIn("up", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           className="active-requests w-full basis-1/2 sm:min-h-[362px] bg-neutral-100 bg-opacity-[0.16] rounded border border-neutral-100 border-opacity-[0.32] shadow-4xl mb-[50px]"
         >
           <motion.div
-            variants={fadeIn('up', 'tween', 0.35, 1)}
+            variants={fadeIn("up", "tween", 0.35, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
             className="relative flex items-center justify-between gap-1 py-2 px-3 bg-neutral-300 bg-opacity-20 rounded border border-neutral-100 border-opacity-30 shadow-4xl"
           >
             <h3 className="basis-1/5 sm:basis-1/4 font-mukta text-[10px] sm:text-[16px] mxl:text-[20px] text-left text-secondary leading-none">
-              Category name
+              Notes & Related Files
             </h3>
             <div className="search basis-2/5 sm:basis-2/4 h-[23px] ml:h-[30px] mxl:h-[38px] relative cursor-pointer">
               <input
@@ -87,6 +87,11 @@ const Course = () => {
             <div className="basis-2/5 sm:basis-1/4 flex items-center justify-end gap-1">
               <div className="filter cursor-pointer flex items-center justify-center py-1 px-[10px] rounded bg-white">
                 <p className=" font-Montagu text-[10px] ml:text-[16px] mxl:text-[20px] text-secondary">
+                  Add File +
+                </p>
+              </div>
+              <div className="filter cursor-pointer flex items-center justify-center py-1 px-[10px] rounded bg-white">
+                <p className=" font-Montagu text-[10px] ml:text-[16px] mxl:text-[20px] text-secondary">
                   Sort By
                 </p>
               </div>
@@ -101,7 +106,7 @@ const Course = () => {
           <div className="flex flex-col justify-between items-center gap-10 py-5 px-3">
             <div className="w-full flex flex-col ml:flex-row flex-wrap gap-2 items-start justify-center ml:justify-start">
               <motion.div
-                variants={fadeIn('up', 'tween', 0.35, 1)}
+                variants={fadeIn("up", "tween", 0.35, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -111,7 +116,7 @@ const Course = () => {
                 <div className=" flex-1 flex flex-col items-center justify-center gap-2">
                   <div className="flex items-center justify-between w-full">
                     <p className="font-mukta text-primary text-[15px]">
-                      Week 3 Exercises.pdf{' '}
+                      Week 3 Exercises.pdf{" "}
                     </p>
                     <span className="font-mukta text-primary text-[15px]">
                       ...
@@ -125,7 +130,7 @@ const Course = () => {
                 </div>
               </motion.div>
               <motion.div
-                variants={fadeIn('up', 'tween', 0.4, 1)}
+                variants={fadeIn("up", "tween", 0.4, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -135,7 +140,7 @@ const Course = () => {
                 <div className=" flex-1 flex flex-col items-center justify-center gap-2">
                   <div className="flex items-center justify-between w-full">
                     <p className="font-mukta text-primary text-[15px]">
-                      Week 3 Exercises.pdf{' '}
+                      Week 3 Exercises.pdf{" "}
                     </p>
                     <span className="font-mukta text-primary text-[15px]">
                       ...
@@ -149,7 +154,7 @@ const Course = () => {
                 </div>
               </motion.div>
               <motion.div
-                variants={fadeIn('up', 'tween', 0.45, 1)}
+                variants={fadeIn("up", "tween", 0.45, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -159,7 +164,7 @@ const Course = () => {
                 <div className=" flex-1 flex flex-col items-center justify-center gap-2">
                   <div className="flex items-center justify-between w-full">
                     <p className="font-mukta text-primary text-[15px]">
-                      Week 3 Exercises.pdf{' '}
+                      Week 3 Exercises.pdf{" "}
                     </p>
                     <span className="font-mukta text-primary text-[15px]">
                       ...
@@ -173,7 +178,7 @@ const Course = () => {
                 </div>
               </motion.div>
               <motion.div
-                variants={fadeIn('up', 'tween', 0.5, 1)}
+                variants={fadeIn("up", "tween", 0.5, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -183,7 +188,7 @@ const Course = () => {
                 <div className=" flex-1 flex flex-col items-center justify-center gap-2">
                   <div className="flex items-center justify-between w-full">
                     <p className="font-mukta text-primary text-[15px]">
-                      Week 3 Exercises.pdf{' '}
+                      Week 3 Exercises.pdf{" "}
                     </p>
                     <span className="font-mukta text-primary text-[15px]">
                       ...
@@ -222,4 +227,4 @@ const Course = () => {
   );
 };
 
-export default Course;
+export default DoctorCourse;

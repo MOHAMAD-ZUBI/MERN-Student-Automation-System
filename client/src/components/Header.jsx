@@ -85,7 +85,6 @@ const Header = () => {
 
   const handleLogout = () => {
     auth.logout();
-    sessionStorage.removeItem("admin");
   };
 
   return (

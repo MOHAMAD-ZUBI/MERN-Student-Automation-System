@@ -1,7 +1,7 @@
-import SectionTitle from './repeated/SectionTitle';
-import ArrowDown from '../../public/ArrowDown';
-import { motion } from 'framer-motion';
-import { fadeIn } from '../motion/motion';
+import SectionTitle from "../repeated/SectionTitle";
+import ArrowDown from "../../../public/ArrowDown";
+import { motion } from "framer-motion";
+import { fadeIn } from "../../motion/motion";
 
 const DoctorRequests = () => {
   return (
@@ -10,21 +10,21 @@ const DoctorRequests = () => {
         <SectionTitle content="Requests" extras="mb-[45px]" />
         <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center sm:items-start sm:gap-8">
           <motion.div
-            variants={fadeIn('up', 'tween', 0.3, 1)}
+            variants={fadeIn("up", "tween", 0.3, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
             className="active-requests w-full basis-1/2 sm:min-h-[362px] mb-5 bg-neutral-100 bg-opacity-[0.16] rounded border border-neutral-100 border-opacity-[0.32] shadow-4xl"
           >
             <motion.div
-              variants={fadeIn('up', 'tween', 0.35, 1)}
+              variants={fadeIn("up", "tween", 0.35, 1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
               className="requests-heading relative flex items-center justify-center py-2 px-3 bg-neutral-300 bg-opacity-20 rounded border border-neutral-100 border-opacity-30 shadow-4xl"
             >
               <h3 className="font-Montagu text-[15px] sm:text-[20px] mxl:text-[25px] text-center text-primary leading-normal drop-shadow-4xl">
-                Active Requests{' '}
+                Active Requests{" "}
               </h3>
               <div className="filter absolute top-2 right-3 cursor-pointer flex items-center justify-between gap-1 py-1 pl-[14px] pr-[10px] rounded bg-white">
                 <p className=" font-Montagu text-[10px] mxl:text-[20px] text-secondary">
@@ -36,7 +36,7 @@ const DoctorRequests = () => {
             <div className="flex flex-col justify-between items-center gap-3 py-5 px-3">
               <div className="w-full flex items-start justify-center gap-1">
                 <motion.div
-                  variants={fadeIn('up', 'tween', 0.4, 1)}
+                  variants={fadeIn("up", "tween", 0.4, 1)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
@@ -76,7 +76,7 @@ const DoctorRequests = () => {
                   </div>
                 </motion.div>
                 <motion.div
-                  variants={fadeIn('up', 'tween', 0.35, 1)}
+                  variants={fadeIn("up", "tween", 0.35, 1)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
@@ -116,7 +116,7 @@ const DoctorRequests = () => {
                   </div>
                 </motion.div>
                 <motion.div
-                  variants={fadeIn('up', 'tween', 0.4, 1)}
+                  variants={fadeIn("up", "tween", 0.4, 1)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
@@ -157,7 +157,7 @@ const DoctorRequests = () => {
                 </motion.div>
               </div>
               <motion.div
-                variants={fadeIn('up', 'tween', 0.5, 1)}
+                variants={fadeIn("up", "tween", 0.5, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
@@ -183,21 +183,21 @@ const DoctorRequests = () => {
             </div>
           </motion.div>
           <motion.div
-            variants={fadeIn('up', 'tween', 0.3, 1)}
+            variants={fadeIn("up", "tween", 0.3, 1)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
             className="past-requests sm:min-h-[362px] w-full basis-1/2 bg-neutral-100 bg-opacity-[0.16] rounded border border-neutral-100 border-opacity-[0.32] shadow-4xl mb-[50px]"
           >
             <motion.div
-              variants={fadeIn('up', 'tween', 0.35, 1)}
+              variants={fadeIn("up", "tween", 0.35, 1)}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
               className="requests-heading relative flex items-center justify-center py-2 px-3 bg-neutral-300 bg-opacity-20 rounded border border-neutral-100 border-opacity-30 shadow-4xl"
             >
               <h3 className="font-Montagu text-[15px] sm:text-[20px] mxl:text-[25px] text-center text-primary leading-normal drop-shadow-4xl">
-                Past Requests{' '}
+                Past Requests{" "}
               </h3>
               <div className="filter absolute top-2 right-3 cursor-pointer flex items-center justify-between gap-1 py-1 pl-[14px] pr-[10px] rounded bg-white">
                 <p className=" font-Montagu text-[10px] mxl:text-[20px] text-secondary">
@@ -209,7 +209,7 @@ const DoctorRequests = () => {
             <div className="flex flex-col justify-between items-center gap-3 py-5 px-3">
               <div className="w-full flex items-start justify-center gap-1">
                 <motion.div
-                  variants={fadeIn('up', 'tween', 0.4, 1)}
+                  variants={fadeIn("up", "tween", 0.4, 1)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
@@ -249,7 +249,7 @@ const DoctorRequests = () => {
                   </div>
                 </motion.div>
                 <motion.div
-                  variants={fadeIn('up', 'tween', 0.35, 1)}
+                  variants={fadeIn("up", "tween", 0.35, 1)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
@@ -289,7 +289,7 @@ const DoctorRequests = () => {
                   </div>
                 </motion.div>
                 <motion.div
-                  variants={fadeIn('up', 'tween', 0.35, 1)}
+                  variants={fadeIn("up", "tween", 0.35, 1)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
@@ -329,7 +329,7 @@ const DoctorRequests = () => {
                   </div>
                 </motion.div>
                 <motion.div
-                  variants={fadeIn('up', 'tween', 0.4, 1)}
+                  variants={fadeIn("up", "tween", 0.4, 1)}
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
@@ -370,7 +370,7 @@ const DoctorRequests = () => {
                 </motion.div>
               </div>
               <motion.div
-                variants={fadeIn('up', 'tween', 0.5, 1)}
+                variants={fadeIn("up", "tween", 0.5, 1)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}

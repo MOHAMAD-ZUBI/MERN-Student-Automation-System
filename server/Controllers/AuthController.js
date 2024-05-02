@@ -90,6 +90,39 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const getCurrentUser = async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const role = decoded.roles;
+    let userDetails;
+    const user = await User.findById(decoded._id);
+
+    if (!user) {
+      return res.status(401).json({ msg: "No such user" });
+    }
+
+    if (role.includes("Academician")) {
+      userDetails = await Academician.findOne({ user: user._id });
+
+      if (!userDetails) {
+        return res.status(401).json({ msg: "No such academician" });
+      }
+    } else {
+      userDetails = await Student.findOne({ user: user._id });
+
+      if (!userDetails) {
+        return res.status(401).json({ msg: "No such student" });
+      }
+    }
+
+    return res.status(200).json({ data: userDetails, user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "server error" });
+  }
+};
+
 ///////////////////////////////////////////// ROLES FUNCTIONS /////////////////////////////////////////////
 
 // Add role to user
@@ -183,4 +216,5 @@ module.exports = {
   deleteUser,
   addRole,
   deleteRole,
+  getCurrentUser,
 };

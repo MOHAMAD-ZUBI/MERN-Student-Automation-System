@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
-import api from "../utils/Request";
-import SectionTitle from "../components/repeated/SectionTitle";
-import Graduate from "../../public/Graduate";
-import TimeLine from "./repeated/TimeLine";
+import api from "../../utils/Request";
+import SectionTitle from "../repeated/SectionTitle";
+import Graduate from "../../../public/Graduate";
+import TimeLine from "../repeated/TimeLine";
 import { motion } from "framer-motion";
-import { fadeIn } from "../motion/motion";
+import { fadeIn } from "../../motion/motion";
 
 const Profile = () => {
   const admin = sessionStorage.getItem("admin");
@@ -31,7 +31,7 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchStudent = async () => {
-      const student = await api.get("/student/current", {
+      const student = await api.get("/auth/current", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -60,7 +60,7 @@ const Profile = () => {
           {student?.data ? (
             <img
               src={
-                student?.data?.sex == "male"
+                student?.user?.sex == "male"
                   ? "./profile2.png"
                   : "./profile.png"
               }
@@ -72,17 +72,13 @@ const Profile = () => {
           )}
           <div className="profile-name">
             <p className="font-normal capitalize font-Montagu text-[28px] text-primary">
-              {student && student.user && student.user.firstName
+              {student
                 ? student.user.firstName + " " + student.user.lastName
                 : admin}
-              {/* {student.user.firstName} */}
             </p>
             <p className="font-normal capitalize font-Montagu text-[20px] text-primary">
               {student?.user?.registerNo}
             </p>
-            <span className="profile-number font-mukta font-normal text-[20px] text-secondary">
-              {/* {student.user.registerNo} */}
-            </span>
           </div>
         </div>
         <motion.div

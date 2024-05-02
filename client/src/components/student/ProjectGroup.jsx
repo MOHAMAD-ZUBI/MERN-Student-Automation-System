@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-import { fadeIn } from "../motion/motion";
+import { fadeIn } from "../../motion/motion";
 import { Link } from "react-router-dom";
-import SectionTitle from "./repeated/SectionTitle";
-import ArrowDown from "../../public/ArrowDown";
-import Search from "../../public/Search";
-import api from "../utils/Request";
+import SectionTitle from "../repeated/SectionTitle";
+import ArrowDown from "../../../public/ArrowDown";
+import Search from "../../../public/Search";
+import api from "../../utils/Request";
 import { useEffect, useState } from "react";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import { FaRegTrashCan, FaEye } from "react-icons/fa6";
 
 const ProjectGroup = () => {

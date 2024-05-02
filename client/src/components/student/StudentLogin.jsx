@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import Person from "../../public/Person";
-import Password from "../../public/Password";
-import api from "../utils/Request";
-import useAuth from "../hooks/useAuth";
+import Person from "../../../public/Person";
+import Password from "../../../public/Password";
+import api from "../../utils/Request";
+import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 
 const Login = () => {
@@ -19,19 +19,18 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     try {
       const response = await api.post("/auth/login", data);
-      console.log(response);
+      // console.log(response);
       const { token, email, role } = response.data;
-
-      if (!role.includes("Academician"))
+      if (!role.includes("Student"))
         return setErrorMessage("Wrong username or password");
       // Store token in cookies
       document.cookie = `token=${token};`;
 
       // Redirect to homepage or dashboard
-      auth.user = "doctor";
+      auth.user = "student";
       navigate("/", { replace: true });
       sessionStorage.setItem("admin", auth.user);
     } catch (error) {
@@ -53,7 +52,8 @@ const Login = () => {
           className="w-[60px] sm:w-[68px]"
         />
         <h3 className="font-Montagu text-[17px] sm:text-[24px] text-center text-primary">
-          Academician Log-in
+          Welcome to <span className="text-secondary">e-Campus !</span> <br />{" "}
+          Student Log-in
         </h3>
 
         <form
@@ -67,6 +67,7 @@ const Login = () => {
             <input
               className="flex-1 h-full py-[6px] px-3 outline-none rounded text-[17px] sm:text-[20px] font-Montagu text-primary"
               type="email"
+              // value="example2@example.com"
               placeholder="Enter Email"
               {...register("email", { required: "this is required." })}
             />
@@ -81,11 +82,12 @@ const Login = () => {
             <input
               className="flex-1 h-full py-[6px] px-3 outline-none rounded text-[17px] sm:text-[20px] font-Montagu text-primary"
               type="password"
+              // value="123456"
               placeholder="Enter Password"
               {...register("password", {
                 required: "this is required.",
                 minLength: {
-                  value: 6,
+                  value: 1,
                   message: "password must be long enough",
                 },
               })}
@@ -108,7 +110,7 @@ const Login = () => {
               type="submit"
               className="mt-[20px] sm:mt-[40px] px-[45px] sm:px-[70px] py-1 bg-secondary text-white font-Montagu text-[20px] sm:text-[23px] rounded hover:bg-primary duration-0.3"
             >
-              Academician Log-In
+              Student Log-In
             </button>
           </div>
           <Link
