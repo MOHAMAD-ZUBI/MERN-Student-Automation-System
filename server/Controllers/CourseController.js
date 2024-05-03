@@ -132,7 +132,7 @@ const deleteCourse = async (req, res) => {
 const getCourseById = async (req, res) => {
   try {
     const { id } = req.params;
-    const course = await Course.findById(id);
+    const course = await Course.findById(id).populate("notes");
     res.status(200).json(course);
   } catch (error) {
     res.status(500).json({ error: "Failed to get course" });
@@ -159,6 +159,27 @@ const uploadNote = async (req, res) => {
   }
 };
 
+// delete Note 
+const deleteNote = async (req, res) => {
+  try {
+    const { id } = req.params;
+        const note = await Note.findById(id);
+
+    if (!note) {
+      return res.status(404).json({ error: "Note not found" });
+    }
+    await Promise.all(note.file.map(async (filePath) => {
+      await fs.unlink(filePath); 
+    }));
+
+    await Note.findByIdAndDelete(id);
+
+    res.status(200).json({ message: "Note deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to delete note" });
+  }
+};
 // export
 module.exports = {
   getAllCourses,
@@ -168,4 +189,5 @@ module.exports = {
   deleteCourse,
   getCourseById,
   uploadNote,
+  deleteNote
 };
