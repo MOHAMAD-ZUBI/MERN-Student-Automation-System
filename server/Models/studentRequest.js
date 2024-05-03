@@ -31,6 +31,7 @@ const studentRequestSchema = new Schema(
     },
     receiverReply: {
       type: String,
+      default: "",
     },
     file: {
       type: [String],
