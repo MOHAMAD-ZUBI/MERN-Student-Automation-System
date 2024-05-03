@@ -12,7 +12,6 @@ const {
   showSingleRequest,
   getRequestsForLecturer,
   replyToRequest,
-  filterRequests,
   getRequestsForStudent,
   showSingleRequestForStudent,
 } = require("../Controllers/StudentRequestController");
@@ -33,7 +32,6 @@ requestRouter.get("/lecturer/:id", authenticateUser, getRequestsForLecturer);
 requestRouter.put("/reply/:id", authenticateUser, replyToRequest); //
 
 // student
-requestRouter.get("/filter", authenticateUser, filterRequests);
 requestRouter.post(
   "/create",
   upload.single("file"),

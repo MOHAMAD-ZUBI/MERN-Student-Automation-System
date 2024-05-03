@@ -31,8 +31,19 @@ const createStudentRequest = async (req, res) => {
 const getRequestsForLecturer = async (req, res) => {
   try {
     const user = req.user;
+    const { type, status } = req.query;
+    let query = {};
+
+    if (type) {
+      query.type = type;
+    }
+
+    if (status) {
+      query.status = status;
+    }
+
     const studentRequests = await studentRequest
-      .find({ receiver: user._id })
+      .find({ receiver: user._id, query })
       .populate("sender");
     res.status(200).json(studentRequests);
   } catch (error) {
@@ -43,8 +54,19 @@ const getRequestsForLecturer = async (req, res) => {
 const getRequestsForStudent = async (req, res) => {
   try {
     const user = req.user;
+    const { type, status } = req.query;
+    let query = {};
+
+    if (type) {
+      query.type = type;
+    }
+
+    if (status) {
+      query.status = status;
+    }
+
     const studentRequests = await studentRequest
-      .find({ sender: user._id })
+      .find({ sender: user._id, query })
       .populate("receiver");
     res.status(200).json(studentRequests);
   } catch (error) {
@@ -87,39 +109,6 @@ const replyToRequest = async (req, res) => {
   }
 };
 
-const filterRequests = async (req, res) => {
-  try {
-    const user = req.user;
-    const { type, status } = req.query;
-    let studentRequests;
-    if (type && status) {
-      studentRequests = await studentRequest.find({
-        receiver: user._id,
-        type,
-        status,
-      });
-    } else if (type) {
-      studentRequests = await studentRequest.find({
-        receiver: user._id,
-        type,
-      });
-    } else if (status) {
-      studentRequests = await studentRequest.find({
-        receiver: user._id,
-        status,
-      });
-    } else {
-      studentRequests = await studentRequest.find({
-        receiver: user._id,
-      });
-    }
-
-    res.status(200).json(studentRequests);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
 const showSingleRequest = async (req, res) => {
   try {
     const user = req.user;
@@ -136,7 +125,7 @@ const showSingleRequest = async (req, res) => {
   }
 };
 
-// Get all student requests
+// Get all student requests for global
 const getAllStudentRequests = async (req, res) => {
   try {
     const studentRequests = await studentRequest.find();
@@ -203,7 +192,6 @@ module.exports = {
   showSingleRequest,
   getRequestsForLecturer,
   replyToRequest,
-  filterRequests,
   getRequestsForStudent,
   showSingleRequestForStudent,
 };
