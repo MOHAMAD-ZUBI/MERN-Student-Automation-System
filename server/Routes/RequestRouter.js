@@ -28,7 +28,7 @@ const upload = multer({ storage: storage });
 
 // lecturer
 requestRouter.get("/single/lecturer/:id", authenticateUser, showSingleRequest); //
-requestRouter.get("/lecturer/:id", authenticateUser, getRequestsForLecturer);
+requestRouter.get("/lecturer", authenticateUser, getRequestsForLecturer);
 requestRouter.put("/reply/:id", authenticateUser, replyToRequest); //
 
 // student

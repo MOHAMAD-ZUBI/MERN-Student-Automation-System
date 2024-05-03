@@ -34,6 +34,8 @@ const getRequestsForLecturer = async (req, res) => {
     const { type, status } = req.query;
     let query = {};
 
+    query.receiver = user._id;
+
     if (type) {
       query.type = type;
     }
@@ -43,8 +45,9 @@ const getRequestsForLecturer = async (req, res) => {
     }
 
     const studentRequests = await studentRequest
-      .find({ receiver: user._id, query })
-      .populate("sender");
+      .find(query)
+      .populate("sender")
+      .populate("receiver");
     res.status(200).json(studentRequests);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -57,6 +60,8 @@ const getRequestsForStudent = async (req, res) => {
     const { type, status } = req.query;
     let query = {};
 
+    query.sender = user._id;
+
     if (type) {
       query.type = type;
     }
@@ -66,7 +71,7 @@ const getRequestsForStudent = async (req, res) => {
     }
 
     const studentRequests = await studentRequest
-      .find({ sender: user._id, query })
+      .find(query)
       .populate("receiver");
     res.status(200).json(studentRequests);
   } catch (error) {
