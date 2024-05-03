@@ -40,5 +40,5 @@ const studentRequestSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model(studentRequestSchema, "Studentrequest");
+module.exports = mongoose.model("Studentrequest", studentRequestSchema);
 module.exports.Types = Types;

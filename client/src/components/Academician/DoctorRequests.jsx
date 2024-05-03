@@ -1,13 +1,80 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-empty */
 import SectionTitle from "../repeated/SectionTitle";
 import ArrowDown from "../../../public/ArrowDown";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../motion/motion";
-
+import { useEffect, useState } from "react";
+import api from "../../utils/Request";
+import useAuth from "../../hooks/useAuth";
+import NewRequestModal from "./request/NewRequestModal";
+import PastRequestModal from "./request/PastRequestModal";
 const DoctorRequests = () => {
+  const admin = sessionStorage.getItem("admin");
+  const { token } = useAuth();
+  const [newRequests, setNewRequests] = useState(null);
+  const [pastRequests, setPastRequests] = useState(null);
+  const [isNewRequestModalOpen, setIsNewRequestModalOpen] = useState(false);
+  const [isPastRequestModalOpen, setIsPastRequestModalOpen] = useState(false);
+
+  const openNewRequestModal = () => {
+    setIsNewRequestModalOpen(true);
+  };
+
+  const closeNewRequestModal = () => {
+    setIsNewRequestModalOpen(false);
+  };
+
+  const openPastRequestModal = () => {
+    setIsPastRequestModalOpen(true);
+  };
+
+  const closePastRequestModal = () => {
+    setIsPastRequestModalOpen(false);
+  };
+
+  useEffect(() => {
+    const fetchNewRequests = async () => {
+      try {
+        const response = await api.get(`/request/lecturer?status=unreplied`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setNewRequests(response.data); // Assuming the data you want is in the response's 'data' field
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    const fetchPastRequests = async () => {
+      try {
+        const response = await api.get(`/request/lecturer?status=replied`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setPastRequests(response.data); // Assuming the data you want is in the response's 'data' field
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    console.log(pastRequests);
+    console.log(newRequests);
+
+    fetchPastRequests();
+    fetchNewRequests();
+  }, [token]);
+
   return (
     <div className="requests pt-[30px] min-h-screen overflow-hidden">
       <div className="container">
         <SectionTitle content="Requests" extras="mb-[45px]" />
+        {/* Modal */}
+        <div className="w-full">
+          <div className="mx-auto text-center flex bg-black flex-col justify-center"></div>
+        </div>
+
         <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center sm:items-start sm:gap-8">
           <motion.div
             variants={fadeIn("up", "tween", 0.3, 1)}
@@ -44,35 +111,20 @@ const DoctorRequests = () => {
                 >
                   <div className="rounded bg-[#E88287] py-1 px-1 h-[44px] flex justify-center items-center">
                     <h3 className="text-white text-center text-[12px] mxl:text-[20px] font-Montagu drop-shadow-4xl">
-                      Receiver
+                      Sender
                     </h3>
                   </div>
                   <div className="py-3 px-1 flex flex-col justify-start items-center gap-1">
-                    <div className="w-full rounded bg-[#E88287] py-1 flex items-center justify-center px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-white text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Prof.Ilhami ORAK
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#E88287] py-1 flex items-center justify-center px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-white text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Prof.Ilhami ORAK
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#E88287] py-1 flex items-center justify-center px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-white text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Prof.Ilhami ORAK
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#E88287] py-1 flex items-center justify-center px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-white text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Prof.Ilhami ORAK
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#E88287] py-1 flex items-center justify-center px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-white text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Prof.Ilhami ORAK
-                      </p>
-                    </div>
+                    {newRequests?.map((request) => (
+                      <div
+                        key={request._id}
+                        className="w-full rounded bg-[#E88287] py-1 flex items-center justify-center px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
+                      >
+                        <p className="text-white text-center capitalize text-[8px] mxl:text-[18px] font-Montagu">
+                          {request.sender.firstName} {request.sender.lastName}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
                 <motion.div
@@ -87,32 +139,18 @@ const DoctorRequests = () => {
                       Request Type
                     </h3>
                   </div>
+
                   <div className="py-3 px-1 flex flex-col justify-start items-center gap-1">
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Internship
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Internship
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Internship
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Internship
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Internship
-                      </p>
-                    </div>
+                    {newRequests?.map((request) => (
+                      <div
+                        key={request._id}
+                        className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
+                      >
+                        <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
+                          {request.type}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
                 <motion.div
@@ -128,31 +166,26 @@ const DoctorRequests = () => {
                     </h3>
                   </div>
                   <div className="py-3 px-1 flex flex-col justify-start items-center gap-1">
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
+                    {newRequests?.map((request) => (
+                      <div
+                        key={request._id}
+                        className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
+                      >
+                        <button
+                          onClick={openNewRequestModal}
+                          className="text-lg font-bold text-white"
+                        >
+                          Show Details
+                        </button>
+                        {isNewRequestModalOpen && (
+                          <NewRequestModal
+                            newRequest={request}
+                            isOpen={isNewRequestModalOpen}
+                            onClose={closeNewRequestModal}
+                          />
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
               </div>
@@ -217,35 +250,20 @@ const DoctorRequests = () => {
                 >
                   <div className="rounded bg-[#E88287] py-1 px-1 h-[44px] flex justify-center items-center">
                     <h3 className="text-white text-center text-[12px] mxl:text-[20px] font-Montagu drop-shadow-4xl">
-                      Receiver
+                      Sender
                     </h3>
                   </div>
                   <div className="py-3 px-1 flex flex-col justify-start items-center gap-1">
-                    <div className="w-full rounded bg-[#E88287] py-1 flex items-center justify-center px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-white text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Prof.Ilhami ORAK
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#E88287] py-1 flex items-center justify-center px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-white text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Prof.Ilhami ORAK
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#E88287] py-1 flex items-center justify-center px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-white text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Prof.Ilhami ORAK
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#E88287] py-1 flex items-center justify-center px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-white text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Prof.Ilhami ORAK
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#E88287] py-1 flex items-center justify-center px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-white text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Prof.Ilhami ORAK
-                      </p>
-                    </div>
+                    {pastRequests?.map((request) => (
+                      <div
+                        key={request._id}
+                        className="w-full rounded bg-[#E88287] py-1 flex items-center justify-center px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
+                      >
+                        <p className="text-white text-center capitalize text-[8px] mxl:text-[18px] font-Montagu">
+                          {request.sender.firstName} {request.sender.lastName}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
                 <motion.div
@@ -261,31 +279,16 @@ const DoctorRequests = () => {
                     </h3>
                   </div>
                   <div className="py-3 px-1 flex flex-col justify-start items-center gap-1">
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Internship
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Internship
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Internship
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Internship
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Internship
-                      </p>
-                    </div>
+                    {pastRequests?.map((request) => (
+                      <div
+                        key={request._id}
+                        className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
+                      >
+                        <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
+                          {request.type}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
                 <motion.div
@@ -301,31 +304,16 @@ const DoctorRequests = () => {
                     </h3>
                   </div>
                   <div className="py-3 px-1 flex flex-col justify-start items-center gap-1">
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Approved
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Approved
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Approved
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Declined
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-primary text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Declined
-                      </p>
-                    </div>
+                    {pastRequests?.map((request) => (
+                      <div
+                        key={request._id}
+                        className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
+                      >
+                        <p className="text-primary text-center capitalize text-[8px] mxl:text-[18px] font-Montagu">
+                          {request.status}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
                 <motion.div
@@ -341,31 +329,26 @@ const DoctorRequests = () => {
                     </h3>
                   </div>
                   <div className="py-3 px-1 flex flex-col justify-start items-center gap-1">
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
+                    {pastRequests?.map((request) => (
+                      <div
+                        key={request._id}
+                        className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
+                      >
+                        <button
+                          onClick={openPastRequestModal}
+                          className="text-lg font-bold text-white"
+                        >
+                          Show Details
+                        </button>
+                        {isPastRequestModalOpen && (
+                          <PastRequestModal
+                            newRequest={request}
+                            isOpen={isPastRequestModalOpen}
+                            onClose={closePastRequestModal}
+                          />
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
               </div>
