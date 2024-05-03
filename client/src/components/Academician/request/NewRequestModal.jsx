@@ -10,8 +10,8 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-import useAuth from "../../hooks/useAuth";
-import api from "../../utils/Request";
+import useAuth from "../../../hooks/useAuth";
+import api from "../../../utils/Request";
 
 const ModalComponent = ({ onClose, isOpen, newRequest }) => {
   const admin = sessionStorage.getItem("admin");

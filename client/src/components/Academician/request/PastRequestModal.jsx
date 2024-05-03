@@ -56,14 +56,17 @@ const ModalComponent = ({ onClose, isOpen, newRequest }) => {
                   </h1>
                   <h1></h1>
                 </div>
+                <div className="flex flex-col justify-start items-start mt-[20px] border-t-2 border-gray-200">
+                  <h1 className="capitalize mt-8">
+                    <span className="text-blue-700">Reply:</span>{" "}
+                    {newRequest?.receiverReply}
+                  </h1>
+                </div>
               </div>
             </ModalBody>
             <ModalFooter>
               <Button color="danger" variant="light" onPress={onClose}>
                 Close
-              </Button>
-              <Button color="primary" onPress={onClose}>
-                Action
               </Button>
             </ModalFooter>
           </div>

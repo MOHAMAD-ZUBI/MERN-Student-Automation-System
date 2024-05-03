@@ -7,26 +7,34 @@ import { fadeIn } from "../../motion/motion";
 import { useEffect, useState } from "react";
 import api from "../../utils/Request";
 import useAuth from "../../hooks/useAuth";
-import Modal from "../request/NewRequestModal";
+import NewRequestModal from "./request/NewRequestModal";
+import PastRequestModal from "./request/PastRequestModal";
 const DoctorRequests = () => {
   const admin = sessionStorage.getItem("admin");
   const { token } = useAuth();
   const [newRequests, setNewRequests] = useState(null);
   const [pastRequests, setPastRequests] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isNewRequestModalOpen, setIsNewRequestModalOpen] = useState(false);
+  const [isPastRequestModalOpen, setIsPastRequestModalOpen] = useState(false);
 
-  const openModal = () => {
-    // console.log("Opening modal...");
-    setIsModalOpen(true);
+  const openNewRequestModal = () => {
+    setIsNewRequestModalOpen(true);
   };
 
-  const closeModal = () => {
-    // console.log("Closing modal...");
-    setIsModalOpen(false);
+  const closeNewRequestModal = () => {
+    setIsNewRequestModalOpen(false);
+  };
+
+  const openPastRequestModal = () => {
+    setIsPastRequestModalOpen(true);
+  };
+
+  const closePastRequestModal = () => {
+    setIsPastRequestModalOpen(false);
   };
 
   useEffect(() => {
-    const fetchNewReqeusts = async () => {
+    const fetchNewRequests = async () => {
       try {
         const response = await api.get(`/request/lecturer?status=unreplied`, {
           headers: {
@@ -55,8 +63,9 @@ const DoctorRequests = () => {
     console.log(newRequests);
 
     fetchPastRequests();
-    fetchNewReqeusts();
+    fetchNewRequests();
   }, [token]);
+
   return (
     <div className="requests pt-[30px] min-h-screen overflow-hidden">
       <div className="container">
@@ -163,16 +172,16 @@ const DoctorRequests = () => {
                         className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
                       >
                         <button
-                          onClick={openModal}
+                          onClick={openNewRequestModal}
                           className="text-lg font-bold text-white"
                         >
                           Show Details
                         </button>
-                        {isModalOpen && (
-                          <Modal
+                        {isNewRequestModalOpen && (
+                          <NewRequestModal
                             newRequest={request}
-                            isOpen={isModalOpen}
-                            onClose={closeModal}
+                            isOpen={isNewRequestModalOpen}
+                            onClose={closeNewRequestModal}
                           />
                         )}
                       </div>
@@ -320,31 +329,26 @@ const DoctorRequests = () => {
                     </h3>
                   </div>
                   <div className="py-3 px-1 flex flex-col justify-start items-center gap-1">
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
-                    <div className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center">
-                      <p className="text-secondary bg-white rounded py-[2px] px-3 w-full text-center text-[8px] mxl:text-[18px] font-Montagu">
-                        Show
-                      </p>
-                    </div>
+                    {pastRequests?.map((request) => (
+                      <div
+                        key={request._id}
+                        className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
+                      >
+                        <button
+                          onClick={openPastRequestModal}
+                          className="text-lg font-bold text-white"
+                        >
+                          Show Details
+                        </button>
+                        {isPastRequestModalOpen && (
+                          <PastRequestModal
+                            newRequest={request}
+                            isOpen={isPastRequestModalOpen}
+                            onClose={closePastRequestModal}
+                          />
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </motion.div>
               </div>
