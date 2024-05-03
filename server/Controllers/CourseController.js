@@ -1,4 +1,4 @@
-const Course = require("../Models/course");
+const { Note, Course } = require("../Models/course");
 const jwt = require("jsonwebtoken");
 const Student = require("../Models/student");
 const Academician = require("../Models/academician");
@@ -139,6 +139,26 @@ const getCourseById = async (req, res) => {
   }
 };
 
+const uploadNote = async (req, res) => {
+  try {
+    const { title, description, course } = req.body;
+    const uploadedFilePath = req.file.path;
+    const note = await Note.create({
+      title,
+      description,
+      course,
+      file: uploadedFilePath,
+    });
+    await note.save();
+    const courseToUpdate = await Course.findById(course);
+    courseToUpdate.notes.push(note._id);
+    await courseToUpdate.save();
+    res.status(201).json(note);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 // export
 module.exports = {
   getAllCourses,
@@ -147,4 +167,5 @@ module.exports = {
   updateCourse,
   deleteCourse,
   getCourseById,
+  uploadNote,
 };

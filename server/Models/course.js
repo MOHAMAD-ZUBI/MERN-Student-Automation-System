@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const Schema = mongoose.Schema;
 
 const DaysOfWeek = {
@@ -10,6 +11,28 @@ const DaysOfWeek = {
   Fri: 5,
   Sat: 6,
 };
+
+const noteSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
+    course: {
+      type: mongoose.Types.ObjectId,
+      ref: "Course",
+    },
+    file: {
+      type: [String],
+    },
+  },
+  { timestamps: true }
+);
+
+const Note = mongoose.model("Note", noteSchema);
 
 const courseSchema = new Schema({
   courseName: {
@@ -52,6 +75,15 @@ const courseSchema = new Schema({
     type: [mongoose.Types.ObjectId],
     ref: "User",
   },
+  notes: {
+    type: [mongoose.Types.ObjectId],
+    ref: "Note",
+  },
 });
 
-module.exports = mongoose.model("Course", courseSchema);
+const Course = mongoose.model("Course", courseSchema);
+
+module.exports = {
+  Course,
+  Note,
+};
