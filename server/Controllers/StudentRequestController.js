@@ -38,6 +38,31 @@ const getRequestsForLecturer = async (req, res) => {
     }
 }
 
+const getRequestsForStudent = async (req, res) => {
+    try {
+        const user = req.user
+        const studentRequests = await studentRequest.find({ sender: user._id }).populate('receiver');
+        res.status(200).json(studentRequests);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+const showSingleRequestForStudent = async(req,res) => {
+    try {
+        const user = req.user;
+        const { requestId } = req.params;
+        const studentRequestToShow = await studentRequest.findOne({ _id: requestId, sender: user._id }).populate('receiver');
+        if (!studentRequestToShow) {
+            return res.status(404).json({ message: 'Request not found' });
+        }
+        res.status(200).json(studentRequestToShow);
+    }
+    catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
 const replyToRequest = async (req, res) => {
     try {
         const user = req.user
@@ -150,5 +175,7 @@ module.exports = {
     showSingleRequest,
     getRequestsForLecturer,
     replyToRequest,
-    filterRequests
+    filterRequests,
+    getRequestsForStudent,
+    showSingleRequestForStudent
 };
