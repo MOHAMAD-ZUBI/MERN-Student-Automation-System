@@ -140,6 +140,42 @@ const getStudentSeniorGroup = async (req, res) => {
   }
 };
 
+// Get group reports
+const getGroupReports = async (req, res) => {
+  try {
+    const groupId = req.params.id;
+    console.log(groupId);
+    const { page, pageSize = 10, title } = req.query;
+    const skip = (Number(page) - 1) * Number(pageSize);
+
+    let query = { group: groupId };
+    if (title) {
+      query.title = { $regex: new RegExp(title, "i") };
+    }
+
+    const reports = await Report.find(query)
+      .select("title description file createdAt")
+      .skip(skip)
+      .limit(pageSize);
+
+    const totalCount = await Report.countDocuments(query);
+
+    console.log(reports);
+
+    const totalPages = Math.ceil(totalCount / pageSize);
+
+    res.status(200).json({
+      reports,
+      page,
+      pageSize,
+      totalCount,
+      totalPages,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 // Update a senior group by ID
 const updateSeniorGroupById = async (req, res) => {
   try {
@@ -184,6 +220,7 @@ module.exports = {
   addStudentToGroup,
   removeStudentFromGroup,
   getStudentSeniorGroup,
+  getGroupReports,
 };
 
 // add file
