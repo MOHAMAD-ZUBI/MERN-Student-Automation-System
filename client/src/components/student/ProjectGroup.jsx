@@ -14,6 +14,10 @@ const ProjectGroup = () => {
   const admin = sessionStorage.getItem("admin");
   const { token } = useAuth();
   const [group, setGroup] = useState(null);
+  const [groupReports, setGroupReports] = useState(null);
+  const [reportsPage, setReportsPage] = useState(1);
+  const [reportsTotalPage, setReportsTotalPage] = useState(1);
+  const [reportTitle, setReportTitle] = useState("");
   function getFileExtension(filename) {
     // Use a regular expression to match the file extension
     const match = /\.([0-9a-z]+)$/i.exec(filename);
@@ -36,6 +40,13 @@ const ProjectGroup = () => {
     return `${month}/${day}/${year}`;
   }
 
+  const handlePageIncrease = (index) => {
+    setReportsPage(index);
+  };
+  const handleTitleChange = (title) => {
+    setReportTitle(title);
+  };
+
   useEffect(() => {
     const fetchGroup = async () => {
       const group = await api.get("/senior/studentGroup", {
@@ -45,9 +56,21 @@ const ProjectGroup = () => {
       });
       setGroup(group.data);
     };
+    const fetchGroupReports = async () => {
+      const groupReports = await api.get(
+        `/senior/files/${group.group._id}?page=${reportsPage}&title=${reportTitle}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setGroupReports(groupReports.data);
+    };
 
     fetchGroup();
-  }, [token]);
+    fetchGroupReports();
+  }, [token, group?.group?._id, reportsPage, reportTitle]);
 
   const deleteGroup = async (id) => {
     await api.delete(`/report/remove/${id}`, {
@@ -113,7 +136,7 @@ const ProjectGroup = () => {
               className="w-[50px] ml:w-[100px] mr-4"
             />
             <div className="flex items-start justify-between flex-col  w-[240px] py-[5px] px-[10px] bg-primary  rounded-lg text-left">
-              <p className="w-full text-left text-white text-[14px] ml:text-[22px]">
+              <p className="w-full text-left text-white text-[14px] ml:text-[22px] capitalize">
                 {group
                   ? group.group.lecturer.firstName +
                     " " +
@@ -155,6 +178,7 @@ const ProjectGroup = () => {
                 id="search"
                 placeholder="search"
                 className="absolute h-full w-full top-0 left-0 rounded bg-[#D9D9D9] px-[5px] ml:px-[10px] mxl:px-[15px] outline-none border-none text-[10px] ml:text-[16px] mxl:text-[20px] text-white"
+                onChange={(e) => handleTitleChange(e.target.value)}
               />
               <div className="absolute right-1 top-1/2 -translate-y-1/2 w-[10px] ml:w-[20px] mxl:w-[30px] h-[12px] ml:h-[20px] mxl:h-[25px]">
                 <Search wth="100%" hth="100%" fill="#595959" />
@@ -169,18 +193,12 @@ const ProjectGroup = () => {
                   +
                 </span>
               </div>
-              <div className="filter cursor-pointer flex items-center justify-between gap-1 py-1 pl-[10px] pr-[8px] rounded bg-white">
-                <p className=" font-Montagu text-[10px] ml:text-[16px] mxl:text-[20px] text-secondary">
-                  Filter
-                </p>
-                <ArrowDown wth="10" hth="6" fill="#C8272E" />
-              </div>
             </div>
           </motion.div>
           <div className="flex flex-col justify-between items-center gap-10 py-5 px-3">
             <div className="w-full flex flex-col ml:flex-row flex-wrap gap-2 sm:gap-4 items-start justify-center ml:justify-start">
-              {group ? (
-                group.reports.map((report, index) => {
+              {groupReports ? (
+                groupReports.reports.map((report, index) => {
                   return (
                     <motion.div
                       key={index}
@@ -239,22 +257,19 @@ const ProjectGroup = () => {
               )}
             </div>
             <div className="pagination flex justify-center items-center gap-1 text-[#939393]">
-              <span className="rounded border border-[#93939370] py-1 px-2 cursor-pointer">
-                <p className=" font-mukta text-[10px] mxl:text-[16px] text-center text-[#939393] font-bold">
-                  1
-                </p>
-              </span>
-              <span className="rounded border border-[#93939370] py-1 px-2 cursor-pointer">
-                <p className=" font-mukta text-[10px] mxl:text-[16px] text-center text-[#939393] font-bold">
-                  2
-                </p>
-              </span>
-              ..
-              <span className="rounded border border-[#93939370] py-1 px-2 cursor-pointer">
-                <p className=" font-mukta text-[10px] mxl:text-[16px] text-center text-[#939393] font-bold">
-                  4
-                </p>
-              </span>
+              {Array.from({ length: reportsTotalPage }).map((_, index) => (
+                <span
+                  key={index}
+                  className="rounded border border-[#93939370] py-1 px-2 cursor-pointer"
+                  onClick={() => {
+                    handlePageIncrease(index + 1);
+                  }}
+                >
+                  <p className="font-mukta text-[10px] mxl:text-[16px] text-center text-[#939393] font-bold">
+                    {index + 1}
+                  </p>
+                </span>
+              ))}
             </div>
           </div>
         </motion.div>
