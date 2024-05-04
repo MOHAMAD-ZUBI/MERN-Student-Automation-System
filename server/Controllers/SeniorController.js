@@ -54,19 +54,26 @@ const removeStudentFromGroup = async (req, res) => {
 const getLecturerSeniorGroups = async (req, res) => {
   try {
     const user = req.user;
-    // if (user.premissions.includes("Academician") === false)
-    //   return res
-    //     .status(401)
-    //     .json({ message: "You are not allowed to view senior groups" });
+    const { page, pageSize = 10 } = req.query;
+    const skip = (Number(page) - 1) * Number(pageSize);
 
-    const seniorGroups = await seniorGroup
-      .find({ lecturer: user._id })
-      .populate({
-        path: "students",
-        select: "name",
-      });
+    const [seniorGroups, totalCount] = await Promise.all([
+      seniorGroup
+        .find({ lecturer: user._id })
+        .populate({
+          path: "students",
+          select: "name",
+        })
+        .skip(skip)
+        .limit(pageSize),
+      seniorGroup.countDocuments({ lecturer: user._id }),
+    ]);
 
-    res.status(200).json(seniorGroups);
+    const totalPages = Math.ceil(totalCount / pageSize);
+
+    res
+      .status(200)
+      .json({ seniorGroups, page, pageSize, totalCount, totalPages });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -82,16 +89,22 @@ const getSeniorGroupById = async (req, res) => {
       .findById(seniorGroupId)
       .populate({
         path: "students",
-        select: "name",
+        select: "firstName lastName registerNo sex",
       })
       .populate({
         path: "lecturer",
-        select: "name",
+        select: "firstName lastName registerNo sex",
       });
+
     if (!group) {
       return res.status(404).json({ message: "Senior group not found" });
     }
-    res.status(200).json(group);
+
+    const reports = await Report.find({ group: group._id }).select(
+      "title description file createdAt"
+    );
+
+    res.status(200).json({ group, reports });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -112,9 +125,11 @@ const getStudentSeniorGroup = async (req, res) => {
         path: "lecturer",
         select: "firstName lastName sex",
       });
+
     if (!group) {
       return res.status(404).json({ message: "Senior group not found" });
     }
+
     const reports = await Report.find({ group: group._id }).select(
       "title description file createdAt"
     );

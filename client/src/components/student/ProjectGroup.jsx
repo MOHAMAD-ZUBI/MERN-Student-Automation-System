@@ -11,6 +11,9 @@ import useAuth from "../../hooks/useAuth";
 import { FaRegTrashCan, FaEye } from "react-icons/fa6";
 
 const ProjectGroup = () => {
+  const admin = sessionStorage.getItem("admin");
+  const { token } = useAuth();
+  const [group, setGroup] = useState(null);
   function getFileExtension(filename) {
     // Use a regular expression to match the file extension
     const match = /\.([0-9a-z]+)$/i.exec(filename);
@@ -32,10 +35,6 @@ const ProjectGroup = () => {
 
     return `${month}/${day}/${year}`;
   }
-
-  const admin = sessionStorage.getItem("admin");
-  const { token } = useAuth();
-  const [group, setGroup] = useState(null);
 
   useEffect(() => {
     const fetchGroup = async () => {
@@ -106,7 +105,7 @@ const ProjectGroup = () => {
           >
             <img
               src={
-                group?.lecturer?.sex == "male"
+                group?.group.lecturer?.sex == "male"
                   ? "./profile2.png"
                   : "./profile.png"
               }

@@ -1,14 +1,16 @@
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { fadeIn } from '../../motion/motion';
-import Delete from '../../../public/Delete';
-import Edit from '../../../public/Edit';
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { fadeIn } from "../../motion/motion";
+import Delete from "../../../public/Delete";
+import Edit from "../../../public/Edit";
 
-const Group = ({ delay, name, color1, color2 }) => {
+const Group = ({ groupId, delay, name, color1, color2 }) => {
   return (
     <motion.div
-      variants={fadeIn('up', 'tween', delay, 1)}
+      variants={fadeIn("up", "tween", delay, 1)}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
@@ -23,7 +25,10 @@ const Group = ({ delay, name, color1, color2 }) => {
             {name}
           </span>
           <Link
-            to="/project-group"
+            to={{
+              pathname: "/project-group",
+              search: `?groupId=${groupId}`,
+            }}
             className="font-Montagu text-[12px] sm:text-[18px] mxl:text-[22px] text-primary hover:text-secondary duration-0.3"
           >
             View Details
