@@ -9,19 +9,58 @@ import api from "../../utils/Request";
 import useAuth from "../../hooks/useAuth";
 import NewRequestModal from "./request/NewRequestModal";
 import PastRequestModal from "./request/PastRequestModal";
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/react";
 const DoctorRequests = () => {
   const admin = sessionStorage.getItem("admin");
   const { token } = useAuth();
-  const [newRequests, setNewRequests] = useState(null);
-  const [pastRequests, setPastRequests] = useState(null);
-  const [isNewRequestModalOpen, setIsNewRequestModalOpen] = useState(false);
-  const [isPastRequestModalOpen, setIsPastRequestModalOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pastPage, setPastPage] = useState(1);
-  const [pastTotalPage, setTotalPastPage] = useState(1);
-  const [currentTotalPage, setTotalCurrentPage] = useState(1);
+
   const [currentPastRequestId, setCurrentPastRequestId] = useState(null);
 
+  // current
+  const [currentRequests, setCurrentRequests] = useState(null);
+  const [isNewRequestModalOpen, setIsNewRequestModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentTotalPage, setTotalCurrentPage] = useState(1);
+  const [currentTypeFilter, setCurrentTypeFilter] = useState("");
+
+  // past
+  const [pastRequests, setPastRequests] = useState(null);
+  const [isPastRequestModalOpen, setIsPastRequestModalOpen] = useState(false);
+  const [pastPage, setPastPage] = useState(1);
+  const [pastTotalPage, setTotalPastPage] = useState(1);
+  const [pastTypeFilter, setPastTypeFilter] = useState("");
+
+  const filterItems = [
+    {
+      key: "",
+      label: "All",
+    },
+    {
+      key: "internship",
+      label: "Internship",
+    },
+    {
+      key: "gradeObjection",
+      label: "Grade Objection",
+    },
+    {
+      key: "recommendationLetter",
+      label: "Recommendation Letter",
+    },
+  ];
+
+  const handleCurrentType = (key) => {
+    setCurrentTypeFilter(key);
+  };
+  const handlePastType = (key) => {
+    setPastTypeFilter(key);
+  };
   const openNewRequestModal = (id) => {
     setIsNewRequestModalOpen(true);
     setCurrentPastRequestId(id);
@@ -52,14 +91,20 @@ const DoctorRequests = () => {
     const fetchData = async () => {
       try {
         const [newRes, pastRes] = await Promise.all([
-          api.get(`/request/lecturer?status=unreplied&page=${currentPage}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          api.get(`/request/lecturer?status=replied&page=${pastPage}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
+          api.get(
+            `/request/lecturer?status=unreplied&page=${currentPage}&type=${currentTypeFilter}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          ),
+          api.get(
+            `/request/lecturer?status=replied&page=${pastPage}&type=${pastTypeFilter}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          ),
         ]);
-        setNewRequests(newRes.data.studentRequests);
+        setCurrentRequests(newRes.data.studentRequests);
         setPastRequests(pastRes.data.studentRequests);
         setTotalCurrentPage(newRes.data.totalPages);
         setTotalPastPage(pastRes.data.totalPages);
@@ -69,7 +114,7 @@ const DoctorRequests = () => {
     };
 
     fetchData();
-  }, [token, currentPage, pastPage]);
+  }, [token, currentPage, pastPage, currentTypeFilter, pastTypeFilter]);
 
   return (
     <div className="requests pt-[30px] min-h-screen overflow-hidden">
@@ -98,11 +143,29 @@ const DoctorRequests = () => {
               <h3 className="font-Montagu text-[15px] sm:text-[20px] mxl:text-[25px] text-center text-primary leading-normal drop-shadow-4xl">
                 Active Requests{" "}
               </h3>
-              <div className="filter absolute top-2 right-3 cursor-pointer flex items-center justify-between gap-1 py-1 pl-[14px] pr-[10px] rounded bg-white">
-                <p className=" font-Montagu text-[10px] mxl:text-[20px] text-secondary">
-                  Filter
-                </p>
-                <ArrowDown wth="10" hth="6" fill="#C8272E" />
+              <div className=" absolute top-2 right-3 cursor-pointer flex items-center justify-between gap-1 py-1 pl-[14px] pr-[10px] ">
+                <Dropdown>
+                  <DropdownTrigger>
+                    <Button>
+                      Type <ArrowDown wth="10" hth="6" fill="#C8272E" />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu
+                    aria-label="Dynamic Actions"
+                    items={filterItems}
+                  >
+                    {(item) => (
+                      <DropdownItem
+                        onClick={() => handleCurrentType(item.key)}
+                        key={item.key}
+                        color={item.key === "delete" ? "danger" : "default"}
+                        className={item.key === "delete" ? "text-danger" : ""}
+                      >
+                        {item.label}
+                      </DropdownItem>
+                    )}
+                  </DropdownMenu>
+                </Dropdown>
               </div>
             </motion.div>
             <div className="flex flex-col justify-between items-center gap-3 py-5 px-3">
@@ -120,7 +183,7 @@ const DoctorRequests = () => {
                     </h3>
                   </div>
                   <div className="py-3 px-1 flex flex-col justify-start items-center gap-1">
-                    {newRequests?.map((request) => (
+                    {currentRequests?.map((request) => (
                       <div
                         key={request._id}
                         className="w-full rounded bg-[#E88287] py-1 flex items-center justify-center px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
@@ -146,7 +209,7 @@ const DoctorRequests = () => {
                   </div>
 
                   <div className="py-3 px-1 flex flex-col justify-start items-center gap-1">
-                    {newRequests?.map((request) => (
+                    {currentRequests?.map((request) => (
                       <div
                         key={request._id}
                         className="w-full rounded bg-[#9DF6BB] py-2 px-2 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
@@ -171,7 +234,7 @@ const DoctorRequests = () => {
                     </h3>
                   </div>
                   <div className="py-3 px-1 flex flex-col justify-start items-center gap-1">
-                    {newRequests?.map((request) => (
+                    {currentRequests?.map((request) => (
                       <div
                         key={request._id}
                         className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
@@ -237,11 +300,29 @@ const DoctorRequests = () => {
               <h3 className="font-Montagu text-[15px] sm:text-[20px] mxl:text-[25px] text-center text-primary leading-normal drop-shadow-4xl">
                 Past Requests{" "}
               </h3>
-              <div className="filter absolute top-2 right-3 cursor-pointer flex items-center justify-between gap-1 py-1 pl-[14px] pr-[10px] rounded bg-white">
-                <p className=" font-Montagu text-[10px] mxl:text-[20px] text-secondary">
-                  Filter
-                </p>
-                <ArrowDown wth="10" hth="6" fill="#C8272E" />
+              <div className="filter absolute top-2 right-3 cursor-pointer flex items-center justify-between gap-1 py-1 pl-[14px] pr-[10px]">
+                <Dropdown>
+                  <DropdownTrigger>
+                    <Button>
+                      Type <ArrowDown wth="10" hth="6" fill="#C8272E" />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownMenu
+                    aria-label="Dynamic Actions"
+                    items={filterItems}
+                  >
+                    {(item) => (
+                      <DropdownItem
+                        onClick={() => handlePastType(item.key)}
+                        key={item.key}
+                        color={item.key === "delete" ? "danger" : "default"}
+                        className={item.key === "delete" ? "text-danger" : ""}
+                      >
+                        {item.label}
+                      </DropdownItem>
+                    )}
+                  </DropdownMenu>
+                </Dropdown>
               </div>
             </motion.div>
             <div className="flex flex-col justify-between items-center gap-3 py-5 px-3">
