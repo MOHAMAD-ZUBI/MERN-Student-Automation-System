@@ -31,7 +31,8 @@ const createStudentRequest = async (req, res) => {
 const getRequestsForLecturer = async (req, res) => {
   try {
     const user = req.user;
-    const { type, status } = req.query;
+    const { type, status, page } = req.query;
+    const pageSize = 7;
     let query = {};
 
     query.receiver = user._id;
@@ -44,11 +45,23 @@ const getRequestsForLecturer = async (req, res) => {
       query.status = status;
     }
 
+    const totalCount = await studentRequest.countDocuments(query);
+    const totalPages = Math.ceil(totalCount / pageSize);
+
     const studentRequests = await studentRequest
       .find(query)
       .populate("sender")
-      .populate("receiver");
-    res.status(200).json(studentRequests);
+      .populate("receiver")
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
+
+    res.status(200).json({
+      studentRequests,
+      page,
+      pageSize,
+      totalCount,
+      totalPages,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -57,7 +70,8 @@ const getRequestsForLecturer = async (req, res) => {
 const getRequestsForStudent = async (req, res) => {
   try {
     const user = req.user;
-    const { type, status } = req.query;
+    const { type, status, page } = req.query;
+    const pageSize = 7;
     let query = {};
 
     query.sender = user._id;
@@ -70,10 +84,23 @@ const getRequestsForStudent = async (req, res) => {
       query.status = status;
     }
 
+    const totalCount = await studentRequest.countDocuments(query);
+    const totalPages = Math.ceil(totalCount / pageSize);
+
     const studentRequests = await studentRequest
       .find(query)
-      .populate("receiver");
-    res.status(200).json(studentRequests);
+      .populate("sender")
+      .populate("receiver")
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
+
+    res.status(200).json({
+      studentRequests,
+      page,
+      pageSize,
+      totalCount,
+      totalPages,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -1,10 +1,37 @@
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import { fadeIn } from "../../motion/motion";
 import SectionTitle from "../repeated/SectionTitle";
 import ArrowDown from "../../../public/ArrowDown";
 import Group from "../repeated/Group";
+import useAuth from "../../hooks/useAuth";
+import { useEffect, useState } from "react";
+import api from "../../utils/Request";
 
 const ProjectGroups = () => {
+  const admin = sessionStorage.getItem("admin");
+  const { token } = useAuth();
+  const [groups, setGroups] = useState(null);
+
+  const colors = ["FDFFE0", "E0EBFF", "FFE6E6", "E6FFEF"];
+  const colors2 = ["F4FBA3", "87A4DA", "E88287", "9DF6BB"];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get(`/senior/lecturer/list`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        setGroups(response.data.seniorGroups);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [token]);
+
   return (
     <div className="ProjectGroups  pt-[30px] min-h-screen overflow-hidden scale-95">
       <div className="container overflow-hidden">
@@ -42,42 +69,22 @@ const ProjectGroups = () => {
           </motion.div>
           <div className="flex flex-col justify-start items-center gap-3 py-5 px-3">
             <div className="w-full flex flex-col ml:flex-row flex-wrap gap-3 items-start justify-center ml:justify-around">
-              <Group
-                delay="0.3"
-                name="Group Name"
-                color1="from-[#FFE6E6]"
-                color2="bg-[#9DF6BBB3]"
-              />
-              <Group
-                delay="0.35"
-                name="Group Name"
-                color1="from-[#E0EBFF]"
-                color2="bg-[#87A4DA]"
-              />
-              <Group
-                delay="0.4"
-                name="Group Name"
-                color1="from-[#E6FFEF]"
-                color2="bg-[#9DF6BBB3]"
-              />
-              <Group
-                delay="0.45"
-                name="Group Name"
-                color1="from-[#FDFFE0]"
-                color2="bg-[#F4FBA3]"
-              />
-              <Group
-                delay="0.5"
-                name="Group Name"
-                color1="from-[#E0EBFF]"
-                color2="bg-[#87A4DA]"
-              />
-              <Group
-                delay="0.55"
-                name="Group Name"
-                color1="from-[#FFE6E6]"
-                color2="bg-[#9DF6BBB3]"
-              />
+              {groups ? (
+                groups.map((group, index) => {
+                  return (
+                    <Group
+                      groupId={group._id}
+                      key={index}
+                      delay="0.3"
+                      name={group.title}
+                      color1={`bg-[#${colors[index % 4]}]`}
+                      color2={`bg-[#${colors2[index % 4]}]`}
+                    />
+                  );
+                })
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </motion.div>
