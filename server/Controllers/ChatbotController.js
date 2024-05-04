@@ -54,7 +54,7 @@ const TestBot = async(req,res) => {
        
         const text = await extractTextFromPDF("PdfFiles/SINAV_YONETMELIGI.pdf");
         const prompt = req.body.prompt;
-        const rule = `you are a text parser, i want you to summarize an answer for me from the given text. given question : ${prompt}. given text : ${text}`
+        const rule = `Given the text extracted from a PDF document, I'd like to ask a question related to the text. Please answer the question based solely on the provided text data, without referencing external knowledge or information beyond what is contained in the text. question : ${prompt}. given text : ${text}`
         const response = await generateContent(rule);
         return res.status(200).json({response});
     } catch (error) {
