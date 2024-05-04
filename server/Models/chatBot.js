@@ -5,6 +5,7 @@ const chatBotSchema = new Schema(
   {
     language: {
       type: String,
+      default: "en"
     },
     question: {
       type: String,
@@ -18,4 +19,4 @@ const chatBotSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model(chatBotSchema, "Chatbot");
+module.exports = mongoose.model("Chatbot", chatBotSchema);
