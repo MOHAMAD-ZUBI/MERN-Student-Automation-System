@@ -144,7 +144,7 @@ const getStudentSeniorGroup = async (req, res) => {
 const getGroupReports = async (req, res) => {
   try {
     const groupId = req.params.id;
-    const { page, pageSize = 10, title } = req.query;
+    const { page, pageSize = 6, title } = req.query;
     const skip = (Number(page) - 1) * Number(pageSize);
 
     let query = { group: groupId };
