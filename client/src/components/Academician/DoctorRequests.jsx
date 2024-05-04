@@ -16,55 +16,60 @@ const DoctorRequests = () => {
   const [pastRequests, setPastRequests] = useState(null);
   const [isNewRequestModalOpen, setIsNewRequestModalOpen] = useState(false);
   const [isPastRequestModalOpen, setIsPastRequestModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pastPage, setPastPage] = useState(1);
+  const [pastTotalPage, setTotalPastPage] = useState(1);
+  const [currentTotalPage, setTotalCurrentPage] = useState(1);
+  const [currentPastRequestId, setCurrentPastRequestId] = useState(null);
 
-  const openNewRequestModal = () => {
+  const openNewRequestModal = (id) => {
     setIsNewRequestModalOpen(true);
+    setCurrentPastRequestId(id);
   };
 
   const closeNewRequestModal = () => {
     setIsNewRequestModalOpen(false);
   };
 
-  const openPastRequestModal = () => {
+  const openPastRequestModal = (id) => {
     setIsPastRequestModalOpen(true);
+    setCurrentPastRequestId(id);
   };
 
   const closePastRequestModal = () => {
     setIsPastRequestModalOpen(false);
   };
 
+  const handleCurrentPageIncrease = (index) => {
+    setCurrentPage(index);
+    console.log(index);
+  };
+  const handlePastPageIncrease = (index) => {
+    setPastPage(index);
+  };
+
   useEffect(() => {
-    const fetchNewRequests = async () => {
+    const fetchData = async () => {
       try {
-        const response = await api.get(`/request/lecturer?status=unreplied`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setNewRequests(response.data); // Assuming the data you want is in the response's 'data' field
+        const [newRes, pastRes] = await Promise.all([
+          api.get(`/request/lecturer?status=unreplied&page=${currentPage}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          api.get(`/request/lecturer?status=replied&page=${pastPage}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+        ]);
+        setNewRequests(newRes.data.studentRequests);
+        setPastRequests(pastRes.data.studentRequests);
+        setTotalCurrentPage(newRes.data.totalPages);
+        setTotalPastPage(pastRes.data.totalPages);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
-    const fetchPastRequests = async () => {
-      try {
-        const response = await api.get(`/request/lecturer?status=replied`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setPastRequests(response.data); // Assuming the data you want is in the response's 'data' field
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    console.log(pastRequests);
-    console.log(newRequests);
-
-    fetchPastRequests();
-    fetchNewRequests();
-  }, [token]);
+    fetchData();
+  }, [token, currentPage, pastPage]);
 
   return (
     <div className="requests pt-[30px] min-h-screen overflow-hidden">
@@ -172,18 +177,21 @@ const DoctorRequests = () => {
                         className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
                       >
                         <button
-                          onClick={openNewRequestModal}
+                          onClick={() => openNewRequestModal(request._id)}
                           className="text-lg font-bold text-white"
                         >
                           Show Details
                         </button>
-                        {isNewRequestModalOpen && (
-                          <NewRequestModal
-                            newRequest={request}
-                            isOpen={isNewRequestModalOpen}
-                            onClose={closeNewRequestModal}
-                          />
-                        )}
+                        {isNewRequestModalOpen &&
+                          request._id === currentPastRequestId && (
+                            <NewRequestModal
+                              newRequest={request}
+                              isOpen={isNewRequestModalOpen}
+                              onClose={closeNewRequestModal}
+                            />
+                          )}
+                        {!isNewRequestModalOpen ||
+                          request._id !== currentPastRequestId}
                       </div>
                     ))}
                   </div>
@@ -196,22 +204,19 @@ const DoctorRequests = () => {
                 viewport={{ once: true }}
                 className="pagination flex justify-center items-center gap-1 text-[#939393]"
               >
-                <span className="rounded border border-[#93939370] py-1 px-2 cursor-pointer">
-                  <p className=" font-mukta text-[10px] mxl:text-[16px] text-center text-[#939393] font-bold">
-                    1
-                  </p>
-                </span>
-                <span className="rounded border border-[#93939370] py-1 px-2 cursor-pointer">
-                  <p className=" font-mukta text-[10px] mxl:text-[16px] text-center text-[#939393] font-bold">
-                    2
-                  </p>
-                </span>
-                ..
-                <span className="rounded border border-[#93939370] py-1 px-2 cursor-pointer">
-                  <p className=" font-mukta text-[10px] mxl:text-[16px] text-center text-[#939393] font-bold">
-                    4
-                  </p>
-                </span>
+                {Array.from({ length: currentTotalPage }).map((_, index) => (
+                  <span
+                    key={index}
+                    className="rounded border border-[#93939370] py-1 px-2 cursor-pointer"
+                    onClick={() => {
+                      handleCurrentPageIncrease(index + 1);
+                    }}
+                  >
+                    <p className="font-mukta text-[10px] mxl:text-[16px] text-center text-[#939393] font-bold">
+                      {index + 1}
+                    </p>
+                  </span>
+                ))}
               </motion.div>
             </div>
           </motion.div>
@@ -335,18 +340,21 @@ const DoctorRequests = () => {
                         className="w-full rounded bg-[#87A4DA] py-2 px-3 h-[30px] mxl:h-[50px] mxl:flex mxl:items-center mxl:justify-center"
                       >
                         <button
-                          onClick={openPastRequestModal}
+                          onClick={() => openPastRequestModal(request._id)}
                           className="text-lg font-bold text-white"
                         >
                           Show Details
                         </button>
-                        {isPastRequestModalOpen && (
-                          <PastRequestModal
-                            newRequest={request}
-                            isOpen={isPastRequestModalOpen}
-                            onClose={closePastRequestModal}
-                          />
-                        )}
+                        {isPastRequestModalOpen &&
+                          request._id === currentPastRequestId && (
+                            <PastRequestModal
+                              newRequest={request}
+                              isOpen={isPastRequestModalOpen}
+                              onClose={closePastRequestModal}
+                            />
+                          )}
+                        {!isPastRequestModalOpen ||
+                          request._id !== currentPastRequestId}
                       </div>
                     ))}
                   </div>
@@ -359,22 +367,19 @@ const DoctorRequests = () => {
                 viewport={{ once: true }}
                 className="pagination flex justify-center items-center gap-1 text-[#939393]"
               >
-                <span className="rounded border border-[#93939370] py-1 px-2 cursor-pointer">
-                  <p className=" font-mukta text-[10px] mxl:text-[16px] text-center text-[#939393] font-bold">
-                    1
-                  </p>
-                </span>
-                <span className="rounded border border-[#93939370] py-1 px-2 cursor-pointer">
-                  <p className=" font-mukta text-[10px] mxl:text-[16px] text-center text-[#939393] font-bold">
-                    2
-                  </p>
-                </span>
-                ..
-                <span className="rounded border border-[#93939370] py-1 px-2 cursor-pointer">
-                  <p className=" font-mukta text-[10px] mxl:text-[16px] text-center text-[#939393] font-bold">
-                    4
-                  </p>
-                </span>
+                {Array.from({ length: pastTotalPage }).map((_, index) => (
+                  <span
+                    key={index}
+                    className="rounded border border-[#93939370] py-1 px-2 cursor-pointer"
+                    onClick={() => {
+                      handlePastPageIncrease(index + 1);
+                    }}
+                  >
+                    <p className="font-mukta text-[10px] mxl:text-[16px] text-center text-[#939393] font-bold">
+                      {index + 1}
+                    </p>
+                  </span>
+                ))}
               </motion.div>
             </div>
           </motion.div>

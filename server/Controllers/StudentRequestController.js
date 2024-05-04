@@ -31,9 +31,11 @@ const createStudentRequest = async (req, res) => {
 const getRequestsForLecturer = async (req, res) => {
   try {
     const user = req.user;
-    const { type, status, page = 1 } = req.query;
-    const pageSize = 10;
-    let query = { receiver: user._id };
+    const { type, status, page } = req.query;
+    const pageSize = 7;
+    let query = {};
+
+    query.receiver = user._id;
 
     if (type) {
       query.type = type;
@@ -45,6 +47,7 @@ const getRequestsForLecturer = async (req, res) => {
 
     const totalCount = await studentRequest.countDocuments(query);
     const totalPages = Math.ceil(totalCount / pageSize);
+
     const studentRequests = await studentRequest
       .find(query)
       .populate("sender")
@@ -68,7 +71,7 @@ const getRequestsForStudent = async (req, res) => {
   try {
     const user = req.user;
     const { type, status, page } = req.query;
-    const pageSize = 10;
+    const pageSize = 7;
     let query = {};
 
     query.sender = user._id;
@@ -86,6 +89,7 @@ const getRequestsForStudent = async (req, res) => {
 
     const studentRequests = await studentRequest
       .find(query)
+      .populate("sender")
       .populate("receiver")
       .skip((page - 1) * pageSize)
       .limit(pageSize);
