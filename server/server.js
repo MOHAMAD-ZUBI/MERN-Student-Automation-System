@@ -44,7 +44,7 @@ app.use("/api/department", departmentRouter);
 app.use("/api/course", courseRouter);
 app.use("/api/academician", academicianRouter);
 app.use("/api/admin", adminRouter);
-app.use("/bot", chatBotRouter);
+app.use("/api/bot", chatBotRouter);
 app.use("/api/report", reportRouter);
 app.use("/api/request", requestRouter);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
