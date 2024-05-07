@@ -25,6 +25,6 @@ router.delete("/removeStudent/:groupId", removeStudentFromGroup);
 router.get("/:id", getSeniorGroupById);
 router.post("/create", createSeniorGroup);
 router.put("/update/:id", updateSeniorGroupById);
-router.delete("/delete/:id", deleteSeniorGroupById);
+router.delete("/:id", deleteSeniorGroupById);
 
 module.exports = router;

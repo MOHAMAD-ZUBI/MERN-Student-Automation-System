@@ -59,12 +59,12 @@ const ProjectGroups = () => {
                   +
                 </span>
               </div>
-              <div className="filter cursor-pointer flex items-center justify-between gap-1 py-1 pl-[10px] pr-[8px] rounded bg-white">
+              {/* <div className="filter cursor-pointer flex items-center justify-between gap-1 py-1 pl-[10px] pr-[8px] rounded bg-white">
                 <p className=" font-Montagu text-[10px] ml:text-[16px] mxl:text-[20px] text-secondary">
                   Filter
                 </p>
                 <ArrowDown wth="10" hth="6" fill="#C8272E" />
-              </div>
+              </div> */}
             </div>
           </motion.div>
           <div className="flex flex-col justify-start items-center gap-3 py-5 px-3">
