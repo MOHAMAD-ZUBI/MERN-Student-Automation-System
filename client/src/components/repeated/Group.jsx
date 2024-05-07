@@ -6,8 +6,18 @@ import { motion } from "framer-motion";
 import { fadeIn } from "../../motion/motion";
 import Delete from "../../../public/Delete";
 import Edit from "../../../public/Edit";
+import api from "../../utils/Request";
 
 const Group = ({ groupId, delay, name, color1, color2 }) => {
+  const deleteGroup = async (id) => {
+    await api.delete(`/senior/${id}`, {
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // },
+    });
+    window.location.reload();
+  };
+
   return (
     <motion.div
       variants={fadeIn("up", "tween", delay, 1)}
@@ -41,8 +51,13 @@ const Group = ({ groupId, delay, name, color1, color2 }) => {
             </span>
             Edit
           </span>
-          <span className="flex items-center justify-between gap-1 text-[12px] sm:text-[16px] mxl:text-[18px] text-primary font-Montagu cursor-pointer">
-            <span className="w-[12px] h-[12px] mxl:w-[16px] mxl:h-[16px]">
+          <span
+            className="flex items-center justify-between gap-1 text-[12px] sm:text-[16px] mxl:text-[18px] text-primary font-Montagu cursor-pointer hover:text-red-500 duration-100"
+            onClick={() => {
+              deleteGroup(groupId);
+            }}
+          >
+            <span className="w-[12px] h-[12px] mxl:w-[16px] mxl:h-[16px] ">
               <Delete wth="100%" hth="100%" fill="#595959" />
             </span>
             Delete
