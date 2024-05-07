@@ -1,6 +1,7 @@
 const seniorGroup = require("../Models/seniorGroup");
 const Report = require("../Models/report");
 const StudentModel = require("../Models/student");
+const { Course } = require("../Models/course");
 // Create a new senior group
 const createSeniorGroup = async (req, res) => {
   try {
@@ -17,6 +18,43 @@ const createSeniorGroup = async (req, res) => {
       students,
     });
     res.status(201).json(newSeniorGroup);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// get lecturer students
+const lecturerStudents = async (req, res) => {
+  try {
+    const user = req.user;
+    const userId = user._id;
+    let students = [];
+
+    // CPE423, CPE424
+    const course1 = await Course.find({
+      courseCode: "CPE423",
+      lecturer: userId,
+    })
+      .populate({
+        path: "student",
+        select: "firstName lastName registerNo sex",
+      })
+      .then((courses) => courses.map((course) => course.student).flat());
+
+    const course2 = await Course.find({
+      courseCode: "CPE424",
+      lecturer: userId,
+    })
+      .populate({
+        path: "student",
+        select: "firstName lastName registerNo sex",
+      })
+      .then((courses) => courses.map((course) => course.student).flat());
+
+    // add the course students to the array
+    students.push(...course1, ...course2);
+
+    res.status(200).json({ students });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -218,6 +256,7 @@ module.exports = {
   removeStudentFromGroup,
   getStudentSeniorGroup,
   getGroupReports,
+  lecturerStudents,
 };
 
 // add file
