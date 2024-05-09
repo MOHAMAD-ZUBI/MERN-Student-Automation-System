@@ -132,10 +132,42 @@ const deleteCourse = async (req, res) => {
 const getCourseById = async (req, res) => {
   try {
     const { id } = req.params;
-    const course = await Course.findById(id).populate("notes");
+    const course = await Course.findById(id)
+      .populate("notes")
+      .populate("lecturer", "firstName lastName registerNo sex")
+      .populate("student", "firstName lastName registerNo sex");
     res.status(200).json(course);
   } catch (error) {
     res.status(500).json({ error: "Failed to get course" });
+  }
+};
+
+// get course files
+const getCourseNotes = async (req, res) => {
+  try {
+    const courseId = req.params.id;
+    const { page, pageSize = 6, title } = req.query;
+    const skip = (Number(page) - 1) * Number(pageSize);
+
+    let query = { course: courseId };
+    if (title) {
+      query.title = { $regex: new RegExp(title, "i") };
+    }
+
+    const notes = await Note.findOne(query).skip(skip).limit(pageSize);
+
+    const totalCount = await Note.countDocuments(query);
+    const totalPages = Math.ceil(totalCount / pageSize);
+
+    res.status(200).json({
+      notes,
+      page,
+      pageSize,
+      totalCount,
+      totalPages,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to get course files" });
   }
 };
 
@@ -159,18 +191,20 @@ const uploadNote = async (req, res) => {
   }
 };
 
-// delete Note 
+// delete Note
 const deleteNote = async (req, res) => {
   try {
     const { id } = req.params;
-        const note = await Note.findById(id);
+    const note = await Note.findById(id);
 
     if (!note) {
       return res.status(404).json({ error: "Note not found" });
     }
-    await Promise.all(note.file.map(async (filePath) => {
-      await fs.unlink(filePath); 
-    }));
+    await Promise.all(
+      note.file.map(async (filePath) => {
+        await fs.unlink(filePath);
+      })
+    );
 
     await Note.findByIdAndDelete(id);
 
@@ -181,7 +215,6 @@ const deleteNote = async (req, res) => {
   }
 };
 
-
 // export
 module.exports = {
   getAllCourses,
@@ -191,5 +224,6 @@ module.exports = {
   deleteCourse,
   getCourseById,
   uploadNote,
-  deleteNote
+  deleteNote,
+  getCourseNotes,
 };
