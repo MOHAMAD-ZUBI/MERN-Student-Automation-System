@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 
-import QuestionMark from "../../public/QuestionMark";
+import QuestionMark from "../../../public/QuestionMark";
 import { useState, useEffect } from "react";
 import AiBot from "./AiBot";
-import ChatBox from "./chatbot/ChatModal";
+import ChatBox from "./ChatModal";
 
 const Questions = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);

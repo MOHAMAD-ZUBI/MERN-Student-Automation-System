@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import Search from "../../public/Search";
+import Search from "../../../public/Search";
 
 const HeaderMessages = () => {
   return (

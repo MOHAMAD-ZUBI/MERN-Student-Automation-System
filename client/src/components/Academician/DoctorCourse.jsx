@@ -9,7 +9,7 @@ import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import api from "../../utils/Request";
 import { FaRegTrashCan } from "react-icons/fa6";
-import UploadFileModal from "../repeated/UploadFileModal";
+import UploadFileModal from "./seniorGroups/UploadFileModal";
 
 const DoctorCourse = () => {
   const location = useLocation();
