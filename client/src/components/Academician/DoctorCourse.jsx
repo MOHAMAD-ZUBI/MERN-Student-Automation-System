@@ -15,6 +15,10 @@ const DoctorCourse = () => {
 
   const { token } = useAuth();
   const [course, setCourse] = useState(null);
+  const [courseNotes, setCourseNotes] = useState(null);
+  const [notesPage, setNotesPage] = useState(1);
+  const [notesTotalPage, setNotesTotalPage] = useState(1);
+  const [reportTitle, setReportTitle] = useState("");
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -26,10 +30,22 @@ const DoctorCourse = () => {
       setCourse(course.data);
     };
 
-    fetchCourse();
-  }, [courseId, token]);
+    const fetchCourseNotes = async () => {
+      const courseNotes = await api.get(
+        `/senior/files/${courseId}?page=${notesPage}&title=${reportTitle}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setCourseNotes(courseNotes.data);
+      setNotesTotalPage(courseNotes.data.totalPages);
+    };
 
-  console.log(course);
+    fetchCourse();
+    fetchCourseNotes();
+  }, [courseId, notesPage, reportTitle, token]);
 
   return (
     <div className="course  pt-[30px] min-h-screen overflow-hidden">
