@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-import { fadeIn } from "../../motion/motion";
+import { fadeIn } from "../../../motion/motion";
 import { Link, useLocation } from "react-router-dom";
-import SectionTitle from "../repeated/SectionTitle";
-import ArrowDown from "../../../public/ArrowDown";
-import Search from "../../../public/Search";
-import useAuth from "../../hooks/useAuth";
+import SectionTitle from "../../repeated/SectionTitle";
+import ArrowDown from "../../../../public/ArrowDown";
+import Search from "../../../../public/Search";
+import useAuth from "../../../hooks/useAuth";
 import { useEffect, useState } from "react";
-import api from "../../utils/Request";
+import api from "../../../utils/Request";
 import { FaRegTrashCan } from "react-icons/fa6";
-import UploadFileModal from "./seniorGroups/UploadFileModal";
+import UploadFileModal from "./UploadFileModal";
 
 const DoctorCourse = () => {
   const location = useLocation();

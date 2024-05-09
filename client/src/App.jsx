@@ -21,7 +21,7 @@ import ForgetPassword from "./components/ForgetPassword";
 import Questions from "./components/chatbot/Questions";
 import ErrorPage from "./components/ErrorPage";
 import DoctorRequests from "./components/academician/DoctorRequests";
-import DoctorCourse from "./components/academician/DoctorCourse";
+import DoctorCourse from "./components/academician/courses/DoctorCourse";
 import DoctorProjectGroup from "./components/academician/DoctorProjectGroup";
 import DoctorDashboard from "./components/academician/DoctorDashboard";
 import { NextUIProvider } from "@nextui-org/react";
