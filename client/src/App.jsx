@@ -7,7 +7,7 @@ import Dashboard from "./components/student/Dashboard";
 import Profile from "./components/student/Profile";
 import DoctorProfile from "./components/academician/DoctorProfile";
 import Requests from "./components/student/Requests";
-import Courses from "./components/student/Courses";
+import Courses from "./components/Courses";
 import ProjectGroups from "./components/academician/ProjectGroups";
 import Department from "./components/student/Department";
 import Footer from "./components/Footer";

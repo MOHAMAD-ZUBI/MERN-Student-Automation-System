@@ -1,11 +1,34 @@
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import { fadeIn } from "../../motion/motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import SectionTitle from "../repeated/SectionTitle";
 import ArrowDown from "../../../public/ArrowDown";
 import Search from "../../../public/Search";
+import { useEffect, useState } from "react";
+import api from "../../utils/Request";
+import useAuth from "../../hooks/useAuth";
 
 const Course = () => {
+  const location = useLocation();
+  const courseId = new URLSearchParams(location.search).get("courseId");
+
+  const { token } = useAuth();
+  const [course, setCourse] = useState(null);
+
+  useEffect(() => {
+    const fetchCourse = async () => {
+      const course = await api.get(`/course/${courseId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setCourse(course.data);
+    };
+
+    fetchCourse();
+  });
+
   return (
     <div className="course  pt-[30px] min-h-screen overflow-hidden">
       <div className="container overflow-hidden">

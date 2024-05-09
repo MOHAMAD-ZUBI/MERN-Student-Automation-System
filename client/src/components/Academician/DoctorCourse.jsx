@@ -1,16 +1,44 @@
+/* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
 import { fadeIn } from "../../motion/motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import SectionTitle from "../repeated/SectionTitle";
 import ArrowDown from "../../../public/ArrowDown";
 import Search from "../../../public/Search";
+import useAuth from "../../hooks/useAuth";
+import { useEffect, useState } from "react";
+import api from "../../utils/Request";
 
 const DoctorCourse = () => {
+  const location = useLocation();
+  const courseId = new URLSearchParams(location.search).get("courseId");
+
+  const { token } = useAuth();
+  const [course, setCourse] = useState(null);
+
+  useEffect(() => {
+    const fetchCourse = async () => {
+      const course = await api.get(`/course/${courseId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setCourse(course.data);
+    };
+
+    fetchCourse();
+  }, [courseId, token]);
+
+  console.log(course);
+
   return (
     <div className="course  pt-[30px] min-h-screen overflow-hidden">
       <div className="container overflow-hidden">
-        <SectionTitle content="PRG209 Programming" extras="mb-[45px]" />
-        <motion.p
+        <SectionTitle
+          content={`${course?.courseCode} ${course?.courseName}`}
+          extras="mb-[45px]"
+        />
+        {/* <motion.p
           variants={fadeIn("left", "tween", 0.3, 1)}
           initial="hidden"
           whileInView="show"
@@ -21,7 +49,7 @@ const DoctorCourse = () => {
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat.
-        </motion.p>
+        </motion.p> */}
         <motion.div
           variants={fadeIn("left", "tween", 0.3, 1)}
           initial="hidden"
@@ -30,13 +58,20 @@ const DoctorCourse = () => {
           className="flex items-center justify-start gap-0 mb-12"
         >
           <img
-            src="./profile-pic.png"
+            src={
+              course?.lecturer[0]?.sex == "male"
+                ? "./profile2.png"
+                : "./profile.png"
+            }
             alt="profile img"
-            className="w-[50px] ml:w-[100px]"
+            className="w-[50px] ml:w-[100px] mr-4"
           />
-          <div className="flex items-start justify-between flex-col gap-0 w-[240px] py-[5px] px-[10px] bg-primary rounded-l-none rounded-r text-left">
-            <p className="w-full text-left text-white text-[14px] ml:text-[22px]">
-              Dr. Sam Felix
+          <div className="flex items-start justify-between flex-col  w-[240px] py-[5px] px-[10px] bg-primary  rounded-lg text-left">
+            <p className="w-full text-left text-white text-[14px] ml:text-[22px] capitalize">
+              Dr.{" "}
+              {course?.lecturer[0]?.firstName +
+                " " +
+                course?.lecturer[0]?.lastName}
             </p>
             <Link
               to="/profile"

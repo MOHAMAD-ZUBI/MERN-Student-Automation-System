@@ -6,11 +6,11 @@ import "swiper/css/navigation";
 
 import { Link } from "react-router-dom";
 
-import SectionTitle from "../repeated/SectionTitle";
-import CurrentCourse from "../repeated/CurrentCourse";
+import SectionTitle from "./repeated/SectionTitle";
+import CurrentCourse from "./repeated/CurrentCourse";
 import { useEffect, useState } from "react";
-import api from "../../utils/Request";
-import useAuth from "../../hooks/useAuth";
+import api from "../utils/Request";
+import useAuth from "../hooks/useAuth";
 
 const Courses = () => {
   const admin = sessionStorage.getItem("admin");
@@ -78,7 +78,12 @@ const Courses = () => {
               currentCourses.map((course, index) => {
                 return (
                   <SwiperSlide key={index}>
-                    <Link to="/course">
+                    <Link
+                      to={{
+                        pathname: "/course",
+                        search: `?courseId=${course._id}`,
+                      }}
+                    >
                       <CurrentCourse
                         color={`from-[#${colors[index % 4]}] to-white`}
                         code={course.courseCode}
@@ -131,7 +136,12 @@ const Courses = () => {
               pastCourses.map((course, index) => {
                 return (
                   <SwiperSlide key={index}>
-                    <Link to="/course">
+                    <Link
+                      to={{
+                        pathname: "/course",
+                        search: `?courseId=${course._id}`,
+                      }}
+                    >
                       <CurrentCourse
                         color={`from-[#${colors[index % 4]}] to-white`}
                         code={course.courseCode}
