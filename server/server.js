@@ -1,19 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const path = require("path");
+const routes = require("./Routes/index");
 
-// Routers
-const auth = require("./Routes/AuthRouter");
-const studentRouter = require("./Routes/StudentRouter");
-const academicianRouter = require("./Routes/AcademicianRouter");
-const adminRouter = require("./Routes/AdminRouter");
-const chatBotRouter = require("./Routes/ChatbotRouter");
-const courseRouter = require("./Routes/CourseRouter");
-const departmentRouter = require("./Routes/DepartmentRouter");
-const facultyRouter = require("./Routes/FacultyRouter");
-const seniorRouter = require("./Routes/SeniorGroupRouter");
-const reportRouter = require("./Routes/ReportRouter");
-const requestRouter = require("./Routes/RequestRouter");
 const cors = require("cors");
 
 // Middlewares
@@ -36,18 +24,4 @@ mongoose
   });
 
 // Routes
-app.use("/api/auth", auth);
-app.use("/api/student", studentRouter);
-app.use("/api/senior", seniorRouter);
-app.use("/api/faculty", facultyRouter);
-app.use("/api/department", departmentRouter);
-app.use("/api/course", courseRouter);
-app.use("/api/academician", academicianRouter);
-app.use("/api/admin", adminRouter);
-app.use("/api/bot", chatBotRouter);
-app.use("/api/report", reportRouter);
-app.use("/api/request", requestRouter);
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.get("/", (req, res) => {
-  return res.json("Hi");
-});
+app.use("/api", routes);

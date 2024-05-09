@@ -1,5 +1,5 @@
 const studentRequest = require("../Models/studentRequest");
-const User = require("../Models/userMode");
+const User = require("../Models/User/userMode");
 const fs = require("fs").promises;
 
 // Create a new student request

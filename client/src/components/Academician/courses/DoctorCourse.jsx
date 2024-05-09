@@ -1,15 +1,17 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-import { fadeIn } from "../../motion/motion";
+import { fadeIn } from "../../../motion/motion";
 import { Link, useLocation } from "react-router-dom";
-import SectionTitle from "../repeated/SectionTitle";
-import ArrowDown from "../../../public/ArrowDown";
-import Search from "../../../public/Search";
+import SectionTitle from "../../repeated/SectionTitle";
+import ArrowDown from "../../../../public/ArrowDown";
+import Search from "../../../../public/Search";
+import useAuth from "../../../hooks/useAuth";
 import { useEffect, useState } from "react";
-import api from "../../utils/Request";
-import useAuth from "../../hooks/useAuth";
+import api from "../../../utils/Request";
+import { FaRegTrashCan } from "react-icons/fa6";
+import UploadFileModal from "./UploadFileModal";
 
-const Course = () => {
+const DoctorCourse = () => {
   const location = useLocation();
   const courseId = new URLSearchParams(location.search).get("courseId");
 
@@ -50,6 +52,15 @@ const Course = () => {
     setReportTitle(title);
   };
 
+  const openUploadModal = (id) => {
+    setIsUploadModalOpen(true);
+    // setCurrentPastRequestId(id);
+  };
+
+  const closeUploadModal = () => {
+    setIsUploadModalOpen(false);
+  };
+
   useEffect(() => {
     const fetchCourse = async () => {
       const course = await api.get(`/course/${courseId}`, {
@@ -76,6 +87,15 @@ const Course = () => {
     fetchCourse();
     fetchCourseNotes();
   }, [courseId, notesPage, reportTitle, token]);
+
+  const deleteNote = async (id) => {
+    await api.delete(`/course/notes/remove/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    window.location.reload();
+  };
 
   return (
     <div className="course  pt-[30px] min-h-screen overflow-hidden">
@@ -110,10 +130,10 @@ const Course = () => {
                 : "./profile.png"
             }
             alt="profile img"
-            className="w-[50px] ml:w-[100px]"
+            className="w-[50px] ml:w-[100px] mr-4"
           />
-          <div className="flex items-start justify-between flex-col gap-0 w-[240px] py-[5px] px-[10px] bg-primary rounded-l-none rounded-r text-left">
-            <p className="w-full text-left text-white text-[14px] ml:text-[22px]">
+          <div className="flex items-start justify-between flex-col  w-[240px] py-[5px] px-[10px] bg-primary  rounded-lg text-left">
+            <p className="w-full text-left text-white text-[14px] ml:text-[22px] capitalize">
               {`Dr. ${course?.lecturer[0]?.firstName} ${course?.lecturer[0]?.lastName}`}
             </p>
             <Link
@@ -149,7 +169,7 @@ const Course = () => {
             className="relative flex items-center justify-between gap-1 py-2 px-3 bg-neutral-300 bg-opacity-20 rounded border border-neutral-100 border-opacity-30 shadow-4xl"
           >
             <h3 className="basis-1/5 sm:basis-1/4 font-mukta text-[10px] sm:text-[16px] mxl:text-[20px] text-left text-secondary leading-none">
-              Category name
+              Notes & Related Files
             </h3>
             <div className="search basis-2/5 sm:basis-2/4 h-[23px] ml:h-[30px] mxl:h-[38px] relative cursor-pointer">
               <input
@@ -164,8 +184,21 @@ const Course = () => {
                 <Search wth="100%" hth="100%" fill="#595959" />
               </div>
             </div>
-            {/* <div className="basis-2/5 sm:basis-1/4 flex items-center justify-end gap-1">
+            <div className="basis-2/5 sm:basis-1/4 flex items-center justify-end gap-1">
               <div className="filter cursor-pointer flex items-center justify-center py-1 px-[10px] rounded bg-white">
+                <p
+                  className=" font-Montagu text-[10px] ml:text-[16px] mxl:text-[20px] text-secondary"
+                  onClick={() => openUploadModal(course?._id)}
+                >
+                  Add File +
+                </p>
+                <UploadFileModal
+                  courseId={course?._id}
+                  isOpen={IsUploadModalOpen}
+                  onClose={closeUploadModal}
+                />
+              </div>
+              {/* <div className="filter cursor-pointer flex items-center justify-center py-1 px-[10px] rounded bg-white">
                 <p className=" font-Montagu text-[10px] ml:text-[16px] mxl:text-[20px] text-secondary">
                   Sort By
                 </p>
@@ -175,8 +208,8 @@ const Course = () => {
                   Filter
                 </p>
                 <ArrowDown wth="10" hth="6" fill="#C8272E" />
-              </div>
-            </div> */}
+              </div> */}
+            </div>
           </motion.div>
           <div className="flex flex-col justify-between items-center gap-10 py-5 px-3">
             <div className="w-full flex flex-col ml:flex-row flex-wrap gap-2 items-start justify-center ml:justify-start">
@@ -206,6 +239,15 @@ const Course = () => {
                           <p className="font-mukta text-primary text-[15px]">
                             {note.title}
                           </p>
+                          <button
+                            onClick={() => {
+                              deleteNote(note._id);
+                            }}
+                          >
+                            <span className="font-mukta text-primary text-[15px] sm:text-[20px] mxl:text-[22px] tracking-widest">
+                              <FaRegTrashCan />
+                            </span>
+                          </button>
                         </div>
                         <div className="flex items-center justify-start w-full">
                           <p className="font-mukta text-primary text-[10px]">
@@ -242,4 +284,4 @@ const Course = () => {
   );
 };
 
-export default Course;
+export default DoctorCourse;

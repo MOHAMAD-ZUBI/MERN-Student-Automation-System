@@ -1,5 +1,5 @@
-const User = require("../Models/userMode");
-const Admin = require("../Models/admin");
+const User = require("../Models/User/userMode");
+const Admin = require("../Models/User/admin");
 const jwt = require("jsonwebtoken");
 
 const createAdmin = async (req, res) => {

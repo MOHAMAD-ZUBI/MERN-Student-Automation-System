@@ -1,5 +1,5 @@
 const passport = require("passport");
-const User = require("../Models/userMode");
+const User = require("../Models/User/userMode");
 const jwt = require("jsonwebtoken");
 const authMiddleware = passport.authenticate("jwt", { session: false });
 

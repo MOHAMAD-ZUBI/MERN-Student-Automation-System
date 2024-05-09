@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 import { motion } from "framer-motion";
-import { fadeIn } from "../../motion/motion";
-import SectionTitle from "../repeated/SectionTitle";
-import ArrowDown from "../../../public/ArrowDown";
-import Group from "../repeated/Group";
-import useAuth from "../../hooks/useAuth";
+import { fadeIn } from "../../../motion/motion";
+import SectionTitle from "../../repeated/SectionTitle";
+import ArrowDown from "../../../../public/ArrowDown";
+import Group from "../../repeated/Group";
+import useAuth from "../../../hooks/useAuth";
 import { useEffect, useState } from "react";
-import api from "../../utils/Request";
+import api from "../../../utils/Request";
 
 const ProjectGroups = () => {
   const admin = sessionStorage.getItem("admin");
