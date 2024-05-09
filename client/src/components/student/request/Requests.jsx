@@ -1,7 +1,7 @@
-import SectionTitle from "../repeated/SectionTitle";
-import ArrowDown from "../../../public/ArrowDown";
+import SectionTitle from "../../repeated/SectionTitle";
+import ArrowDown from "../../../../public/ArrowDown";
 import { motion } from "framer-motion";
-import { fadeIn } from "../../motion/motion";
+import { fadeIn } from "../../../motion/motion";
 
 const Requests = () => {
   return (

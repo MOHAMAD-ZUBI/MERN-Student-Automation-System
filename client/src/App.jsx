@@ -3,27 +3,31 @@ import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { AuthProvider } from "./contexts/Auth";
 import Header from "./components/Header";
+// student pages
 import Dashboard from "./components/student/Dashboard";
 import Profile from "./components/student/Profile";
-import DoctorProfile from "./components/academician/DoctorProfile";
-import Requests from "./components/student/Requests";
-import Courses from "./components/Courses";
-import ProjectGroups from "./components/academician/seniorGroups/ProjectGroups";
+import Requests from "./components/student/request/Requests";
 import Department from "./components/student/Department";
-import Footer from "./components/Footer";
-import MobileFooter from "./components/MobileFooter";
 import Course from "./components/student/Course";
-import ProjectGroup from "./components/student/ProjectGroup";
-import Login from "./components/Login";
 import StudentLogin from "./components/student/StudentLogin";
+import ProjectGroup from "./components/student/ProjectGroup";
+
+// academician pages
+import DoctorProfile from "./components/academician/DoctorProfile";
+import ProjectGroups from "./components/academician/seniorGroups/ProjectGroups";
 import AcademicianLogin from "./components/academician/AcademicianLogin";
-import ForgetPassword from "./components/ForgetPassword";
-import Questions from "./components/chatbot/Questions";
-import ErrorPage from "./components/ErrorPage";
-import DoctorRequests from "./components/academician/DoctorRequests";
 import DoctorCourse from "./components/academician/courses/DoctorCourse";
 import DoctorProjectGroup from "./components/academician/DoctorProjectGroup";
 import DoctorDashboard from "./components/academician/DoctorDashboard";
+import DoctorRequests from "./components/academician/DoctorRequests";
+
+import Courses from "./components/Courses";
+import Footer from "./components/Footer";
+import MobileFooter from "./components/MobileFooter";
+import Login from "./components/Login";
+import ForgetPassword from "./components/ForgetPassword";
+import Questions from "./components/chatbot/Questions";
+import ErrorPage from "./components/ErrorPage";
 import { NextUIProvider } from "@nextui-org/react";
 
 const Layout = ({ children }) => {
