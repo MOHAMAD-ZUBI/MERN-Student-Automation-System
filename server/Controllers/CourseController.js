@@ -1,7 +1,7 @@
 const { Note, Course } = require("../Models/course");
 const jwt = require("jsonwebtoken");
-const Student = require("../Models/student");
-const Academician = require("../Models/academician");
+const Student = require("../Models/User/student");
+const Academician = require("../Models/User/academician");
 
 // get all courses
 const getAllCourses = async (req, res) => {

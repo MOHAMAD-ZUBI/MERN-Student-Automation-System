@@ -1,6 +1,6 @@
 const seniorGroup = require("../Models/seniorGroup");
 const Report = require("../Models/report");
-const StudentModel = require("../Models/student");
+const StudentModel = require("../Models/User/student");
 const { Course } = require("../Models/course");
 // Create a new senior group
 const createSeniorGroup = async (req, res) => {

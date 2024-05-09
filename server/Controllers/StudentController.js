@@ -1,5 +1,5 @@
-const User = require("../Models/userMode");
-const Student = require("../Models/student");
+const User = require("../Models/User/userMode");
+const Student = require("../Models/User/student");
 const jwt = require("jsonwebtoken");
 
 const getProfileData = async (req, res) => {

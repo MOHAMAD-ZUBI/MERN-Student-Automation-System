@@ -1,5 +1,5 @@
-const User = require("../Models/userMode");
-const Academician = require("../Models/academician");
+const User = require("../Models/User/userMode");
+const Academician = require("../Models/User/academician");
 const jwt = require("jsonwebtoken");
 
 const createAcademician = async (req, res) => {

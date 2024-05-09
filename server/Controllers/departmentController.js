@@ -1,7 +1,7 @@
 const { Department, Worker, DepartmentCorse } = require("../Models/department");
-const User = require("../Models/userMode");
-const Student = require("../Models/student");
-const Academician = require("../Models/academician");
+const User = require("../Models/User/userMode");
+const Student = require("../Models/User/student");
+const Academician = require("../Models/User/academician");
 
 // get all departments
 const getAllDepartments = async (req, res) => {

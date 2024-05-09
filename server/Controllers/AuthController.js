@@ -1,10 +1,10 @@
-const User = require("../Models/userMode");
+const User = require("../Models/User/userMode");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const { Roles } = require("../Models/userMode");
-const Admin = require("../Models/admin");
-const Academician = require("../Models/academician");
-const Student = require("../Models/student");
+const { Roles } = require("../Models/User/userMode");
+const Admin = require("../Models/User/admin");
+const Academician = require("../Models/User/academician");
+const Student = require("../Models/User/student");
 require("dotenv").config();
 
 ///////////////////////////////////////////// AUTH FUNCTIONS /////////////////////////////////////////////
