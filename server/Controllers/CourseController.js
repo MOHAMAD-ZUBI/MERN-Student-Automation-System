@@ -154,7 +154,7 @@ const getCourseNotes = async (req, res) => {
       query.title = { $regex: new RegExp(title, "i") };
     }
 
-    const notes = await Note.findOne(query).skip(skip).limit(pageSize);
+    const notes = await Note.find(query).skip(skip).limit(pageSize);
 
     const totalCount = await Note.countDocuments(query);
     const totalPages = Math.ceil(totalCount / pageSize);
@@ -200,11 +200,12 @@ const deleteNote = async (req, res) => {
     if (!note) {
       return res.status(404).json({ error: "Note not found" });
     }
-    await Promise.all(
-      note.file.map(async (filePath) => {
-        await fs.unlink(filePath);
-      })
-    );
+    // TODO: Remove the file
+    // await Promise.all(
+    //   note.file.map(async (filePath) => {
+    //     await fs.unlink(filePath);
+    //   })
+    // );
 
     await Note.findByIdAndDelete(id);
 
