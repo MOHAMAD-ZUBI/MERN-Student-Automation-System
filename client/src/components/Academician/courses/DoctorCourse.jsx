@@ -134,12 +134,10 @@ const DoctorCourse = () => {
           />
           <div className="flex items-start justify-between flex-col  w-[240px] py-[5px] px-[10px] bg-primary  rounded-lg text-left">
             <p className="w-full text-left text-white text-[14px] ml:text-[22px] capitalize">
-              Dr.{" "}
-              {course?.lecturer[0]?.firstName +
-                " " +
-                course?.lecturer[0]?.lastName}
+              {`Dr. ${course?.lecturer[0]?.firstName} ${course?.lecturer[0]?.lastName}`}
             </p>
             <Link
+              // TODO: Add the profile link
               to="/profile"
               className="text-white underline cursor-pointer text-left font-Montagu text-[9px] ml:text-[14px] hover:text-secondary duration-0.3"
             >
