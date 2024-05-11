@@ -12,6 +12,8 @@ const DoctorProfile = () => {
   const admin = sessionStorage.getItem("admin");
   const { token } = useAuth();
   const [academician, setAcademician] = useState(null);
+  const [courses, setCourses] = useState(null);
+
   const [day, setDay] = useState("Mon");
 
   const colors = ["FDFFE0", "E0EBFF", "FFE6E6", "E6FFEF"];
@@ -19,20 +21,26 @@ const DoctorProfile = () => {
 
   useEffect(() => {
     const fetchAcademician = async () => {
-      try {
-        const response = await api.get("/auth/current", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setAcademician(response.data); // Assuming the data you want is in the response's 'data' field
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+      const response = await api.get("/auth/current", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setAcademician(response.data);
     };
 
+    const fetchCourses = async () => {
+      const courses = await api.get(`/course/list/mine?day=${day}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setCourses(courses.data);
+    };
+
+    fetchCourses();
     fetchAcademician();
-  }, [token]);
+  }, [token, day]);
 
   return (
     <div className="profile min-h-screen relative pt-[125px] overflow-hidden">
@@ -70,44 +78,10 @@ const DoctorProfile = () => {
             <Graduate wth="100%" hth="100%" fill="white" />
           </div>
           <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white flex-1 text-left sm:text-center">
-            Computer Engineering - Faculty of Engineering
+            {academician?.data?.departmentId.name} - Faculty of Engineering
           </p>
         </motion.div>
-        <div className="classes hidden w-full justify-center items-center gap-[20px] mb-[50px]">
-          <motion.div
-            variants={fadeIn("up", "tween", 0.4, 1)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="class py-[5px] px-[15px] rounded-[4px] bg-secondary"
-          >
-            <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white">
-              Class 4
-            </p>
-          </motion.div>
-          <motion.div
-            variants={fadeIn("up", "tween", 0.3, 1)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="class py-[5px] px-[15px] rounded-[4px] bg-secondary"
-          >
-            <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white">
-              ANO 4,00
-            </p>
-          </motion.div>
-          <motion.div
-            variants={fadeIn("up", "tween", 0.4, 1)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="class py-[5px] px-[15px] rounded-[4px] bg-secondary"
-          >
-            <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white">
-              AGNO 4,00
-            </p>
-          </motion.div>
-        </div>
+
         <SectionTitle content="Full Schedule" extras="mb-5" />
         <motion.div
           variants={fadeIn("up", "tween", 0.3, 1)}
@@ -125,7 +99,7 @@ const DoctorProfile = () => {
               className="day flex justify-center items-center py-[8px] px-[6px] rounded-[4px] bg-white shadow-3xl min-w-[38px] sm:min-w-[50px] cursor-pointer"
             >
               <span className="font-Montagu text-[10px] sm:text-[16px] text-secondary">
-                Mon
+                <button onClick={() => setDay("Mon")}>Mon</button>
               </span>
             </motion.div>
             <motion.div
@@ -136,7 +110,7 @@ const DoctorProfile = () => {
               className="day flex justify-center items-center py-[8px] px-[6px] rounded-[4px] bg-white shadow-3xl min-w-[38px] sm:min-w-[50px] cursor-pointer"
             >
               <span className="font-Montagu text-[10px] sm:text-[16px] text-secondary">
-                Tue
+                <button onClick={() => setDay("Tue")}>Tue</button>
               </span>
             </motion.div>
             <motion.div
@@ -147,7 +121,7 @@ const DoctorProfile = () => {
               className="day flex justify-center items-center py-[8px] px-[6px] rounded-[4px] bg-white shadow-3xl min-w-[38px] sm:min-w-[50px] cursor-pointer"
             >
               <span className="font-Montagu text-[10px] sm:text-[16px] text-secondary">
-                Wed
+                <button onClick={() => setDay("Wed")}>Wed</button>
               </span>
             </motion.div>
             <motion.div
@@ -158,7 +132,7 @@ const DoctorProfile = () => {
               className="day flex justify-center items-center py-[8px] px-[6px] rounded-[4px] bg-white shadow-3xl min-w-[38px] sm:min-w-[50px] cursor-pointer"
             >
               <span className="font-Montagu text-[10px] sm:text-[16px] text-secondary">
-                Thu
+                <button onClick={() => setDay("Thu")}>Thu</button>
               </span>
             </motion.div>
             <motion.div
@@ -169,49 +143,40 @@ const DoctorProfile = () => {
               className="day flex justify-center items-center py-[8px] px-[6px] rounded-[4px] bg-white shadow-3xl min-w-[38px] sm:min-w-[50px] cursor-pointer"
             >
               <span className="font-Montagu text-[10px] sm:text-[16px] text-secondary">
-                Fri
+                <button onClick={() => setDay("Fri")}>Fri</button>
+              </span>
+            </motion.div>
+            <motion.div
+              variants={fadeIn("up", "tween", 0.6, 1)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              className="day flex justify-center items-center py-[8px] px-[6px] rounded-[4px] bg-white shadow-3xl min-w-[38px] sm:min-w-[50px] cursor-pointer"
+            >
+              <span className="font-Montagu text-[10px] sm:text-[16px] text-secondary">
+                <button onClick={() => setDay("Sat")}>Sat</button>
               </span>
             </motion.div>
           </div>
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-start w-full gap-1 sm:gap-[35px]">
-            <div className="w-full flex flex-col items-center justify-start gap-[5px]">
-              <TimeLine
-                time="10:00"
-                module="DAC209 Data Communication Group A"
-                color1="bg-[#FFE6E6]"
-                color2="bg-[#E88287]"
-                delay="0.5"
-              />
-              <TimeLine
-                time="11:00"
-                module="PHY209 Physics"
-                color1="bg-[#E6FFEF]"
-                color2="bg-[#9DF6BB]"
-                delay="0.55"
-              />
-              <TimeLine
-                time="12:00"
-                module="DAC209 Data Communication Group B"
-                color1="bg-[#E0EBFF]"
-                color2="bg-[#87A4DA]"
-                delay="0.6"
-              />
-            </div>
-            <div className="w-full flex flex-col items-center justify-start gap-[5px]">
-              <TimeLine
-                time="14:00"
-                module="Senior Project Group A"
-                color1="bg-[#FDFFE0]"
-                color2="bg-[#F4FBA3]"
-                delay="0.65"
-              />
-              <TimeLine
-                time="08:00"
-                module="Senior Project Group B"
-                color1="bg-[#E0EBFF]"
-                color2="bg-[#87A4DA]"
-                delay="0.7"
-              />
+            <div className="w-full flex flex-wrap items-center justify-start gap-[15px]">
+              {courses ? (
+                courses.map((course, index) => {
+                  return (
+                    <div key={index}>
+                      <TimeLine
+                        time={course.time}
+                        module={course.courseName}
+                        color1={`bg-[#${colors[index % 4]}]`}
+                        color2={`bg-[#${colors2[index % 4]}]`}
+                        delay="0.5"
+                      />
+                    </div>
+                  );
+                })
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </motion.div>
