@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import SectionTitle from "../repeated/SectionTitle";
 import CurrentCourse from "../repeated/CurrentCourse";
+import { Link } from "react-router-dom";
 
 const CurrentCourses = ({ courses }) => {
   const colors = ["FDFFE0", "E0EBFF", "FFE6E6", "E6FFEF"];
@@ -13,7 +14,13 @@ const CurrentCourses = ({ courses }) => {
         {courses ? (
           courses.map((course, index) => {
             return (
-              <div key={index}>
+              <Link
+                key={course._id}
+                to={{
+                  pathname: "/course",
+                  search: `?courseId=${course._id}`,
+                }}
+              >
                 <CurrentCourse
                   color={`from-[#${colors[index % 4]}] to-white`}
                   code={course.courseCode}
@@ -23,7 +30,7 @@ const CurrentCourses = ({ courses }) => {
                   }
                   delay="0.5"
                 />
-              </div>
+              </Link>
             );
           })
         ) : (

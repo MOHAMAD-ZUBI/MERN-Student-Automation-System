@@ -7,6 +7,7 @@ import { fadeIn } from "../../motion/motion";
 import api from "../../utils/Request.js";
 import useAuth from "../../hooks/useAuth.js";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Shedule = ({ courses }) => {
   if (courses) {
@@ -109,17 +110,24 @@ const Shedule = ({ courses }) => {
           <div className="grid grid-cols-2 items-center justify-center gap-1 sm:gap-4 sm:basis-1/2 w-full">
             {courses ? (
               courses.map((course, index) => {
-                console.log(firstThreeLetters);
+                // console.log(firstThreeLetters);
                 if (course.day == firstThreeLetters) {
                   return (
-                    <TimeLine
+                    <Link
                       key={course._id}
-                      time={course.time}
-                      module={course.courseCode + " " + course.courseName}
-                      color1={`bg-[#${colors[index % 4]}]`}
-                      color2={`bg-[#${colors2[index % 4]}]`}
-                      delay="0.5"
-                    />
+                      to={{
+                        pathname: "/course",
+                        search: `?courseId=${course._id}`,
+                      }}
+                    >
+                      <TimeLine
+                        time={course.time}
+                        module={course.courseCode + " " + course.courseName}
+                        color1={`bg-[#${colors[index % 4]}]`}
+                        color2={`bg-[#${colors2[index % 4]}]`}
+                        delay="0.5"
+                      />
+                    </Link>
                   );
                 } else {
                   index--;
