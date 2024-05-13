@@ -7,11 +7,24 @@ import Group from "../../repeated/Group";
 import useAuth from "../../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import api from "../../../utils/Request";
+import AddGroupModal from "./AddGroupModal";
+import StudentList from "./StudentList";
 
 const ProjectGroups = () => {
   const admin = sessionStorage.getItem("admin");
   const { token } = useAuth();
   const [groups, setGroups] = useState(null);
+  const [IsAddModalOpen, setIsAddModalOpen] = useState(false);
+  const openAddModal = () => {
+    console.log("opened");
+    console.log({ state: IsAddModalOpen });
+    setIsAddModalOpen(true);
+    // setCurrentPastRequestId(id);
+  };
+
+  const closeAddModal = () => {
+    setIsAddModalOpen(false);
+  };
 
   const colors = ["FDFFE0", "E0EBFF", "FFE6E6", "E6FFEF"];
   const colors2 = ["F4FBA3", "87A4DA", "E88287", "9DF6BB"];
@@ -51,13 +64,21 @@ const ProjectGroups = () => {
             className="relative flex items-center justify-center gap-1 py-2 px-3 bg-neutral-300 bg-opacity-20 rounded border border-neutral-100 border-opacity-30 shadow-4xl"
           >
             <div className="flex items-center justify-center gap-1 ml:gap-4 mxl:gap-8">
-              <div className="cursor-pointer flex items-center justify-between gap-1 py-1 pl-[10px] pr-[8px] rounded bg-white">
+              <div
+                className="cursor-pointer flex items-center justify-between gap-1 py-1 pl-[10px] pr-[8px] rounded bg-white"
+                onClick={() => openAddModal()}
+              >
                 <p className=" font-Montagu text-[10px] ml:text-[16px] mxl:text-[20px] text-secondary">
                   Add New Group
                 </p>
                 <span className="flex items-center text-[10px] ml:text-[14px] text-secondary font-bold leading-none">
                   +
                 </span>
+
+                <AddGroupModal
+                  onClose={closeAddModal}
+                  isOpen={IsAddModalOpen}
+                />
               </div>
               {/* <div className="filter cursor-pointer flex items-center justify-between gap-1 py-1 pl-[10px] pr-[8px] rounded bg-white">
                 <p className=" font-Montagu text-[10px] ml:text-[16px] mxl:text-[20px] text-secondary">

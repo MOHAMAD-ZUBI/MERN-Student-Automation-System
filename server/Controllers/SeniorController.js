@@ -28,33 +28,20 @@ const lecturerStudents = async (req, res) => {
   try {
     const user = req.user;
     const userId = user._id;
+    const courseCodes = ["CPE423", "CPE424"];
     let students = [];
 
-    // CPE423, CPE424
-    const course1 = await Course.find({
-      courseCode: "CPE423",
+    const courses = await Course.find({
+      courseCode: courseCodes,
       lecturer: userId,
     })
       .populate({
         path: "student",
         select: "firstName lastName registerNo sex",
       })
-      .then((courses) => courses.map((course) => course.student).flat());
+      .then((courses) => courses.map((course) => course.student));
 
-    const course2 = await Course.find({
-      courseCode: "CPE424",
-      lecturer: userId,
-    })
-      .populate({
-        path: "student",
-        select: "firstName lastName registerNo sex",
-      })
-      .then((courses) => courses.map((course) => course.student).flat());
-
-    // add the course students to the array
-    students.push(...course1, ...course2);
-
-    res.status(200).json({ students });
+    res.status(200).json({ students: courses[0] });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
