@@ -91,7 +91,7 @@ const ModalComponent = ({ onClose, isOpen }) => {
       // Assuming the data you want is in the response's 'data' field
       console.log("Response data:", response.data);
       if (response.status >= 200 && response.status < 300) {
-        setResponseMessage("Note uploaded successfully!"); // Set success message
+        setResponseMessage("Group created successfully!"); // Set success message
       } else {
         setResponseMessage("An error occurred."); // Set error message
       }
@@ -138,7 +138,7 @@ const ModalComponent = ({ onClose, isOpen }) => {
                         return (
                           <span
                             key={student._id}
-                            className=" hover:bg-blue-100 duration-150 border-b-1 border-gray-200 flex flex-row justify-between "
+                            className=" hover:bg-blue-100  rounded-lg py-1 px-2 duration-150 border-b-1 border-gray-200 flex flex-row justify-between "
                           >
                             <div className="flex flex-col">
                               <h1>
@@ -152,7 +152,7 @@ const ModalComponent = ({ onClose, isOpen }) => {
                                 onClick={() => handleStudentAddition(student)}
                               >
                                 {" "}
-                                <IoAddCircleOutline />
+                                <IoAddCircleOutline size={32} />
                               </div>
                             ) : (
                               <div
@@ -160,13 +160,16 @@ const ModalComponent = ({ onClose, isOpen }) => {
                                 onClick={() => handleStudentRemove(student)}
                               >
                                 {" "}
-                                <IoRemoveCircleOutline />
+                                <IoRemoveCircleOutline size={32} />
                               </div>
                             )}
                           </span>
                         );
                       })}
                     </div>
+                    {responseMessage && (
+                      <p className=" text-green-500">{responseMessage}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -176,7 +179,11 @@ const ModalComponent = ({ onClose, isOpen }) => {
             <Button color="danger" variant="light" onPress={onClose}>
               Close
             </Button>
-            <Button onClick={handleSendData} color="primary">
+            <Button
+              onClick={handleSendData}
+              color="primary"
+              isDisabled={!title}
+            >
               Submit
             </Button>
           </ModalFooter>
