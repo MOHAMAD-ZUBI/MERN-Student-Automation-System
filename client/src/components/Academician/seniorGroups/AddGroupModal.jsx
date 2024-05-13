@@ -27,6 +27,9 @@ const ModalComponent = ({ onClose, isOpen }) => {
     setStudentsToAdd([...studentsToAdd, id]);
   };
 
+  const handleStudentRemove = (id) => {
+    setStudentsToAdd(studentsToAdd.filter((student) => student !== id));
+  };
   const handleStudentSearch = (event) => {
     const filteredStudents = students.filter((student) =>
       student.registerNo
@@ -108,11 +111,22 @@ const ModalComponent = ({ onClose, isOpen }) => {
           </ModalHeader>
           <ModalBody>
             <div className="flex flex-col gap-2 text-2xl  capitalize border-t-2 border-gray-200 ">
+              <label htmlFor="groupTitle" className="text-blue-700">
+                Group Title
+              </label>
+              <input
+                id="groupTitle"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Enter group title"
+                className="outline-none rounded-lg border-1 border-gray-300 px-2 py-2"
+              />
+
               <div className="flex flex-row justify-evenly mt-8">
                 <div className="w-full border-t-2 border-gray-200 flex flex-row-reverse justify-evenly  mt-4">
-                  <div className="flex flex-col justify-center gap-2">
+                  <div className="flex flex-col justify-center gap-2 w-full">
                     <h1 className=" text-blue-700">Student List</h1>
-                    <div className="  border-2 border-gray-300 min-w-[400px] rounded-lg p-2 flex flex-col gap-2 font-mono text-black">
+                    <div className="  border-2 border-gray-300 min-w-[400px]  rounded-lg p-2 flex flex-col gap-2 font-mono text-black">
                       <input
                         type="search"
                         placeholder="Search student"
@@ -124,7 +138,7 @@ const ModalComponent = ({ onClose, isOpen }) => {
                         return (
                           <span
                             key={student._id}
-                            className=" hover:bg-green-200 duration-150 border-b-1 border-gray-200 flex flex-row justify-between "
+                            className=" hover:bg-blue-100 duration-150 border-b-1 border-gray-200 flex flex-row justify-between "
                           >
                             <div className="flex flex-col">
                               <h1>
@@ -132,38 +146,24 @@ const ModalComponent = ({ onClose, isOpen }) => {
                               </h1>
                               <p className="text-sm">{student.registerNo}</p>
                             </div>
-                            <div
-                              className="flex items-center cursor-pointer text-green-500 "
-                              onClick={() => handleStudentAddition(student)}
-                            >
-                              {" "}
-                              <IoAddCircleOutline />
-                            </div>
+                            {!studentsToAdd.includes(student) ? (
+                              <div
+                                className="flex items-center cursor-pointer text-green-500 "
+                                onClick={() => handleStudentAddition(student)}
+                              >
+                                {" "}
+                                <IoAddCircleOutline />
+                              </div>
+                            ) : (
+                              <div
+                                className="flex items-center cursor-pointer text-red-500 "
+                                onClick={() => handleStudentRemove(student)}
+                              >
+                                {" "}
+                                <IoRemoveCircleOutline />
+                              </div>
+                            )}
                           </span>
-                        );
-                      })}
-                    </div>
-                  </div>
-                  <div>
-                    <h1>Selected Students</h1>
-                    <div>
-                      {studentsToAdd.map((student) => {
-                        return (
-                          <div
-                            key={student._id}
-                            className=" hover:bg-green-200 duration-150 border-b-1 border-gray-200 flex flex-row justify-between "
-                          >
-                            <div className="flex flex-col">
-                              <h1>
-                                {student.firstName} {student.lastName}
-                              </h1>
-                              <p className="text-sm">{student.registerNo}</p>
-                            </div>
-                            <div className="flex items-center cursor-pointer text-red-500 ">
-                              {" "}
-                              <IoRemoveCircleOutline />
-                            </div>
-                          </div>
                         );
                       })}
                     </div>
@@ -176,7 +176,9 @@ const ModalComponent = ({ onClose, isOpen }) => {
             <Button color="danger" variant="light" onPress={onClose}>
               Close
             </Button>
-            <Button color="primary">Submit</Button>
+            <Button onClick={handleSendData} color="primary">
+              Submit
+            </Button>
           </ModalFooter>
         </div>
       </ModalContent>
