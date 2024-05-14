@@ -14,15 +14,15 @@ import useAuth from "../../../hooks/useAuth";
 import api from "../../../utils/Request";
 import { IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
 
-const ModalComponent = ({ onClose, isOpen }) => {
+const ModalComponent = ({ onClose, isOpen, group }) => {
   const { token } = useAuth();
   const admin = sessionStorage.getItem("admin");
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState(false);
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(group.title);
   const [students, setStudents] = useState([]);
   const [studentSearch, setStudentSearch] = useState("");
-  const [studentsToAdd, setStudentsToAdd] = useState([]);
+  const [studentsToAdd, setStudentsToAdd] = useState([...group.students]);
 
   const handleStudentAddition = (id) => {
     setStudentsToAdd([...studentsToAdd, id]);
@@ -62,8 +62,8 @@ const ModalComponent = ({ onClose, isOpen }) => {
 
     setLoading(true);
     try {
-      const response = await api.post(
-        "/senior/create",
+      const response = await api.put(
+        `/senior/update/${group._id}`,
         { title: title, students: studentIds }, // Pass FormData instead of an object
         {
           headers: {
@@ -75,7 +75,7 @@ const ModalComponent = ({ onClose, isOpen }) => {
       // Assuming the data you want is in the response's 'data' field
       console.log("Response data:", response.data);
       if (response.status >= 200 && response.status < 300) {
-        setResponseMessage("Group created successfully!"); // Set success message
+        setResponseMessage("Group edited successfully!"); // Set success message
       } else {
         setResponseMessage("An error occurred."); // Set error message
       }
@@ -85,16 +85,15 @@ const ModalComponent = ({ onClose, isOpen }) => {
       setLoading(false);
     }
   };
-
   return (
     <Modal backdrop={"blur"} size="4xl" isOpen={isOpen} onClose={onClose}>
       <ModalContent>
         <div className="font-semibold font-serif">
           <ModalHeader className="flex flex-col gap-1">
-            <h2 className="text-3xl">Create Group</h2>
+            <h2 className="text-3xl">Edit Group</h2>
           </ModalHeader>
           <ModalBody>
-            <div className="flex flex-col gap-2 text-2xl  capitalize border-t-2 border-gray-200  h-[600px]">
+            <div className="flex flex-col gap-2 text-2xl  capitalize border-t-2 border-gray-200  min-h-[600px]">
               <label htmlFor="groupTitle" className="text-blue-700">
                 Group Title
               </label>
@@ -104,7 +103,43 @@ const ModalComponent = ({ onClose, isOpen }) => {
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Enter group title"
                 className="outline-none rounded-lg border-1 border-gray-300 px-2 py-2"
+                readOnly={false}
               />
+              <h2 className="text-blue-700">Existing Students</h2>
+              <div className=" p-1 border-1 rounded-lg border-gray-300">
+                {studentsToAdd.map((student) => {
+                  return (
+                    <span
+                      key={student._id}
+                      className=" hover:bg-blue-100  rounded-lg py-1 px-2 duration-150 border-b-1 border-gray-200 flex flex-row justify-between "
+                    >
+                      <div className="flex flex-col">
+                        <h1>
+                          {student.firstName} {student.lastName}
+                        </h1>
+                        <p className="text-sm">{student.registerNo}</p>
+                      </div>
+                      {!studentsToAdd.includes(student) ? (
+                        <div
+                          className="flex items-center cursor-pointer text-green-500 "
+                          onClick={() => handleStudentAddition(student)}
+                        >
+                          {" "}
+                          <IoAddCircleOutline size={32} />
+                        </div>
+                      ) : (
+                        <div
+                          className="flex items-center cursor-pointer text-red-500 "
+                          onClick={() => handleStudentRemove(student)}
+                        >
+                          {" "}
+                          <IoRemoveCircleOutline size={32} />
+                        </div>
+                      )}
+                    </span>
+                  );
+                })}
+              </div>
 
               <div className="flex flex-row justify-evenly mt-8">
                 <div className="w-full border-t-2 border-gray-200 flex flex-row-reverse justify-evenly  mt-4">
@@ -117,11 +152,16 @@ const ModalComponent = ({ onClose, isOpen }) => {
                         onChange={(e) => handleStudentSearch(e.target.value)}
                         className="outline-none rounded-lg py-2 px-2 border-1 border-gray-300 placeholder:text-md placeholder:font-mono"
                       />
-                      {students.map((student) => {
-                        return (
+
+                      {students
+                        .filter(
+                          (student) =>
+                            !studentsToAdd.some((s) => s._id === student._id)
+                        )
+                        .map((student) => (
                           <span
                             key={student._id}
-                            className=" hover:bg-blue-100  rounded-lg py-1 px-2 duration-150 border-b-1 border-gray-200 flex flex-row justify-between "
+                            className="hover:bg-blue-100 rounded-lg py-1 px-2 duration-150 border-b-1 border-gray-200 flex flex-row justify-between"
                           >
                             <div className="flex flex-col">
                               <h1>
@@ -129,26 +169,14 @@ const ModalComponent = ({ onClose, isOpen }) => {
                               </h1>
                               <p className="text-sm">{student.registerNo}</p>
                             </div>
-                            {!studentsToAdd.includes(student) ? (
-                              <div
-                                className="flex items-center cursor-pointer text-green-500 "
-                                onClick={() => handleStudentAddition(student)}
-                              >
-                                {" "}
-                                <IoAddCircleOutline size={32} />
-                              </div>
-                            ) : (
-                              <div
-                                className="flex items-center cursor-pointer text-red-500 "
-                                onClick={() => handleStudentRemove(student)}
-                              >
-                                {" "}
-                                <IoRemoveCircleOutline size={32} />
-                              </div>
-                            )}
+                            <div
+                              className="flex items-center cursor-pointer text-green-500"
+                              onClick={() => handleStudentAddition(student)}
+                            >
+                              <IoAddCircleOutline size={32} />
+                            </div>
                           </span>
-                        );
-                      })}
+                        ))}
                     </div>
                     {responseMessage && (
                       <p className=" text-green-500">{responseMessage}</p>

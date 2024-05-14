@@ -92,13 +92,7 @@ const Profile = () => {
             <Graduate wth="100%" hth="100%" fill="white" />
           </div>
           <p className="font-normal font-Montagu text-[12px] sm:text-[18px] text-white flex-1 text-left sm:text-center">
-            {student && student.user && student.data.department
-              ? student.data.department
-              : "Department"}{" "}
-            -{" "}
-            {student && student.user && student.data.faculty
-              ? student.data.faculty
-              : "Faculty"}
+            {student?.data.department + " " + student?.data.faculty}
           </p>
         </motion.div>
         <div className="classes w-full flex justify-center items-center gap-[20px] mb-[50px]">

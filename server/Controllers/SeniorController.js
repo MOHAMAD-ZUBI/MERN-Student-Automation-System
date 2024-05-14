@@ -28,33 +28,29 @@ const lecturerStudents = async (req, res) => {
   try {
     const user = req.user;
     const userId = user._id;
-    let students = [];
+    const courseCodes = ["CPE423", "CPE424"];
+    const search = req.query.search;
 
-    // CPE423, CPE424
-    const course1 = await Course.find({
-      courseCode: "CPE423",
+    const courses = await Course.find({
+      courseCode: courseCodes,
       lecturer: userId,
-    })
-      .populate({
-        path: "student",
-        select: "firstName lastName registerNo sex",
-      })
-      .then((courses) => courses.map((course) => course.student).flat());
+    }).populate({
+      path: "student",
+      select: "firstName lastName registerNo sex",
+    });
 
-    const course2 = await Course.find({
-      courseCode: "CPE424",
-      lecturer: userId,
-    })
-      .populate({
-        path: "student",
-        select: "firstName lastName registerNo sex",
-      })
-      .then((courses) => courses.map((course) => course.student).flat());
+    const filteredStudents = courses.map((course) =>
+      course.student.filter(
+        (student) =>
+          (search &&
+            (student.firstName.toLowerCase().includes(search.toLowerCase()) ||
+              student.lastName.toLowerCase().includes(search.toLowerCase()) ||
+              student.registerNo.includes(search))) ||
+          !search
+      )
+    );
 
-    // add the course students to the array
-    students.push(...course1, ...course2);
-
-    res.status(200).json({ students });
+    res.status(200).json({ students: filteredStudents[0] });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -100,7 +96,7 @@ const getLecturerSeniorGroups = async (req, res) => {
         .find({ lecturer: user._id })
         .populate({
           path: "students",
-          select: "name",
+          select: "firstName lastName registerNo sex",
         })
         .skip(skip)
         .limit(pageSize),
