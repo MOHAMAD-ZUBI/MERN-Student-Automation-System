@@ -29,19 +29,28 @@ const lecturerStudents = async (req, res) => {
     const user = req.user;
     const userId = user._id;
     const courseCodes = ["CPE423", "CPE424"];
-    let students = [];
+    const search = req.query.search;
 
     const courses = await Course.find({
       courseCode: courseCodes,
       lecturer: userId,
-    })
-      .populate({
-        path: "student",
-        select: "firstName lastName registerNo sex",
-      })
-      .then((courses) => courses.map((course) => course.student));
+    }).populate({
+      path: "student",
+      select: "firstName lastName registerNo sex",
+    });
 
-    res.status(200).json({ students: courses[0] });
+    const filteredStudents = courses.map((course) =>
+      course.student.filter(
+        (student) =>
+          (search &&
+            (student.firstName.toLowerCase().includes(search.toLowerCase()) ||
+              student.lastName.toLowerCase().includes(search.toLowerCase()) ||
+              student.registerNo.includes(search))) ||
+          !search
+      )
+    );
+
+    res.status(200).json({ students: filteredStudents[0] });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -15,6 +15,7 @@ import api from "../../../utils/Request";
 import { IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
 
 const ModalComponent = ({ onClose, isOpen }) => {
+  const { token } = useAuth();
   const admin = sessionStorage.getItem("admin");
   const [loading, setLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState(false);
@@ -30,38 +31,21 @@ const ModalComponent = ({ onClose, isOpen }) => {
   const handleStudentRemove = (id) => {
     setStudentsToAdd(studentsToAdd.filter((student) => student !== id));
   };
-  const handleStudentSearch = (event) => {
-    const filteredStudents = students.filter((student) =>
-      student.registerNo
-        .toLowerCase()
-        .includes(event.target.value.toLowerCase())
-    );
-    setStudents(filteredStudents);
-    console.log({ filteredStudents });
+  const handleStudentSearch = (search) => {
+    setStudentSearch(search);
   };
-
-  const { token } = useAuth();
-
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
-  };
-
-  /*
-  {
-  "title": "test",
-  "lecturer": "6633d2adc979bb9fd9f458bf",
-  "students": ["658adabbf2ae9d4ceaf477ca"]
-}
-  */
 
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await api.get(`/senior/lecturer/students`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await api.get(
+          `/senior/lecturer/students?search=${studentSearch}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (response.data) setStudents(response.data.students);
       } catch (error) {
@@ -110,7 +94,7 @@ const ModalComponent = ({ onClose, isOpen }) => {
             <h2 className="text-3xl">Create Group</h2>
           </ModalHeader>
           <ModalBody>
-            <div className="flex flex-col gap-2 text-2xl  capitalize border-t-2 border-gray-200 ">
+            <div className="flex flex-col gap-2 text-2xl  capitalize border-t-2 border-gray-200  h-[600px]">
               <label htmlFor="groupTitle" className="text-blue-700">
                 Group Title
               </label>
@@ -126,12 +110,11 @@ const ModalComponent = ({ onClose, isOpen }) => {
                 <div className="w-full border-t-2 border-gray-200 flex flex-row-reverse justify-evenly  mt-4">
                   <div className="flex flex-col justify-center gap-2 w-full">
                     <h1 className=" text-blue-700">Student List</h1>
-                    <div className="  border-2 border-gray-300 min-w-[400px]  rounded-lg p-2 flex flex-col gap-2 font-mono text-black">
+                    <div className=" md:min-h-[400px] overflow-y-auto md:max-h-[400px] border-2 border-gray-300 min-w-[300px] md:min-w-[400px] rounded-lg p-2 flex flex-col gap-2 font-mono text-black">
                       <input
                         type="search"
                         placeholder="Search student"
-                        onChange={(e) => handleStudentSearch(e)}
-                        disabled={true}
+                        onChange={(e) => handleStudentSearch(e.target.value)}
                         className="outline-none rounded-lg py-2 px-2 border-1 border-gray-300 placeholder:text-md placeholder:font-mono"
                       />
                       {students.map((student) => {
