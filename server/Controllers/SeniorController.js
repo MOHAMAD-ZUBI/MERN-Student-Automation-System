@@ -96,7 +96,7 @@ const getLecturerSeniorGroups = async (req, res) => {
         .find({ lecturer: user._id })
         .populate({
           path: "students",
-          select: "name",
+          select: "firstName lastName registerNo sex",
         })
         .skip(skip)
         .limit(pageSize),

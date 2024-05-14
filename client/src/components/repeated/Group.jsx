@@ -7,8 +7,19 @@ import { fadeIn } from "../../motion/motion";
 import Delete from "../../../public/Delete";
 import Edit from "../../../public/Edit";
 import api from "../../utils/Request";
+import { useState } from "react";
+import EditGroupModal from "../academician/seniorGroups/EditGroupModal";
 
-const Group = ({ groupId, delay, name, color1, color2 }) => {
+const Group = ({ group, delay, name, color1, color2 }) => {
+  const [IsEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const openEditModal = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+  };
   const deleteGroup = async (id) => {
     await api.delete(`/senior/${id}`, {
       // headers: {
@@ -37,7 +48,7 @@ const Group = ({ groupId, delay, name, color1, color2 }) => {
           <Link
             to={{
               pathname: "/project-group",
-              search: `?groupId=${groupId}`,
+              search: `?group._id=${group._id}`,
             }}
             className="font-Montagu text-[12px] sm:text-[18px] mxl:text-[22px] text-primary hover:text-secondary duration-0.3"
           >
@@ -45,16 +56,24 @@ const Group = ({ groupId, delay, name, color1, color2 }) => {
           </Link>
         </div>
         <div className="flex flex-col justify-center items-center basis-1/3 gap-1">
-          <span className="flex items-center justify-between gap-1 text-[12px] sm:text-[16px] mxl:text-[18px] text-primary font-Montagu cursor-pointer">
+          <span
+            className="flex items-center justify-between gap-1 text-[12px] sm:text-[16px] mxl:text-[18px] text-primary font-Montagu cursor-pointer hover:text-green-500 duration-100"
+            onClick={() => openEditModal()}
+          >
             <span className="w-[16px] h-[16px] mxl:w-[20px] mxl:h-[20px]">
               <Edit wth="100%" hth="100%" fill="#595959" />
             </span>
             Edit
           </span>
+          <EditGroupModal
+            onClose={closeEditModal}
+            isOpen={IsEditModalOpen}
+            group={group}
+          />
           <span
             className="flex items-center justify-between gap-1 text-[12px] sm:text-[16px] mxl:text-[18px] text-primary font-Montagu cursor-pointer hover:text-red-500 duration-100"
             onClick={() => {
-              deleteGroup(groupId);
+              deleteGroup(group._id);
             }}
           >
             <span className="w-[12px] h-[12px] mxl:w-[16px] mxl:h-[16px] ">

@@ -8,7 +8,6 @@ import useAuth from "../../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import api from "../../../utils/Request";
 import AddGroupModal from "./AddGroupModal";
-import StudentList from "./StudentList";
 
 const ProjectGroups = () => {
   const admin = sessionStorage.getItem("admin");
@@ -16,10 +15,7 @@ const ProjectGroups = () => {
   const [groups, setGroups] = useState(null);
   const [IsAddModalOpen, setIsAddModalOpen] = useState(false);
   const openAddModal = () => {
-    console.log("opened");
-    console.log({ state: IsAddModalOpen });
     setIsAddModalOpen(true);
-    // setCurrentPastRequestId(id);
   };
 
   const closeAddModal = () => {
@@ -94,7 +90,7 @@ const ProjectGroups = () => {
                 groups.map((group, index) => {
                   return (
                     <Group
-                      groupId={group._id}
+                      group={group}
                       key={index}
                       delay="0.3"
                       name={group.title}
