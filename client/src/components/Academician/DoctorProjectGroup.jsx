@@ -148,7 +148,11 @@ const DoctorProjectGroup = () => {
                   : ""}
               </p>
               <Link
-                to="/profile"
+                // TODO: Add the profile link
+                to={{
+                  pathname: "/academician",
+                  search: `?userId=${group?.group?.lecturer?._id}`,
+                }}
                 className="text-white underline cursor-pointer text-left font-Montagu text-[9px] ml:text-[14px] hover:text-secondary duration-0.3"
               >
                 View Profile

@@ -50,4 +50,31 @@ const getCurrentAcademician = async (req, res) => {
   }
 };
 
-module.exports = { createAcademician, getCurrentAcademician };
+const getAcademicianById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const academician = await Academician.findById(id);
+
+    if (!academician) {
+      return res.status(401).json({ msg: "No such academician" });
+    }
+
+    const user = await User.findById(academician.user);
+
+    if (!user) {
+      return res.status(401).json({ msg: "No such user" });
+    }
+
+    return res.status(200).json({ data: academician, user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "server error" });
+  }
+};
+
+module.exports = {
+  createAcademician,
+  getCurrentAcademician,
+  getAcademicianById,
+};

@@ -23,6 +23,9 @@ const academicianSchema = new Schema({
   officeHours: {
     type: [String],
   },
+  academicInformation: {
+    type: [String],
+  },
   graduatedUni: {
     type: String,
   },

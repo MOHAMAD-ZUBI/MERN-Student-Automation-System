@@ -19,9 +19,10 @@ import AcademicianLogin from "./components/academician/AcademicianLogin";
 import DoctorCourse from "./components/academician/courses/DoctorCourse";
 import DoctorProjectGroup from "./components/academician/DoctorProjectGroup";
 import DoctorDashboard from "./components/academician/DoctorDashboard";
-import DoctorRequests from "./components/academician/DoctorRequests";
+import DoctorRequests from "./components/academician/request/DoctorRequests";
 
 import Courses from "./components/Courses";
+import Academician from "./components/Academician";
 import Footer from "./components/Footer";
 import MobileFooter from "./components/MobileFooter";
 import Login from "./components/Login";
@@ -74,6 +75,7 @@ const App = () => {
             <Route path="/login/student" element={<StudentLogin />} />
             <Route path="/login/academician" element={<AcademicianLogin />} />
             <Route path="/resetPassword" element={<ForgetPassword />} />
+            <Route path="academician" element={<Academician />} />
             {admin === "student" && (
               <Route path="profile" element={<Profile />} />
             )}
