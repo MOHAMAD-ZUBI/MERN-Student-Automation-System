@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-empty */
-import SectionTitle from "../repeated/SectionTitle";
-import ArrowDown from "../../../public/ArrowDown";
+import SectionTitle from "../../repeated/SectionTitle";
+import ArrowDown from "../../../../public/ArrowDown";
 import { motion } from "framer-motion";
-import { fadeIn } from "../../motion/motion";
+import { fadeIn } from "../../../motion/motion";
 import { useEffect, useState } from "react";
-import api from "../../utils/Request";
-import useAuth from "../../hooks/useAuth";
-import NewRequestModal from "./request/NewRequestModal";
-import PastRequestModal from "./request/PastRequestModal";
+import api from "../../../utils/Request";
+import useAuth from "../../../hooks/useAuth";
+import NewRequestModal from "./NewRequestModal";
+import PastRequestModal from "./PastRequestModal";
 import {
   Button,
   Dropdown,

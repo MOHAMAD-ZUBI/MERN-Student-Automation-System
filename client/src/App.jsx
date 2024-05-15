@@ -19,7 +19,7 @@ import AcademicianLogin from "./components/academician/AcademicianLogin";
 import DoctorCourse from "./components/academician/courses/DoctorCourse";
 import DoctorProjectGroup from "./components/academician/DoctorProjectGroup";
 import DoctorDashboard from "./components/academician/DoctorDashboard";
-import DoctorRequests from "./components/academician/DoctorRequests";
+import DoctorRequests from "./components/academician/request/DoctorRequests";
 
 import Courses from "./components/Courses";
 import Academician from "./components/Academician";
