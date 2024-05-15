@@ -38,7 +38,7 @@ requestRouter.post(
   authenticateUser,
   createStudentRequest
 );
-requestRouter.get("/student/:id", authenticateUser, getRequestsForStudent);
+requestRouter.get("/student", authenticateUser, getRequestsForStudent);
 requestRouter.get(
   "/single/student/:id",
   authenticateUser,
