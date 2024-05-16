@@ -9,6 +9,7 @@ import api from "../../../utils/Request";
 import useAuth from "../../../hooks/useAuth";
 import NewRequestModal from "./NewRequestModal";
 import PastRequestModal from "./PastRequestModal";
+import CreateRequestModal from "./CreateRequestModal";
 import {
   Button,
   Dropdown,
@@ -36,6 +37,10 @@ const DoctorRequests = () => {
   const [pastTotalPage, setTotalPastPage] = useState(1);
   const [pastTypeFilter, setPastTypeFilter] = useState("");
 
+  // create request
+  const [isCreateRequestModalOpen, setIsCreateRequestModalOpen] =
+    useState(false);
+
   const filterItems = [
     {
       key: "",
@@ -61,6 +66,8 @@ const DoctorRequests = () => {
   const handlePastType = (key) => {
     setPastTypeFilter(key);
   };
+
+  // Modals
   const openNewRequestModal = (id) => {
     setIsNewRequestModalOpen(true);
     setCurrentPastRequestId(id);
@@ -78,6 +85,15 @@ const DoctorRequests = () => {
   const closePastRequestModal = () => {
     setIsPastRequestModalOpen(false);
   };
+  const openCreateRequestModal = () => {
+    setIsCreateRequestModalOpen(true);
+  };
+
+  const closeCreateRequestModal = () => {
+    setIsCreateRequestModalOpen(false);
+  };
+
+  // Page increase
 
   const handleCurrentPageIncrease = (index) => {
     setCurrentPage(index);
@@ -140,6 +156,16 @@ const DoctorRequests = () => {
               viewport={{ once: true }}
               className="requests-heading relative flex items-center justify-center py-2 px-3 bg-neutral-300 bg-opacity-20 rounded border border-neutral-100 border-opacity-30 shadow-4xl"
             >
+              <h3
+                className="font-Montagu text-[18px] absolute top-3 left-3 cursor-pointer flex items-center justify-between gap-1 py-1 pr-[14px] pl-[10px] text-[#C8272E] hover:scale-105 hover:text-red-500 duration-200"
+                onClick={() => openCreateRequestModal()}
+              >
+                Create Request
+              </h3>
+              <CreateRequestModal
+                isOpen={isCreateRequestModalOpen}
+                onClose={closeCreateRequestModal}
+              />
               <h3 className="font-Montagu text-[15px] sm:text-[20px] mxl:text-[25px] text-center text-primary leading-normal drop-shadow-4xl">
                 Active Requests{" "}
               </h3>
