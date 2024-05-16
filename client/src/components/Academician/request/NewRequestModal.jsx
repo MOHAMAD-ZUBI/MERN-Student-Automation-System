@@ -31,7 +31,7 @@ const ModalComponent = ({ onClose, isOpen, newRequest }) => {
         }
       );
       // Assuming the data you want is in the response's 'data' field
-      console.log("Response data:", response.data);
+      // console.log("Response data:", response.data);
       if (response.status >= 200 && response.status < 300) {
         setResponseMessage("Reply was sent successfully"); // Set success message
       } else {
