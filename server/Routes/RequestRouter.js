@@ -14,6 +14,7 @@ const {
   replyToRequest,
   getRequestsForStudent,
   showSingleRequestForStudent,
+  getLecturersForDepartment,
 } = require("../Controllers/StudentRequestController");
 
 const storage = multer.diskStorage({
@@ -43,6 +44,11 @@ requestRouter.get(
   "/single/student/:id",
   authenticateUser,
   showSingleRequestForStudent
+);
+requestRouter.get(
+  "/student/lecturers",
+  authenticateUser,
+  getLecturersForDepartment
 );
 
 //
