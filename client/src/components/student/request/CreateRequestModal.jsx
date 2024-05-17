@@ -36,7 +36,6 @@ const ModalComponent = ({ onClose, isOpen, newRequest }) => {
 
   const handleContentChange = (event) => {
     setContent(event.target.value);
-    // console.log(textAreaValue);
   };
 
   const handleFileChange = (event) => {
@@ -164,7 +163,7 @@ const ModalComponent = ({ onClose, isOpen, newRequest }) => {
                 onClick={handleSendData}
                 isLoading={loading}
               >
-                Action
+                Send
               </Button>
             </ModalFooter>
           </div>
