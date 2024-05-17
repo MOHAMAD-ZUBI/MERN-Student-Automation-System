@@ -1,5 +1,7 @@
 const studentRequest = require("../Models/studentRequest");
 const User = require("../Models/User/userMode");
+const Student = require("../Models/User/student");
+const Academician = require("../Models/User/academician");
 const fs = require("fs").promises;
 
 // Create a new student request
@@ -101,6 +103,35 @@ const getRequestsForStudent = async (req, res) => {
       totalCount,
       totalPages,
     });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const getLecturersForDepartment = async (req, res) => {
+  try {
+    const user = req.user;
+
+    const student = await Student.findOne({ user: user._id });
+
+    if (!student) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    if (!student.departmentId) {
+      return res
+        .status(404)
+        .json({ message: "Student don't have a department" });
+    }
+
+    const academicians = await Academician.find(
+      {
+        departmentId: student.departmentId,
+      },
+      "-password -__v -academicInformation"
+    ).populate("user", "firstName lastName");
+
+    res.status(200).json(academicians);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -226,4 +257,5 @@ module.exports = {
   replyToRequest,
   getRequestsForStudent,
   showSingleRequestForStudent,
+  getLecturersForDepartment,
 };
